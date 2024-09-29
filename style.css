@@ -21,10 +21,14 @@
 #desktop *::before,
 #desktop *::after{
   -webkit-box-sizing  : border-box;
-  -moz-box-sizing  : border-box;
-    -o-box-sizing  : border-box;
-   -ms-box-sizing  : border-box;
-       box-sizing  : border-box;
+     -moz-box-sizing  : border-box;
+       -o-box-sizing  : border-box;
+      -ms-box-sizing  : border-box;
+          box-sizing  : border-box;
+  -webkit-user-select : none;
+     -moz-user-select : none;
+      -ms-user-select : none;
+          user-select : none;
 }
 
 #desktop main{
@@ -32,6 +36,7 @@
   position:relative;
   z-index:1;
   background: linear-gradient(-45deg, var(--color-bg1), var(--color-bg2));
+  overflow:hidden;
 }
 #desktop header{
   width:100%;
@@ -196,10 +201,6 @@
   display   : flex;
   flex-direction: column;
   gap       : 4px;
-  /* cursor    : move; */
-  /* position  : absolute;
-  left      : var(--x);
-  top       : var(--y); */
   border    : 2px solid transparent;
   border-radius:5px;
   overflow  : hidden;
@@ -252,13 +253,8 @@
 */
 #desktop .window{
   position:absolute;
-  top    : 50%;
-  left   : 50%;
-  transform:translate(-50%,-50%);
-  width  : 50%;
-  height : 50%;
-  min-width: 300px;
-  min-height:300px;
+  min-width: 200px;
+  min-height:200px;
   display:flex;
   flex-direction:column;
   box-shadow:4px 4px 20px rgba(0,0,0,0.5);
@@ -269,6 +265,7 @@
 #desktop .window .header{
   height:30px;
   background-color:#DDD;
+  cursor:move;
   display:flex;
   gap:8px;
   align-items:center;
