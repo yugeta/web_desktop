@@ -22,18 +22,19 @@
   border-radius:5px;
   overflow  : hidden;
   z-index   : var(--z);
+  border: 1px solid transparent;
 }
+
 #desktop .icon:not([data-status="move"]){
   transition-property: left,top;
   transition-duration: 0.3s;
 }
+
 #desktop .icon[data-status="move"]{
   z-index : calc(var(--z) + var(--z-add));
 }
-#desktop .icon[data-select]{
-  border-color:rgba(255,255,255,0.5);
-  background-color:rgba(0,0,0,0.3);
-}
+
+
 
 #desktop .icon img{
   display   : block;
@@ -60,7 +61,17 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
+
+/**
+* Select
+*/
+#desktop .icon[data-select]{
+  border-color:rgba(255,255,255,0.5);
+  background-color:rgba(0,0,0,0.3);
+}
+
 #desktop .icon[data-select] .name{
   background-color:rgb(66, 86, 188);
   color:white;
 }
+

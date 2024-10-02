@@ -1,25 +1,25 @@
+import { Icon }   from "./icon.js"
 import { Window } from "./window.js"
 
 export class Event{
   constructor(){
-    window.addEventListener("click" , this.click.bind(this))
+    window.addEventListener("click"       , this.click.bind(this))
+    window.addEventListener("dblclick"    , this.dblclick.bind(this))
     window.addEventListener("pointermove" , this.pointermove.bind(this))
   }
 
   click(e){
-    // クリックポイントの取得
+    // クリックしたエレメントの取得
     const icon         = e.target.closest(".icon")
     const close        = e.target.closest(".window .header .close")
     const elm_win      = e.target.closest(".window")
     const elm_win_wide = e.target.closest(".window .header .wide")
-    const elm_resize   = e.target.closest(".window .resize")
 
     // アイコンをクリック
     if(icon){
-      const name = icon.querySelector(".name").textContent
-      new Window({
-        mode : "view",
-        name : name,
+      new Icon({
+        mode : "select",
+        icon : icon,
       })
     }
     
@@ -46,6 +46,28 @@ export class Event{
       new Window({
         mode : "sort",
         active_window : elm_win,
+      })
+    }
+
+    // 上記以外をクリック（各種解除処理等）
+    else{
+      new Icon({
+        mode    : "clear",
+        click_element : e.target,
+      })
+    }
+  }
+
+  dblclick(e){
+    // ダブルクリックしたエレメントの取得
+    const icon = e.target.closest(".icon")
+
+    // アイコンをダブルクリッククリック
+    if(icon){
+      const name = icon.querySelector(".name").textContent
+      new Window({
+        mode : "view",
+        name : name,
       })
     }
   }
@@ -79,7 +101,6 @@ export class Event{
     }
 
     // Resize
-    
     if(elm_resize){
       Window.resize_options = {
         mode : "resize",

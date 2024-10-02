@@ -15,7 +15,7 @@
 #desktop .window .header{
   height:30px;
   background-color:#DDD;
-  cursor:move;
+  /* cursor:move; */
   display:flex;
   gap:8px;
   align-items:center;
@@ -37,6 +37,7 @@
   border:1px solid black;
   position:relative;
 }
+
 #desktop .window .header .wide::before{
   content: "";
   display: block;
@@ -45,7 +46,8 @@
   background-color: black;
   clip-path: polygon(85% 60%, 85% 15%, 40% 15%, 85% 60%, 60% 85%, 15% 40%, 15% 85%, 60% 85%, 85% 60%);
 }
-#desktop .window .header .wide[data-wide="true"]::before {
+
+#desktop .window[data-wide-flg] .header .wide::before {
   clip-path: polygon(20% 80%, 80% 80%, 80% 70%, 20% 70%);
 }
 
