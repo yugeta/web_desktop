@@ -11,3 +11,6 @@ Author : Yugeta.Koji
 
 # Blog
 - https://blog.myntinc.com/2024/10/web-00.html
+
+# Github
+- https://github.com/yugeta/web_desktop
