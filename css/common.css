@@ -5,7 +5,7 @@
   --color-bg2 : #98cead;
   
   width : 100%;
-  height:50vh;
+  height: 100%;
   min-height: 300px;
   box-shadow:4px 4px 20px rgba(0,0,0,0.5);
   display:flex;

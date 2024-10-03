@@ -3,16 +3,28 @@ import { Window } from "./window.js"
 
 export class Event{
   constructor(){
+    window.addEventListener("mousedown"   , this.mousedown.bind(this))
     window.addEventListener("click"       , this.click.bind(this))
     window.addEventListener("dblclick"    , this.dblclick.bind(this))
     window.addEventListener("pointermove" , this.pointermove.bind(this))
+  }
+
+  mousedown(e){
+    const elm_win      = e.target.closest(".window")
+
+    // windiwをクリック
+    if(elm_win){
+      new Window({
+        mode : "sort",
+        active_window : elm_win,
+      })
+    }
   }
 
   click(e){
     // クリックしたエレメントの取得
     const icon         = e.target.closest(".icon")
     const close        = e.target.closest(".window .header .close")
-    const elm_win      = e.target.closest(".window")
     const elm_win_wide = e.target.closest(".window .header .wide")
 
     // アイコンをクリック
@@ -38,14 +50,6 @@ export class Event{
       new Window({
         mode : "wide",
         active_window : elm_window,
-      })
-    }
-
-    // windiwをクリック
-    else if(elm_win){
-      new Window({
-        mode : "sort",
-        active_window : elm_win,
       })
     }
 

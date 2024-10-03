@@ -1,45 +1,29 @@
 import { Bootstrap } from "../bootstrap.js"
 import { Sort }      from "./sort.js"
+import { Asset }     from "../asset.js"
+import { Convert }   from "../convert.js"
+import { Uuid }      from "../uuid.js"
 
 export class View{
   constructor(name){
     this.name = name
-    if(this.check()){return}
+    if(this.check){return}
     this.add()
   }
 
-  get html(){
-    return `<div class="header">
-  <span class="name">${this.name}</span>
-  <div class="wide"></div>
-  <div class="close"></div>
-</div>
-<div class="body"></div>
-<div class="resize" name="horizontal"></div>
-<div class="resize" name="vertical"></div>
-<div class="resize" name="both"></div>
-`
-  }
-
-  check(){
+  get check(){
     return Bootstrap.elm_main.querySelector(`.window[name="${this.name}"]`)
   }
 
-  add(){
-    const elm_window = document.createElement("div")
-    elm_window.className = "window"
-    elm_window.name      = this.name
-    elm_window.innerHTML = this.html
-    const rect = this.init_rect()
-    elm_window.style.left   = `${rect.x}px`
-    elm_window.style.top    = `${rect.y}px`
-    elm_window.style.width  = `${rect.w}px`
-    elm_window.style.height = `${rect.h}px`
-    Bootstrap.elm_main.appendChild(elm_window)
-    new Sort(elm_window)
+  get html(){
+    return Asset.get_data("window").text
   }
 
-  init_rect(){
+  get uuid(){
+    return new Uuid().id
+  }
+
+  get init_rect(){
     // 動かしていないwindow一覧の取得
     const windows = Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
     const window_rect = Bootstrap.window_rect
@@ -56,4 +40,24 @@ export class View{
     rect.y = rect.y > window_rect.width  - Bootstrap.size.w ? window_rect.width  - Bootstrap.size.w : rect.y
     return rect
   }
+
+  add(){
+    const rect = this.init_rect
+    const uuid = this.uuid
+    const data = {
+      uuid : uuid,
+      name : this.name,
+      x    : rect.x,
+      y    : rect.y,
+      w    : rect.w,
+      h    : rect.h,
+    }
+    const html = new Convert(this.html, data).text
+    Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)
+    const elm_window = Bootstrap.elm_main.querySelector(`[data-uuid="${uuid}"]`)
+    console.log(elm_window)
+    new Sort(elm_window)
+  }
+
+  
 }

@@ -1,4 +1,5 @@
 import { Event } from "./event.js"
+import { Asset } from "./asset.js"
 
 class Main{
   window_default = {
@@ -18,6 +19,7 @@ class Main{
   }
 
   constructor(){
+    new Asset().promise.then(()=>{console.log(Asset.datas)})
     new Event()
   }
 }
