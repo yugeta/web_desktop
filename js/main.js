@@ -1,29 +1,23 @@
-import { Event } from "./event.js"
-import { Asset } from "./asset.js"
+import { Event }   from "./lib/event.js"
+import { Asset }   from "./lib/asset.js"
+import { Desktop } from "./desktop.js"
 
 class Main{
-  window_default = {
-    pos : {
-      x: 80, 
-      y: 20,
-    },
-    gap : {
-      x: 30, 
-      y: 40,
-    },
-    size : {
-      w : 300,
-      h : 200,
-    },
-    z : 1000
+  constructor(){
+    new Event()
+    this.asset()
   }
 
-  constructor(){
-    new Asset().promise.then(()=>{console.log(Asset.datas)})
-    new Event()
+  asset(){
+    new Asset().promise.then(()=>{
+      this.desktop()
+    })
+  }
+
+  desktop(){
+    new Desktop()
   }
 }
-
 
 switch(document.readyState){
   case "complete":

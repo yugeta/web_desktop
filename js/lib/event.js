@@ -1,5 +1,5 @@
-import { Icon }   from "./icon.js"
-import { Window } from "./window.js"
+import { Icon }   from "../icon.js"
+import { Window } from "../window.js"
 
 export class Event{
   constructor(){
@@ -81,8 +81,12 @@ export class Event{
       if(Window.move_options){
         Window.move_options = null
       }
+      if(Window.resize_options){
+        Window.resize_options = null
+      }
       return
     }
+    
     const elm_window = e.target.closest(".window")
     const elm_header = e.target.closest(".window .header")
     const elm_resize = e.target.closest(".window .resize")

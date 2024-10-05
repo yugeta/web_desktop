@@ -1,25 +1,26 @@
-import { Bootstrap }  from "../bootstrap.js"
+import { Bootstrap }  from "../lib/bootstrap.js"
 
 export class Move{
   constructor(options){
+    this.elm = options.active_window
     this.move(options)
   }
 
   move(options){
     // 座標移動
     const pos = this.position({
-      x : options.active_window.offsetLeft + options.movement.x,
-      y : options.active_window.offsetTop  + options.movement.y,
-      w : options.active_window.offsetWidth,
-      h : options.active_window.offsetHeight,
+      x : this.elm.offsetLeft + options.movement.x,
+      y : this.elm.offsetTop  + options.movement.y,
+      w : this.elm.offsetWidth,
+      h : this.elm.offsetHeight,
     })
 
-    options.active_window.style.left     =  `${pos.x}px`
-    options.active_window.style.top      =  `${pos.y}px`
-    options.active_window.style.position = 'absolute'
-    options.active_window.draggable      = false
-    options.active_window.setAttribute("data-move", true)
-    options.active_window.setPointerCapture(options.pointerId)
+    this.elm.style.left     =  `${pos.x}px`
+    this.elm.style.top      =  `${pos.y}px`
+    this.elm.style.position = 'absolute'
+    this.elm.draggable      = false
+    this.elm.setAttribute("data-move", true)
+    this.elm.setPointerCapture(options.pointerId)
   }
 
   position(rect){
