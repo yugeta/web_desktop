@@ -1,12 +1,27 @@
-import { Bootstrap }  from "../lib/bootstrap.js"
+import { Bootstrap } from "../lib/bootstrap.js"
+import { Sort }      from "./sort.js"
 
 export class Move{
   constructor(options){
     this.elm = options.target
-    this.move(options)
+    switch(options.mode){
+      case "move_start":
+        this.move_start(options.target)
+      break
+
+      case "move_end":
+        this.move_end(options.target)
+      break
+
+      case "move":
+      default:
+        this.move(options)
+      break
+    }
   }
 
   move(options){
+
     // 座標移動
     const pos = this.position({
       x : this.elm.offsetLeft + options.movement.x,
@@ -14,9 +29,10 @@ export class Move{
       w : this.elm.offsetWidth,
       h : this.elm.offsetHeight,
     })
-
     this.elm.style.setProperty("--x" , `${pos.x}px`)
     this.elm.style.setProperty("--y" , `${pos.y}px`)
+    // this.elm.style.setProperty("--z" , `1`)
+
     this.elm.draggable      = false
     this.elm.setAttribute("data-move", true)
     this.elm.setPointerCapture(options.pointerId)
@@ -35,4 +51,14 @@ export class Move{
 
     return rect
   }
+
+  move_start(elm){
+    elm.setAttribute("data-status", "move")
+    new Sort(elm)
+  }
+
+  move_end(elm){
+    elm.removeAttribute("data-status")
+  }
+
 }

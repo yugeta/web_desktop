@@ -2,6 +2,18 @@
 * Window
 */
 #desktop .window{
+  --x : 0px;
+  --y : 0px;
+  --w : 200px;
+  --h : 200px;
+  --z : 100;
+
+  left:var(--x);
+  top :var(--y);
+  width : var(--w);
+  height: var(--h);
+  z-index:var(--z);
+
   position:absolute;
   min-width: 200px;
   min-height:200px;
@@ -10,7 +22,6 @@
   box-shadow:4px 4px 20px rgba(0,0,0,0.5);
   border-radius:10px;
   overflow:hidden;
-  z-index:100;
 }
 #desktop .window .header{
   height:30px;
@@ -20,7 +31,7 @@
   gap:8px;
   align-items:center;
   padding:10px;
-  z-index:200;
+  z-index:10;
 }
 #desktop .window .header .name{
   white-space:nowrap;
@@ -106,7 +117,7 @@
   position:absolute;
   width:var(--resize-width);
   height:100%;
-  z-index:100;
+  z-index:8;
   top:0;
   right:0;
   cursor:ew-resize;
@@ -115,7 +126,7 @@
   position:absolute;
   width:100%;
   height:var(--resize-width);
-  z-index:100;
+  z-index:8;
   bottom:0;
   left:0;
   cursor:ns-resize;
@@ -124,7 +135,7 @@
   position:absolute;
   width:calc(var(--resize-width) * 2);
   height:calc(var(--resize-width) * 2);
-  z-index:110;
+  z-index:9;
   bottom:0;
   right:0;
   cursor:nwse-resize;
