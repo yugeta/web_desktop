@@ -1,8 +1,8 @@
-import { Bootstrap } from "../bootstrap.js"
+import { Bootstrap } from "../lib/bootstrap.js"
 import { Sort }      from "./sort.js"
-import { Asset }     from "../asset.js"
-import { Convert }   from "../convert.js"
-import { Uuid }      from "../uuid.js"
+import { Asset }     from "../lib/asset.js"
+import { Convert }   from "../lib/convert.js"
+import { Uuid }      from "../lib/uuid.js"
 
 export class View{
   constructor(name){
@@ -55,7 +55,6 @@ export class View{
     const html = new Convert(this.html, data).text
     Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)
     const elm_window = Bootstrap.elm_main.querySelector(`[data-uuid="${uuid}"]`)
-    console.log(elm_window)
     new Sort(elm_window)
   }
 

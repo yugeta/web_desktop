@@ -1,4 +1,4 @@
-import { Bootstrap }  from "../bootstrap.js"
+import { Bootstrap }  from "../lib/bootstrap.js"
 
 export class Sort{
   constructor(active_window){

@@ -1,4 +1,8 @@
-
+/**
+ * 基礎データの読み込み処理
+ * # rule
+ * - nameはデータ呼び出しの時に必要な為、ユニーク状態にしてください。
+ */
 
 export class Asset{
   lists = [
@@ -10,6 +14,10 @@ export class Asset{
       name : "icon",
       file : "icon.html",
     },
+    {
+      name : "setting",
+      file : "setting.json"
+    }
   ]
 
   constructor(){
@@ -34,6 +42,13 @@ export class Asset{
 
   loaded(data, e){
     data.text = e.target.response
+    data.ext  = this.get_extension(data.file)
+    switch(data.ext){
+      case "json":
+        data.data = JSON.parse(data.text)
+      break
+    }
+    
     Asset.datas.push(data)
     if(this.lists.length){
       this.load()
@@ -41,6 +56,13 @@ export class Asset{
     else{
       this.finish()
     }
+  }
+
+  // ファイル名から拡張子の取得
+  get_extension(file){
+    const sp1 = file.split("?")
+    const sp2 = sp1[0].split(".")
+    return sp2.pop()
   }
 
 

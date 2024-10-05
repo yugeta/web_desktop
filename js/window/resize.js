@@ -4,9 +4,6 @@ export class Resize{
   constructor(options){
     this.elm = options.active_window
     this.resize(options)
-    options.active_window.setAttribute("data-move", true)
-    // options.active_window.setPointerCapture(options.pointerId)
-    
   }
 
   resize(options){
@@ -26,6 +23,8 @@ export class Resize{
         this.both(w,h)
       break
     }
+
+    this.elm.setPointerCapture(options.pointerId)
   }
 
   horizontal(w){
