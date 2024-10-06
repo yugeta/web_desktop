@@ -13,8 +13,8 @@ export class Sort{
     const windows = Array.from(Bootstrap.elm_main.querySelectorAll(".window"))
     if(windows){
       windows.sort((a,b)=>{
-        if(Number(a.style.getPropertyValue("z-index") || 0) < Number(b.style.getPropertyValue("z-index") || 0)){return -1}
-        if(Number(a.style.getPropertyValue("z-index") || 0) > Number(b.style.getPropertyValue("z-index") || 0)){return +1}
+        if(Number(a.style.getPropertyValue("--z") || 0) < Number(b.style.getPropertyValue("--z") || 0)){return -1}
+        if(Number(a.style.getPropertyValue("--z") || 0) > Number(b.style.getPropertyValue("--z") || 0)){return +1}
         return 0
       })
     }
@@ -25,10 +25,10 @@ export class Sort{
     let num = 0
     for(const elm of windows){
       if(elm === this.active_window){
-        elm.style.zIndex = windows.length + Bootstrap.z
+        elm.style.setProperty("--z", windows.length + Bootstrap.z, "")
       }
       else{
-        elm.style.zIndex = num + 1 + Bootstrap.z
+        elm.style.setProperty("--z", num + 1 + Bootstrap.z, "")
         num++
       }
     }

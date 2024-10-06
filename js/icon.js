@@ -1,6 +1,7 @@
 import { Select } from "./icon/select.js"
 import { Clear }  from "./icon/clear.js"
 import { View }   from "./icon/view.js"
+import { Move }   from "./icon/move.js"
 
 export class Icon{
   constructor(options){
@@ -15,6 +16,12 @@ export class Icon{
 
       case "clear":
         new Clear(options.click_element)
+      break
+
+      case "move":
+      case "move_end":
+      case "move_start":
+        new Move(options)
       break
     }
   }

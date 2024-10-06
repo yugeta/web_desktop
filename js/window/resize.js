@@ -2,7 +2,7 @@
 
 export class Resize{
   constructor(options){
-    this.elm = options.active_window
+    this.elm = options.target
     this.resize(options)
   }
 
@@ -10,7 +10,7 @@ export class Resize{
     const w = this.elm.offsetWidth  + options.movement.x
     const h = this.elm.offsetHeight + options.movement.y
 
-    switch(options.type){
+    switch(options.name){
       case "horizontal":
        this.horizontal(w)
       break
@@ -28,13 +28,13 @@ export class Resize{
   }
 
   horizontal(w){
-    this.elm.style.setProperty("width"  , `${w}px` , "")
+    this.elm.style.setProperty("--w"  , `${w}px` , "")
   }
   vertical(h){
-    this.elm.style.setProperty("height" , `${h}px` , "")
+    this.elm.style.setProperty("--h"  , `${h}px` , "")
   }
   both(w,h){
-    this.elm.style.setProperty("width"  , `${w}px` , "")
-    this.elm.style.setProperty("height" , `${h}px` , "")
+    this.elm.style.setProperty("--w"  , `${w}px` , "")
+    this.elm.style.setProperty("--h"  , `${h}px` , "")
   }
 }
