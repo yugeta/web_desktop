@@ -30,3 +30,10 @@
       -ms-user-select : none;
           user-select : none;
 }
+
+#desktop ul,
+#desktop li{
+  margin:0;
+  padding:0;
+  list-style:none;
+}

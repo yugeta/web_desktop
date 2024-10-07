@@ -1,9 +1,31 @@
-import { Asset } from "./lib/asset.js"
-import { Icon }  from "./icon.js"
+import { Asset }       from "./lib/asset.js"
+import { Icon }        from "./icon.js"
+import { Window }      from "./window.js"
+import { ContextMenu } from "./desktop/context_menu.js"
 
 export class Desktop{
-  constructor(){
-    this.init()
+  constructor(options){
+    this.options = options || {}
+    switch(this.options.mode){
+      case "context_menu":
+        new ContextMenu(options)
+      break
+
+      case "new_folder":
+
+      break
+
+      case "icon_sort":
+        new Icon({
+          mode : "sort",
+          target : ContextMenu.datas.target,
+        })
+      break
+
+      case "init":
+        this.init()
+      break
+    }
   }
 
   init(){

@@ -15,7 +15,7 @@ class Main{
   }
 
   desktop(){
-    new Desktop()
+    new Desktop({mode:"init"})
   }
 }
 
