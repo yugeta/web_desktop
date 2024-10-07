@@ -1,17 +1,21 @@
-import { Icon }   from "../icon.js"
-import { Window } from "../window.js"
+import { Icon }    from "../icon.js"
+import { Window }  from "../window.js"
+import { Desktop } from "../desktop.js"
+import { Bootstrap } from "../lib/bootstrap.js"
 
 export class Event{
   constructor(){
-    window.addEventListener("mousedown"   , this.mousedown.bind(this))
-    window.addEventListener("click"       , this.click.bind(this))
-    window.addEventListener("dblclick"    , this.dblclick.bind(this))
-    window.addEventListener("pointermove" , this.pointermove.bind(this))
+    Bootstrap.elm_main.addEventListener("mousedown"   , this.mousedown.bind(this))
+    Bootstrap.elm_main.addEventListener("click"       , this.click.bind(this))
+    Bootstrap.elm_main.addEventListener("dblclick"    , this.dblclick.bind(this))
+    Bootstrap.elm_main.addEventListener("pointermove" , this.pointermove.bind(this))
+    Bootstrap.elm_main.addEventListener("contextmenu" , this.contextmenu.bind(this))
   }
 
   mousedown(e){
     const elm_win      = e.target.closest(".window")
     const icon         = e.target.closest(".icon")
+    const context_menu = e.target.closest(".context_menu")
 
     // アイコンをクリック
     if(icon){
@@ -37,6 +41,12 @@ export class Event{
       })
     }
 
+    // 右クリックメニューを非表示
+    if(!context_menu){
+      new Desktop({
+        mode : "context_menu"
+      })
+    }
   }
 
   click(e){
@@ -44,6 +54,7 @@ export class Event{
     // const icon         = e.target.closest(".icon")
     const close        = e.target.closest(".window .header .close")
     const elm_win_wide = e.target.closest(".window .header .wide")
+    const context_menu = e.target.closest(".context_menu")
 
     // windowのクローズボタンをクリック
     if(close){
@@ -60,6 +71,20 @@ export class Event{
       new Window({
         mode : "wide",
         active_window : elm_window,
+      })
+    }
+    else if(context_menu){
+      const item = e.target.closest(`.item`)
+
+      // 右クリックメニューの非表示
+      new Desktop({
+        mode : "context_menu"
+      })
+
+      // アイコン整列処理
+      new Icon({
+        mode   : "alignment",
+        target : Bootstrap.context_menu ? Bootstrap.context_menu.target : null,
       })
     }
   }
@@ -150,6 +175,43 @@ export class Event{
           new Icon(this.pointermove_options)
         break
       }
+    }
+  }
+
+  // 右クリック
+  contextmenu(e){
+    const elm_icon    = e.target.closest(".icon")
+    const elm_window  = e.target.closest(".window .body")
+    const elm_desktop = e.target.closest(".desktop")
+
+    if(elm_icon){
+      e.preventDefault()
+      new Desktop({
+        mode  : "context_menu",
+        type  : "icon",
+        target : elm_icon,
+        event : e,
+      })
+    }
+
+    else if(elm_window){
+      e.preventDefault()
+      new Desktop({
+        mode  : "context_menu",
+        type  : "window",
+        target : elm_window.closest(".window"),
+        event : e,
+      })
+    }
+
+    else if(elm_desktop){
+      e.preventDefault()
+      new Desktop({
+        mode  : "context_menu",
+        type  : "desktop",
+        target : elm_desktop,
+        event : e,
+      })
     }
   }
 }

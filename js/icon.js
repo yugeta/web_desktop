@@ -1,7 +1,8 @@
-import { Select } from "./icon/select.js"
-import { Clear }  from "./icon/clear.js"
-import { View }   from "./icon/view.js"
-import { Move }   from "./icon/move.js"
+import { Select }    from "./icon/select.js"
+import { Clear }     from "./icon/clear.js"
+import { View }      from "./icon/view.js"
+import { Move }      from "./icon/move.js"
+import { Alignment } from "./icon/alignment.js"
 
 export class Icon{
   constructor(options){
@@ -22,6 +23,10 @@ export class Icon{
       case "move_end":
       case "move_start":
         new Move(options)
+      break
+
+      case "alignment":
+        new Alignment(options)
       break
     }
   }

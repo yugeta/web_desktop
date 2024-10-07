@@ -17,6 +17,10 @@ export class Asset{
     {
       name : "setting",
       file : "setting.json"
+    },
+    {
+      name : "context_menu_item",
+      file : "context_menu_item.html"
     }
   ]
 

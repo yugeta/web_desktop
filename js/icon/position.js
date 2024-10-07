@@ -8,7 +8,14 @@
 export class Position{
   constructor(options){
     this.options = options || {}
-    this.datas = this.get_number_pos()
+    switch(this.options.mode){
+      case "num":
+        this.datas = this.get_num_pos(this.options.num)
+      break
+
+      default:
+        this.datas = this.get_new_pos()
+    }
   }
 
   get parent_size(){
@@ -27,8 +34,19 @@ export class Position{
     return this.options.size
   }
 
-  get_number_pos(){
-    const num = this.icon_num
+  get_new_pos(){
+    return this.get_num_pos(this.icon_num)
+    // const num = this.icon_num
+    // const line_count = ~~(this.parent_size.h / this.icon_size.h)
+    // const row_number = ~~(num / line_count)
+    // const col_number = num % line_count
+    // return {
+    //   x : (row_number * this.icon_size.w),
+    //   y : (col_number * this.icon_size.h),
+    // }
+  }
+
+  get_num_pos(num){
     const line_count = ~~(this.parent_size.h / this.icon_size.h)
     const row_number = ~~(num / line_count)
     const col_number = num % line_count
@@ -36,9 +54,5 @@ export class Position{
       x : (row_number * this.icon_size.w),
       y : (col_number * this.icon_size.h),
     }
-    // return {
-    //   x : this.icon_size.default_x + (row_number * this.icon_size.w) + (row_number * this.icon_size.gap),
-    //   y : this.icon_size.default_y + (col_number * this.icon_size.h),
-    // }
   }
 }

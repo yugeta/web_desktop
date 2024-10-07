@@ -36,5 +36,24 @@
       "h" : 200
     },
     "z" : 1000
+  },
+
+  "context_menu" : {
+    "icon":[
+
+    ],
+    "window":[
+
+    ],
+    "desktop":[
+      {
+        "name" : "新規フォルダ",
+        "mode" : "new_folder"
+      },
+      {
+        "name" : "デスクトップの整列",
+        "mode" : "icon_alignment"
+      }
+    ]
   }
 }
