@@ -1,7 +1,8 @@
-import { Icon }    from "../icon.js"
-import { Window }  from "../window.js"
-import { Desktop } from "../desktop.js"
+import { Icon }      from "../icon.js"
+import { Window }    from "../window.js"
+import { Desktop }   from "../desktop.js"
 import { Bootstrap } from "../lib/bootstrap.js"
+import { Storage }   from "../lib/storage.js"
 
 export class Event{
   constructor(){
@@ -108,6 +109,22 @@ export class Event{
 
     // finish処理
     if(!e.buttons){
+      // icon データキャッシュ
+      if(this.pointermove_options
+      && this.pointermove_options.type === "icon"){
+        new Storage({
+          mode : "save",
+          data : {
+            mode : "icon_move",
+            id   : this.pointermove_options.target.id,
+            transform : {
+              x : Number(this.pointermove_options.target.style.getPropertyValue("--x").replace("px","")),
+              y : Number(this.pointermove_options.target.style.getPropertyValue("--y").replace("px","")),
+            }
+          }
+        })
+      }
+
       if(this.pointermove_options){
         new Icon({
           mode : "move_end",

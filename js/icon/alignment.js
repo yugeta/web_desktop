@@ -1,10 +1,17 @@
 import { Position } from "./position.js"
+import { Storage }  from "../lib/storage.js"
 
 export class Alignment{
   constructor(options){
     this.options = options || {}
     this.move_clear()
     this.exec()
+    new Storage({
+      mode : "del_mode",
+      data : {
+        mode : "icon_move"
+      }
+    })
   }
 
   get root(){
