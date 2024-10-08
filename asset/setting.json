@@ -1,21 +1,25 @@
 {
   "desktop_icons" : [
     {
+      "id"   : "sample_1",
       "name" : "Setting",
       "type" : "icon",
       "file" : "set-up-svgrepo-com.png"
     },
     {
+      "id"   : "sample_2",
       "name" : "Gift",
       "type" : "icon",
       "file" : "gift-svgrepo-com.png"
     },
     {
+      "id"   : "sample_3",
       "name" : "Heart",
       "type" : "icon",
       "file" : "like-svgrepo-com.png"
     },
     {
+      "id"   : "sample_4",
       "name" : "World",
       "type" : "icon",
       "file" : "the-internet-svgrepo-com.png"

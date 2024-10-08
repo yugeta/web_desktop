@@ -23,11 +23,13 @@ export class Icon{
       case "move_end":
       case "move_start":
         new Move(options)
+        
       break
 
       case "alignment":
         new Alignment(options)
       break
+
     }
   }
 }
