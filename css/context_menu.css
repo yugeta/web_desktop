@@ -31,6 +31,7 @@
   font-size:0.8em;
   padding:2px 5px;
   cursor:pointer;
+  white-space:nowrap;
 }
 
 #desktop .context_menu > li:hover{

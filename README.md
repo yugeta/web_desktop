@@ -14,3 +14,6 @@ Author : Yugeta.Koji
 
 # Github
 - https://github.com/yugeta/web_desktop
+
+# Demo
+- https://yugeta.github.io/web_desktop/

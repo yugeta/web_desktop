@@ -1,4 +1,5 @@
 import { Bootstrap }  from "../lib/bootstrap.js"
+import { Storage }    from "../lib/storage.js"
 
 export class Move{
   constructor(options){
@@ -20,6 +21,14 @@ export class Move{
     this.elm.draggable      = false
     this.elm.setAttribute("data-move", true)
     this.elm.setPointerCapture(options.pointerId)
+
+    // this.set_storage_data({
+    //   name : this.elm.getAttribute("name"),
+    //   x : pos.x,
+    //   y : pos.y,
+    //   w : pos.w,
+    //   h : pos.h,
+    // })
   }
 
   position(rect){
@@ -35,4 +44,20 @@ export class Move{
 
     return rect
   }
+
+  // set_storage_data(data){
+  //   new Storage({
+  //     mode : "save",
+  //     data : {
+  //       mode : "windows",
+  //       name : data.name,
+  //       transform : {
+  //         x : data.x,
+  //         y : data.y,
+  //         w : data.w,
+  //         h : data.h,
+  //       }
+  //     }
+  //   })
+  // }
 }

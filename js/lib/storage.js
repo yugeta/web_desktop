@@ -23,7 +23,7 @@ export class Storage{
       break
 
       case "load":
-        this.datas = this.load()
+        this.datas = this.load(this.options.name)
       break
 
       case "del_all":
@@ -52,7 +52,6 @@ export class Storage{
       else{
         storage[data.mode].push(data)
       }
-      console.log(storage)
     }
     else{
       const data2 = Object.fromEntries(Object.entries(this.options.data).filter(([key]) => key !== 'mode'))  // 連想配列から"mode"keyを取り除く
@@ -68,9 +67,18 @@ export class Storage{
   }
 
   // localStorageから読み込み
-  load(){
+  load(key){
     const base64 = window.localStorage.getItem(this.name)
-    return base64 ? this.dec(base64) : null
+    if(!base64){
+      return null
+    }
+    const datas = this.dec(base64)
+    if(key){
+      return datas[key] || null
+    }
+    else{
+      return datas
+    }
   }
 
   // 暗号化 : データ->JSON->エンコード（エスケープ）->base64
@@ -111,9 +119,11 @@ export class Storage{
   del_id(data){
     if(!data || !data.mode || !data.id){return}
     const storage_data = this.load()
-    if(typeof storage_data[data.mode] === "undefined"
-    || typeof storage_data[data.mode][data.id] === "undefined"){return}
-    delete storage_data[data.mode][data.id]
+    if(typeof storage_data[data.mode] === "undefined"){return}
+    const index = storage_data[data.mode].findIndex(e => e.id === data.id)
+    if(index === -1){return}
+    storage_data[data.mode].splice(index,1)
+    this.save(storage_data)
   }
 
   finish(){

@@ -55,8 +55,12 @@
         "mode" : "new_folder"
       },
       {
-        "name" : "デスクトップの整列",
+        "name" : "アイコン整列",
         "mode" : "icon_alignment"
+      },
+      {
+        "name" : "ウィンドウ整列",
+        "mode" : "window_alignment"
       }
     ]
   }
