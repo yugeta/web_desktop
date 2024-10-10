@@ -14,32 +14,52 @@ export class Mousedown{
 
     // アイコンをクリック
     if(icon){
-      new Icon({
-        mode : "select",
-        icon : icon,
-      })
+      this.icon(icon)
+      this.window(icon.closest(".window"))
     }
 
-    // windiwをクリック
+    // windowをクリック
     else if(elm_win){
-      new Window({
-        mode : "sort",
-        active_window : elm_win,
-      })
+      this.window(elm_win)
+      this.icon_unselect(target)
     }
 
-    // 上記以外をクリック（各種解除処理等）
+    // 上記以外をクリック*デスクトップ（各種解除処理等）
     else{
-      new Icon({
-        mode    : "clear",
-        click_element : target,
-      })
+      this.icon_unselect(target.closest(".desktop"))
     }
 
-    // 右クリックメニューを非表示
-    if(!context_menu){
-      // 右クリックメニューの非表示
-      new ContextMenu({mode: "clear"})
-    }
+    // 右クリックメニューの非表示
+    this.hidden_context_menu(context_menu)
+  }
+
+  icon(icon){
+    if(!icon){return}
+    new Icon({
+      mode : "select",
+      icon : icon,
+    })
+  }
+
+  window(elm_win){
+    if(!elm_win){return}
+    new Window({
+      mode : "sort",
+      active_window : elm_win,
+    })
+  }
+
+  icon_unselect(target){
+    if(!target){return}
+    new Icon({
+      mode    : "clear",
+      click_element : target,
+    })
+  }
+
+  // 右クリックメニューを非表示
+  hidden_context_menu(context_menu){
+    if(context_menu){return}
+    new ContextMenu({mode: "clear"})
   }
 }

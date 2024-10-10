@@ -1,6 +1,7 @@
-import { Icon }        from "../icon.js"
-import { Window }      from "../window.js"
-import { Storage }     from "../lib/storage.js"
+import { Icon }                 from "../icon.js"
+import { Window }               from "../window.js"
+import { Storage }              from "../lib/storage.js"
+import { Elm2data as IconData } from "../icon/elm2data.js"
 
 /**
  * windowとiconの移動処理
@@ -17,46 +18,32 @@ export class PointerMove{
           case "icon":
             new Storage({
               mode : "save",
-              data : {
-                mode : "icons",
-                id   : PointerMove.pointermove_options.target.id,
-                transform : {
-                  x : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--x").replace("px","")),
-                  y : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--y").replace("px","")),
-                }
-              }
+              name : "icons",
+              data : new IconData(PointerMove.pointermove_options.target).datas,
+              // data : {
+              //   id   : PointerMove.pointermove_options.target.getAttribute("data-id"),
+              //   file : this.get_icon_file(PointerMove.pointermove_options.target),
+              //   name : PointerMove.pointermove_options.target.querySelector(".name").textContent,
+              //   x    : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--x").replace("px","")),
+              //   y    : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--y").replace("px","")),
+              // }
             })
           break
 
           case "window":
             new Storage({
               mode : "save",
+              name : "windows",
               data : {
-                mode : "windows",
-                id   : PointerMove.pointermove_options.target.id,
-                name : PointerMove.pointermove_options.target.getAttribute("name"),
-                transform : {
-                  x : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--x").replace("px","")),
-                  y : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--y").replace("px","")),
-                  w : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--w").replace("px","")),
-                  h : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--h").replace("px","")),
-                }
+                id   : PointerMove.pointermove_options.target.getAttribute("data-id"),
+                x    : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--x").replace("px","")),
+                y    : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--y").replace("px","")),
+                w    : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--w").replace("px","")),
+                h    : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--h").replace("px","")),
               }
             })
           break
         }
-      // && PointerMove.pointermove_options.type === "icon"){
-      //   new Storage({
-      //     mode : "save",
-      //     data : {
-      //       mode : "icons",
-      //       id   : PointerMove.pointermove_options.target.id,
-      //       transform : {
-      //         x : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--x").replace("px","")),
-      //         y : Number(PointerMove.pointermove_options.target.style.getPropertyValue("--y").replace("px","")),
-      //       }
-      //     }
-      //   })
       }
 
       if(PointerMove.pointermove_options){
@@ -127,5 +114,10 @@ export class PointerMove{
         break
       }
     }
+  }
+
+  get_icon_file(elm){
+    const src = elm.querySelector("img").getAttribute("src")
+    return src.replace(/^img\/icon\//,"")
   }
 }

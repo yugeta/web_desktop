@@ -1,4 +1,5 @@
 import { Bootstrap }  from "../lib/bootstrap.js"
+import { Asset }      from "../lib/asset.js"
 
 export class Sort{
   constructor(active_window){
@@ -6,6 +7,10 @@ export class Sort{
     const windows = this.get_windows()
     if(!windows){return}
     this.replacement(windows)
+  }
+
+  get z(){
+    return Asset.get_data("setting").data.window.z
   }
 
   // 表示されているwindow一覧を取得
@@ -25,10 +30,10 @@ export class Sort{
     let num = 0
     for(const elm of windows){
       if(elm === this.active_window){
-        elm.style.setProperty("--z", windows.length + Bootstrap.z, "")
+        elm.style.setProperty("--z", windows.length + this.z, "")
       }
       else{
-        elm.style.setProperty("--z", num + 1 + Bootstrap.z, "")
+        elm.style.setProperty("--z", num + 1 + this.z, "")
         num++
       }
     }

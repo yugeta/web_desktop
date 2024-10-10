@@ -16,17 +16,27 @@
       "id"   : "sample_3",
       "name" : "Heart",
       "type" : "icon",
-      "file" : "like-svgrepo-com.png"
+      "file" : "like-svgrepo-com.png",
+      "parent_id" : "sample_1"
     },
     {
       "id"   : "sample_4",
       "name" : "World",
       "type" : "icon",
-      "file" : "the-internet-svgrepo-com.png"
+      "file" : "the-internet-svgrepo-com.png",
+      "parent_id" : "sample_1"
     }
   ],
 
-  "window_default" : {
+  "icon" : {
+    "size" : {
+      "w" : 100,
+      "h" : 100,
+      "z" : 1
+    }
+  },
+
+  "window" : {
     "pos" : {
       "x": 80, 
       "y": 20
@@ -43,12 +53,6 @@
   },
 
   "context_menu" : {
-    "icon":[
-
-    ],
-    "window":[
-
-    ],
     "desktop":[
       {
         "name" : "新規フォルダ",

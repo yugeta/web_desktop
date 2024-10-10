@@ -1,7 +1,6 @@
-import { Asset }       from "./lib/asset.js"
-import { Storage }     from "./lib/storage.js"
+
 import { Icon }        from "./icon.js"
-import { Window }      from "./window.js"
+import { Init }        from "./desktop/init.js"
 import { ContextMenu } from "./desktop/context_menu.js"
 
 export class Desktop{
@@ -19,20 +18,9 @@ export class Desktop{
       break
 
       case "init":
-        this.init()
+        new Init()
       break
 
     }
-  }
-
-  init(){
-    new Icon({
-      mode : "view",
-      data : Asset.get_data("setting").data.desktop_icons,
-    })
-    new Window({
-      mode  : "init",
-      datas : new Storage({mode: "load", name: "windows"}).datas || []
-    })
   }
 }

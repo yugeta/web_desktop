@@ -31,6 +31,7 @@ export class Click{
         active_window : elm_window,
       })
     }
+    
     else if(context_menu){
       // 右クリックメニューの非表示
       new ContextMenu({mode: "clear"})
