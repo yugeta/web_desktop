@@ -4,10 +4,15 @@ import { Close }     from "./window/close.js"
 import { Wide }      from "./window/wide.js"
 import { Resize }    from "./window/resize.js"
 import { Move }      from "./window/move.js"
+import { Alignment } from "./window/alignment.js"
 
 export class Window{
   constructor(options){
     switch(options.mode){
+      case "init":
+      this.init(options.datas)
+      break
+
       case "view":
         new View(options.name)
       break
@@ -31,6 +36,17 @@ export class Window{
       case "resize":
         new Resize(options)
       break
+
+      case "alignment":
+        new Alignment(options)
+      break
+    }
+  }
+
+  init(datas){console.log(datas)
+    if(!datas || !datas.length){return}
+    for(const data of datas){
+      new View(data.name)
     }
   }
 }

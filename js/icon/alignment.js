@@ -9,7 +9,7 @@ export class Alignment{
     new Storage({
       mode : "del_mode",
       data : {
-        mode : "icon_move"
+        mode : "icons"
       }
     })
   }
@@ -29,16 +29,16 @@ export class Alignment{
   exec(){
     const icons = Array.from(this.root.querySelectorAll(`:scope > .icon`))
 
-    // 順番に並べ替え
-    icons.sort((a,b)=>{
-      const a_x = a.style.getPropertyValue("--x")
-      const a_y = a.style.getPropertyValue("--y")
-      const b_x = b.style.getPropertyValue("--x")
-      const b_y = b.style.getPropertyValue("--y")
-      if(a_x < b_x && a_y < b_y){return -1}
-      if(a_x > b_x && a_y > b_y){return +1}
-      return 0
-    })
+    // // 順番に並べ替え
+    // icons.sort((a,b)=>{
+    //   const a_x = a.style.getPropertyValue("--x")
+    //   const a_y = a.style.getPropertyValue("--y")
+    //   const b_x = b.style.getPropertyValue("--x")
+    //   const b_y = b.style.getPropertyValue("--y")
+    //   if(a_x < b_x && a_y < b_y){return -1}
+    //   if(a_x > b_x && a_y > b_y){return +1}
+    //   return 0
+    // })
 
     // 整列移動
     for(let i=0; i<icons.length; i++){

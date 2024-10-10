@@ -1,4 +1,5 @@
 import { Asset }       from "./lib/asset.js"
+import { Storage }     from "./lib/storage.js"
 import { Icon }        from "./icon.js"
 import { Window }      from "./window.js"
 import { ContextMenu } from "./desktop/context_menu.js"
@@ -7,12 +8,7 @@ export class Desktop{
   constructor(options){
     this.options = options || {}
     switch(this.options.mode){
-      case "context_menu":
-        new ContextMenu(options)
-      break
-
       case "new_folder":
-
       break
 
       case "icon_sort":
@@ -25,6 +21,7 @@ export class Desktop{
       case "init":
         this.init()
       break
+
     }
   }
 
@@ -32,6 +29,10 @@ export class Desktop{
     new Icon({
       mode : "view",
       data : Asset.get_data("setting").data.desktop_icons,
+    })
+    new Window({
+      mode  : "init",
+      datas : new Storage({mode: "load", name: "windows"}).datas || []
     })
   }
 }

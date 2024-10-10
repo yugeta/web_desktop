@@ -3,16 +3,25 @@ import { Sort }      from "./sort.js"
 import { Asset }     from "../lib/asset.js"
 import { Convert }   from "../lib/convert.js"
 import { Uuid }      from "../lib/uuid.js"
+import { Storage }   from "../lib/storage.js"
 
 export class View{
   constructor(name){
+    // console.log(this.storage_data)
+    // if(!this.storage_data.id){alert("error window-id");return}
     this.name = name
-    if(this.check){return}
-    this.add()
+    this.storage_data = this.get_storage_data()
+    
+    if(this.opened){
+      this.active()
+    }
+    else{
+      this.add()
+    }
   }
 
-  get check(){
-    return Bootstrap.elm_main.querySelector(`.window[name="${this.name}"]`)
+  get opened(){
+    return Bootstrap.elm_main.querySelector(`.window[id="${this.uuid}"]`)
   }
 
   get html(){
@@ -20,7 +29,19 @@ export class View{
   }
 
   get uuid(){
-    return new Uuid().id
+    return this.storage_data ? this.storage_data.id : new Uuid().id
+    // if(this.storage_data){
+    //   console.log(this.storage_data)
+    //   return this.storage_data.find(e => e.name === this.name).id
+    // }
+    // else{
+    //   return new Uuid().id
+    // }
+  }
+
+  get storage_rect(){
+    return this.storage_data ? this.storage_data.transform : null
+    // return this.storage_data.find(e => e.name === this.name).transform
   }
 
   get init_rect(){
@@ -41,11 +62,21 @@ export class View{
     return rect
   }
 
+  get_storage_data(){
+    const storage_data = new Storage({mode:"load",name:"windows"}).datas
+    if(storage_data){
+      return storage_data.find(e => e.name === this.name)
+    }
+    else{
+      return null
+    }
+  }
+
   add(){
-    const rect = this.init_rect
+    const rect = this.storage_data ? this.storage_rect : this.init_rect
     const uuid = this.uuid
     const data = {
-      uuid : uuid,
+      id   : uuid,
       name : this.name,
       x    : rect.x,
       y    : rect.y,
@@ -54,9 +85,31 @@ export class View{
     }
     const html = new Convert(this.html, data).text
     Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)
-    const elm_window = Bootstrap.elm_main.querySelector(`[data-uuid="${uuid}"]`)
+    const elm_window = Bootstrap.elm_main.querySelector(`[id="${uuid}"]`)
     new Sort(elm_window)
+    if(!this.storage_data){
+      this.set_storage_data(data)
+    }
   }
 
-  
+  active(){
+    new Sort(this.opened)
+  }
+
+  set_storage_data(data){
+    new Storage({
+      mode : "save",
+      data : {
+        mode : "windows",
+        id   : data.id,
+        name : data.name,
+        transform : {
+          x : data.x,
+          y : data.y,
+          w : data.w,
+          h : data.h,
+        }
+      }
+    })
+  }
 }

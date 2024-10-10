@@ -23,8 +23,7 @@ export class View{
   }
 
   get_storage_data(){
-    const data = new Storage({mode:"load"}).datas
-    return data ? data["icon_move"] : null
+    return new Storage({mode:"load", name:"icons"}).datas
   }
 
   check_id(data){
