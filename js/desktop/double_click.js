@@ -14,6 +14,7 @@ export class DoubleClick{
       const name = icon.querySelector(".name").textContent
       new Window({
         mode : "view",
+        id   : icon.getAttribute("data-id"),
         name : name,
       })
     }

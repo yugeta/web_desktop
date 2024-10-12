@@ -14,7 +14,7 @@ export class Window{
       break
 
       case "view":
-        new View(options.name)
+        new View(options)
       break
 
       case "sort":
@@ -43,10 +43,10 @@ export class Window{
     }
   }
 
-  init(datas){console.log(datas)
+  init(datas){
     if(!datas || !datas.length){return}
     for(const data of datas){
-      new View(data.name)
+      new View(data)
     }
   }
 }

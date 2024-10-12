@@ -9,9 +9,11 @@ export class Close{
   del_storage_data(elm){
     new Storage({
       mode : "del_id",
+      name : "windows",
       data : {
         mode : "windows",
-        id   : elm.id,
+        id   : elm.getAttribute("data-id"),
+        name : elm.getAttribute("name"),
       }
     })
   }

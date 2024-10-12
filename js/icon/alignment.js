@@ -1,17 +1,19 @@
-import { Position } from "./position.js"
+import { Position } from "../icon/position.js"
 import { Storage }  from "../lib/storage.js"
+import { Elm2data } from "../icon/elm2data.js"
 
 export class Alignment{
   constructor(options){
     this.options = options || {}
     this.move_clear()
     this.exec()
-    new Storage({
-      mode : "del_mode",
-      data : {
-        mode : "icons"
-      }
-    })
+    // new Storage({
+    //   mode : "del_mode",
+    //   name : "name",
+    //   data : {
+    //     mode : "icons"
+    //   }
+    // })
   }
 
   get root(){
@@ -43,18 +45,19 @@ export class Alignment{
     // 整列移動
     for(let i=0; i<icons.length; i++){
       const icon = icons[i]
-      const pos = new Position({
-        mode : "num",
-        size : {
-          w : 100,
-          h : 100,
-          z : 1,
-        },
-        parent : this.root,
-        num : i,
-      }).datas
+      const pos = new Position(this.root, i).datas
       icon.style.setProperty("--x", `${pos.x}px`, "")
       icon.style.setProperty("--y", `${pos.y}px`, "")
+
+      this.save_storage(icon)
     }
+  }
+
+  save_storage(elm){
+    new Storage({
+      mode : "save",
+      name : "icons",
+      data : new Elm2data(elm).datas,
+    })
   }
 }

@@ -8,7 +8,7 @@ export class Icon{
   constructor(options){
     switch(options.mode){
       case "view":
-        new View(options.data)
+        new View(options.data, options.parent)
       break
       
       case "select":

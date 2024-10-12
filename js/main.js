@@ -1,9 +1,11 @@
 import { Event }   from "./lib/event.js"
 import { Asset }   from "./lib/asset.js"
 import { Desktop } from "./desktop.js"
+import { Storage } from "./lib/storage.js"
 
 class Main{
   constructor(){
+    new Storage()
     new Event()
     this.asset()
   }

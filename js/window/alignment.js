@@ -38,7 +38,7 @@ export class Alignment{
     // 整列移動
     for(let i=0; i<windows.length; i++){
       const data = {
-        id   : windows[i].id,
+        id   : windows[i].getAttribute("data-id"),
         name : windows[i].getAttribute("name"),
         x    : (i % this.cols_count) * this.window_width,
         y    : Math.floor(i / this.cols_count) * this.window_height,
@@ -58,16 +58,15 @@ export class Alignment{
   set_storage_data(data){console.log(data)
     new Storage({
       mode : "save",
+      name : "windows",
       data : {
         mode : "windows",
         id   : data.id,
         name : data.name,
-        transform : {
-          x : data.x,
-          y : data.y,
-          w : data.w,
-          h : data.h,
-        }
+        x : data.x,
+        y : data.y,
+        w : data.w,
+        h : data.h,
       }
     })
   }
