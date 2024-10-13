@@ -1,10 +1,11 @@
 
 
 export class Clear{
-  constructor(click_element){
-    if(!click_element){return}
-    const icons = click_element.querySelectorAll(`:scope > .icon[data-select]`)
+  constructor(parent_elm, except_id){
+    if(!parent_elm){return}
+    const icons = parent_elm.querySelectorAll(`:scope > .icon[data-select]`)
     for(const icon of icons){
+      if(except_id && icon.getAttribute("data-id") === except_id){continue}
       icon.removeAttribute("data-select")
     }
   }

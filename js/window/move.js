@@ -1,5 +1,4 @@
 import { Bootstrap }  from "../lib/bootstrap.js"
-import { Storage }    from "../lib/storage.js"
 
 export class Move{
   constructor(options){
@@ -8,19 +7,16 @@ export class Move{
   }
 
   move(options){
+    if(!options.pos || !options.move || !options.point){return}
     // 座標移動
     const pos = this.position({
-      x : this.elm.offsetLeft + options.movement.x,
-      y : this.elm.offsetTop  + options.movement.y,
-      w : this.elm.offsetWidth,
-      h : this.elm.offsetHeight,
+      x : options.pos.x + (options.move.x - options.point.x),
+      y : options.pos.y + (options.move.y - options.point.y),
     })
-
     this.elm.style.setProperty("--x" , `${pos.x}px`)
     this.elm.style.setProperty("--y" , `${pos.y}px`)
     this.elm.draggable      = false
     this.elm.setAttribute("data-move", true)
-    this.elm.setPointerCapture(options.pointerId)
   }
 
   position(rect){

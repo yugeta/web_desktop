@@ -34,7 +34,9 @@
 
 /* Icon移動中 */
 #desktop .icon[data-status="move"]{
-  z-index : calc(var(--z) + var(--z-move-add));
+  /* z-index : calc(var(--z) + var(--z-move-add)); */
+  /* display:none; */
+  opacity:0;
 }
 
 /* Icon移動していない時の挙動 */
@@ -72,13 +74,26 @@
 /**
 * Select
 */
-#desktop .icon[data-select]{
+#desktop .icon[data-select],
+#desktop .icon-move-instance[data-select] .icon{
   border-color:rgba(255,255,255,0.5);
   background-color:rgba(0,0,0,0.3);
 }
 
-#desktop .icon[data-select] .name{
+#desktop .icon[data-select] .name,
+#desktop .icon-move-instance[data-select] .name{
   background-color:rgb(66, 86, 188);
   color:white;
+}
+
+/**
+* Instance
+*/
+#desktop .icon-move-instance{
+  position : absolute;
+  z-index  : var(--z-move-add);
+  top      : 0;
+  left     : 0;
+  pointer-events:none;
 }
 

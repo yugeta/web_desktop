@@ -7,8 +7,8 @@ export class Resize{
   }
 
   resize(options){
-    const w = this.elm.offsetWidth  + options.movement.x
-    const h = this.elm.offsetHeight + options.movement.y
+    const w = options.size.w  + (options.move.x - options.point.x)
+    const h = options.size.h  + (options.move.y - options.point.y)
 
     switch(options.name){
       case "horizontal":
@@ -23,8 +23,6 @@ export class Resize{
         this.both(w,h)
       break
     }
-
-    this.elm.setPointerCapture(options.pointerId)
   }
 
   horizontal(w){

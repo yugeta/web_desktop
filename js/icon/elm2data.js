@@ -24,8 +24,7 @@ export class Elm2data{
       file      : this.file,
       name      : this.name,
       type      : this.type,
-      x         : this.x,
-      y         : this.y,
+      x : this.x, y : this.y,
       parent_id : this.parent_id,
     }
   }
