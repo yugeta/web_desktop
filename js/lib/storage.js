@@ -45,6 +45,10 @@ export class Storage{
         this.del_id(this.options.data)
       break
 
+      case "destroy":
+        this.destroy()
+      break
+
       case "init":
       default:
         this.init()
@@ -154,6 +158,13 @@ export class Storage{
     if(index === -1){return}
     storage_data[data.mode].splice(index,1)
     this.save(storage_data)
+  }
+
+  // データを全て削除する。
+  destroy(){console.log("destroy")
+    Storage.datas = null
+    window.localStorage.removeItem(this.name)
+    location.reload()
   }
 
   finish(){

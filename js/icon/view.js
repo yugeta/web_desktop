@@ -1,9 +1,7 @@
 import { Bootstrap } from "../lib/bootstrap.js"
 import { Asset }     from "../lib/asset.js"
 import { Convert }   from "../lib/convert.js"
-// import { Storage }   from "../lib/storage.js"
 import { Position }  from "../icon/position.js"
-// import { Elm2data }      from "../icon/elm2data.js"
 
 export class View{
   constructor(data, parent){
@@ -30,8 +28,6 @@ export class View{
   single_icon_view(data){
     if(!data.id){return}
     if(this.get_parent(data.parent_id) !== this.parent){
-
-      // this.set_storage_data(data)
       return
     }
     
@@ -40,10 +36,6 @@ export class View{
     const html = new Convert(this.html, datas).text
     const parent = this.parent
     parent.insertAdjacentHTML("beforeend", html)
-
-    const elm = this.parent.querySelector(`.icon[data-id="${data.id}"]`)
-    // this.set_storage_data(new Elm2data(elm).datas)
-    // this.set_storage_data(data)
   }
 
   get_parent(parent_id){
@@ -56,17 +48,6 @@ export class View{
   }
 
   get_pos(data){
-    // if(Storage.datas 
-    // && Storage.datas.icons 
-    // && Storage.datas.icons.length){
-    //   const res = Storage.datas.icons.find(e => e.id === data.id)
-    //   if(res){
-    //     return {
-    //       x : res.x,
-    //       y : res.y,
-    //     }
-    //   }
-    // }
     if(data && data.x && data.y){
       return {
         x : data.x,
@@ -76,11 +57,4 @@ export class View{
     return new Position(this.parent).datas
   }
 
-  // set_storage_data(data){
-  //   new Storage({
-  //     mode : "save",
-  //     name : "icons",
-  //     data : data,
-  //   })
-  // }
 }
