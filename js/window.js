@@ -5,6 +5,7 @@ import { Wide }      from "./window/wide.js"
 import { Resize }    from "./window/resize.js"
 import { Move }      from "./window/move.js"
 import { Alignment } from "./window/alignment.js"
+import { ViewType }  from "./window/view_type.js"
 
 export class Window{
   constructor(options){
@@ -27,6 +28,10 @@ export class Window{
 
       case "wide":
         new Wide(options.active_window)
+      break
+
+      case "view_type":
+        new ViewType(options.active_window)
       break
 
       case "move":

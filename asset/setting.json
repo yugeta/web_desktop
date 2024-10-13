@@ -66,6 +66,26 @@
         "name" : "ウィンドウ整列",
         "mode" : "window_alignment"
       }
+    ],
+    "window":[
+      {
+        "name" : "新規フォルダ",
+        "mode" : "new_folder"
+      },
+      {
+        "name" : "アイコン整列",
+        "mode" : "icon_alignment"
+      }
+    ],
+    "icon":[
+      {
+        "name" : "名前変更",
+        "mode" : "name_change"
+      },
+      {
+        "name" : "ゴミ箱に入れる",
+        "mode" : "to_trash"
+      }
     ]
   }
 }
