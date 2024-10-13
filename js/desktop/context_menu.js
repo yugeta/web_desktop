@@ -36,20 +36,15 @@ export class ContextMenu{
 
     if(elm_icon){
       e.preventDefault()
-      // this.branch({
-      //   type  : "icon",
-      //   target : elm_icon,
-      //   event : e,
-      // })
+ 
     }
 
     else if(elm_window){
       e.preventDefault()
-      // this.branch({
-      //   type  : "window",
-      //   target : elm_window.closest(".window"),
-      //   event : e,
-      // })
+      Bootstrap.context_menu = {
+        target : elm_window
+      }
+      this.view_lists(Asset.get_data("setting").data.context_menu.window)
     }
 
     else if(elm_desktop){

@@ -7,6 +7,7 @@ import { Storage } from "./lib/storage.js"
 class Main{
   constructor(){
     new Storage()
+    console.log(Storage.datas)
     new Event()
     new System()
     this.asset()

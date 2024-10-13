@@ -96,6 +96,7 @@ export class View{
     const data = {
       id   : this.uuid,
       name : this.get_name(this.uuid),
+      file : this.get_file(this.uuid),
       x    : rect.x,
       y    : rect.y,
       w    : rect.w,
@@ -121,7 +122,6 @@ export class View{
       data : {
         mode : "windows",
         id   : data.id,
-        name : data.name,
         x : data.x,
         y : data.y,
         w : data.w,
@@ -134,5 +134,11 @@ export class View{
     if(!icon_id || !Storage.datas || !Storage.datas.icons){return}
     const icon_data = Storage.datas.icons.find(e => e.id === icon_id)
     return icon_data ? icon_data.name : ""
+  }
+
+  get_file(icon_id){
+    if(!icon_id || !Storage.datas || !Storage.datas.icons){return}
+    const icon_data = Storage.datas.icons.find(e => e.id === icon_id)
+    return icon_data ? `img/icon/${icon_data.file}` : ""
   }
 }

@@ -12,6 +12,7 @@ export class Click{
   event(target){
     const close        = target.closest(".window .header .close")
     const elm_win_wide = target.closest(".window .header .wide")
+    const view_type    = target.closest(".window .header .view-type")
     const context_menu = target.closest(".context_menu")
 
     // windowのクローズボタンをクリック
@@ -31,6 +32,14 @@ export class Click{
         active_window : elm_window,
       })
     }
+
+    else if(view_type){
+      const elm_window = target.closest(".window")
+      new Window({
+        mode : "view_type",
+        active_window : elm_window,
+      })
+    }
     
     else if(context_menu){
       // 右クリックメニューの非表示
@@ -39,7 +48,7 @@ export class Click{
       const item = target.closest(".item")
       switch(item.getAttribute("data-mode")){
         // アイコン整列処理
-        case "icon_alignment":
+        case "icon_alignment":console.log(Bootstrap.context_menu.target)
           new Icon({
             mode   : "alignment",
             target : Bootstrap.context_menu ? Bootstrap.context_menu.target : null,

@@ -5,6 +5,7 @@
 @import "window.css";
 @import "context_menu.css";
 @import "font.css";
+@import "window_view_type.css";
 
 html,body{
   width:100%;

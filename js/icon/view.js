@@ -2,6 +2,8 @@ import { Bootstrap } from "../lib/bootstrap.js"
 import { Asset }     from "../lib/asset.js"
 import { Convert }   from "../lib/convert.js"
 import { Position }  from "../icon/position.js"
+import { Elm2data }  from "../icon/elm2data.js"
+import { Storage }   from "../lib/storage.js"
 
 export class View{
   constructor(data, parent){
@@ -10,10 +12,12 @@ export class View{
     if(data.constructor === Array){
       for(const single_data of data){
         this.single_icon_view(single_data)
+        this.save_storage(single_data)
       }
     }
     else{
       this.single_icon_view(data)
+      this.save_storage(data)
     }
   }
 
@@ -48,13 +52,27 @@ export class View{
   }
 
   get_pos(data){
-    if(data && data.x && data.y){
+    if(data && typeof data.x !== "undefined" && typeof data.y !== "undefined"){
       return {
         x : data.x,
         y : data.y,
       }
     }
-    return new Position(this.parent).datas
+    else{
+      return new Position(this.parent).datas
+    }
   }
 
+  save_storage(data){
+    const parent = this.get_parent(data.parent_id)
+    if(!parent){return}
+    const icon = parent.querySelector(`.icon[data-id="${data.id}"]`)
+    if(!icon){return}
+    const icon_data = new Elm2data(icon).datas
+    new Storage({
+      mode : "save",
+      name : "icons",
+      data : icon_data,
+    })
+  }
 }
