@@ -1,4 +1,5 @@
 import { Header } from "./system/header.js"
+import { Time }   from "./system/time.js"
 
 export class System{
   constructor(options){
@@ -7,6 +8,9 @@ export class System{
 
       default:
         new Header()
+        new Time({
+          format : "normal"
+        })
     }
   }
 }
