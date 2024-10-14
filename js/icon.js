@@ -1,8 +1,10 @@
-import { Select }    from "./icon/select.js"
-import { Clear }     from "./icon/clear.js"
-import { View }      from "./icon/view.js"
-import { Move }      from "./icon/move.js"
-import { Alignment } from "./icon/alignment.js"
+import { Select }     from "./icon/select.js"
+import { Clear }      from "./icon/clear.js"
+import { View }       from "./icon/view.js"
+import { Move }       from "./icon/move.js"
+import { Alignment }  from "./icon/alignment.js"
+import { NewFolder }  from "./icon/new_folder.js"
+import { NameChange } from "./icon/name_change.js"
 
 export class Icon{
   constructor(options){
@@ -30,6 +32,19 @@ export class Icon{
         new Alignment(options)
       break
 
+      case "new_folder":
+        new NewFolder(options)
+      break
+
+      case "name_change":
+        new NameChange(options)
+      break
+
+      case "name_change_end":
+        new NameChange({
+          mode : "end"
+        })
+      break
     }
   }
 }

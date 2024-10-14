@@ -54,8 +54,15 @@ export class Elm2data{
   }
 
   get parent_id(){
-    if(!Storage.datas || !Storage.datas.icons){return ""}
-    const storage_data =  Storage.datas.icons.find(e => e.id === this.id)
-    return storage_data ? storage_data.parent_id : ""
+    // if(!Storage.datas || !Storage.datas.icons){return ""}
+    // const storage_data =  Storage.datas.icons.find(e => e.id === this.id)
+    // return storage_data ? storage_data.parent_id : ""
+    const window = this.elm.closest(".window")
+    if(window){
+      return window.getAttribute("data-id")
+    }
+    else{
+      return ""
+    }
   }
 }

@@ -58,12 +58,15 @@
 #desktop .icon .name{
   display   : block;
   margin    : 0;
-  padding   : 3px;
+  padding   : 2px;
   width     : 100%;
   font-size : var(--icon-font-size);
   text-align: center;
   line-height: 1.4em;
   word-break: break-all;
+  border-width:1px;
+  border-style:solid;
+  border-color:transparent;
 
   overflow: hidden;
   display: -webkit-box;
@@ -121,4 +124,14 @@
   color:white;
 }
 
+/**
+* Contenteditable
+*/
 
+#desktop .icon .name[contenteditable="true"],
+#desktop .icon[data-overlap="prohibited"] .name[contenteditable="true"]{
+  background-color:white;
+  border-color:rgb(66, 86, 188);
+  border-radius:5px;
+  color:black;
+}
