@@ -9,19 +9,7 @@
   position:relative;
   z-index:100;
 }
-#desktop header .time{
-  padding-right:10px;
-}
-#desktop header .time *{
-  font-size:0.8em;
-  display:block;
-  height:30%;
-  text-align:right;
-}
-#desktop header .time > *{
-  display:block;
-  margin:0;
-}
+
 
 /**
 * Menu
@@ -133,9 +121,6 @@
 
 
 @media (max-width:500px){
-  #desktop header .time{
-    padding:0;
-  }
   #desktop label[for='menu_toggle']{
     display:block;
   }
