@@ -37,6 +37,7 @@
   /* z-index : calc(var(--z) + var(--z-move-add)); */
   /* display:none; */
   opacity:0;
+  z-index:-1;
 }
 
 /* Icon移動していない時の挙動 */
@@ -96,4 +97,28 @@
   left     : 0;
   pointer-events:none;
 }
+
+/**
+* Overlap
+*/
+#desktop .icon[data-overlap]{
+  border-color:rgba(255,255,255,0.5);
+  background-color:rgba(0,0,0,0.3);
+}
+
+#desktop .icon[data-overlap] .name{
+  background-color:rgb(66, 86, 188);
+  color:white;
+}
+
+#desktop .icon[data-overlap="prohibited"]{
+  border-color:rgba(255, 160, 160, 0.5);
+  background-color:rgba(0,0,0,0.3);
+}
+
+#desktop .icon[data-overlap="prohibited"] .name{
+  background-color:rgb(188, 92, 66);
+  color:white;
+}
+
 
