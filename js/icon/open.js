@@ -45,7 +45,7 @@ export class Open{
     if(win){
       win.appendChild(current_icon)
     }
-    else{
+    else if(from_data.id !== to_data.id){
       current_icon.parentNode.removeChild(current_icon)
     }
   }

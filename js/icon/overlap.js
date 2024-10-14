@@ -28,7 +28,6 @@ export class Overlap{
     const current_id = this.elm.getAttribute("data-id")
     const target = this.event.target
     const icon   = target.closest(".icon")
-    const win    = target.closest(".window")
     const data   = {
       id     : null,
       target : null,
@@ -48,7 +47,6 @@ export class Overlap{
   get overlap_window(){
     const current_id = this.elm.getAttribute("data-id")
     const target = this.event.target
-    const icon   = target.closest(".icon")
     const win    = target.closest(".window")
     const data   = {
       id     : null,
@@ -82,8 +80,8 @@ export class Overlap{
       this.end("icon")
     }
 
-    Overlap.icon = data.target ? data : null
-    Overlap.past_id = data.id || null
+    Overlap.icon     = data.target ? data : null
+    Overlap.past_id  = data.status === "prohibited" ? null : data.id
   }
 
   // ウィンドウの重なり処理
@@ -123,6 +121,6 @@ export class Overlap{
       id        : this.elm.getAttribute("data-id"),
       target_id : Overlap.past_id,
     })
-    Overlap.past_id = null
+    Overlap.past_id  = null
   }
 }
