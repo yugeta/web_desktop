@@ -37,6 +37,7 @@ export class View{
     
     const pos = this.get_pos(data)
     const datas = {...data, ...pos}
+    this.check_file(datas)
     const html = new Convert(this.html, datas).text
     const parent = this.parent
     parent.insertAdjacentHTML("beforeend", html)
@@ -74,5 +75,11 @@ export class View{
       name : "icons",
       data : icon_data,
     })
+  }
+
+  // 
+  check_file(data){
+    if(data.file){return}
+    data.file = "folder.svg"
   }
 }

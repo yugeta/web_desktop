@@ -1,6 +1,4 @@
-import { Bootstrap }   from "../lib/bootstrap.js"
 import { Window }      from "../window.js"
-import { Icon }        from "../icon.js"
 import { ContextMenu } from "./context_menu.js"
 
 export class Click{
@@ -44,27 +42,7 @@ export class Click{
     else if(context_menu){
       // 右クリックメニューの非表示
       new ContextMenu({mode: "clear"})
-
-      const item = target.closest(".item")
-      switch(item.getAttribute("data-mode")){
-        // アイコン整列処理
-        case "icon_alignment":console.log(Bootstrap.context_menu.target)
-          new Icon({
-            mode   : "alignment",
-            target : Bootstrap.context_menu ? Bootstrap.context_menu.target : null,
-          })
-        break
-
-        // ウィンドウ整列処理
-        case "window_alignment":
-          new Window({
-            mode   : "alignment",
-          })
-        break
-
-
-      }
-      
+      new ContextMenu({mode: "click", target: target})
     }
   }
 }

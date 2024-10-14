@@ -44,6 +44,10 @@ export class MouseDown{
 
     // 右クリックメニューの非表示
     this.hidden_context_menu(context_menu)
+
+    new Icon({
+      mode : "name_change_end"
+    })
   }
 
   icon_push(icon){
