@@ -7,6 +7,9 @@
   --w : 200px;
   --h : 200px;
   --z : 100;
+  --color-1 : #CCC;
+  --color-2 : #44F;
+  --color-3 : #F44;
 
   left:var(--x);
   top :var(--y);
@@ -22,10 +25,14 @@
   box-shadow:4px 4px 20px rgba(0,0,0,0.5);
   border-radius:10px;
   overflow:hidden;
+
+  border-style:solid;
+  border-width:2px;
+  border-color:var(--color-1);
 }
 #desktop .window .header{
   height:30px;
-  background-color:#DDD;
+  background-color:var(--color-1);
   /* cursor:move; */
   display:flex;
   gap:8px;
@@ -195,3 +202,12 @@
   right:0;
   cursor:nwse-resize;
 }
+
+#desktop .window[data-overlap]{
+  border-color:var(--color-2);
+}
+#desktop .window[data-overlap="prohibited"]{
+  border-color:var(--color-3);
+}
+
+

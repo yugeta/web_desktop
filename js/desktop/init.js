@@ -2,6 +2,7 @@ import { Asset }       from "../lib/asset.js"
 import { Storage }     from "../lib/storage.js"
 import { Window }      from "../window.js"
 import { Icon }        from "../icon.js"
+import { Elm2data as IconData } from "../icon/elm2data.js"
 
 export class Init{
   constructor(){
@@ -26,11 +27,16 @@ export class Init{
 
   view_icon(){
     const icon_datas = this.init_icon_storage_data_merge()
-    Storage.datas.icons = icon_datas
-    new Icon({
+    const icon = new Icon({
       mode : "view",
       data : icon_datas,
     })
+    if(icon.elm){
+      Storage.datas.icons = new IconData(icon.elm)
+    }
+    else{
+      Storage.datas.icons = icon_datas
+    }
   }
 
   view_window(){

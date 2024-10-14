@@ -50,7 +50,7 @@ export class Elm2data{
   }
 
   get type(){
-    return "icon"
+    return this.elm.getAttribute("type")
   }
 
   get parent_id(){

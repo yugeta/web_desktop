@@ -3,26 +3,26 @@
     {
       "id"   : "sample_1",
       "name" : "Setting",
-      "type" : "icon",
+      "type" : "folder",
       "file" : "set-up-svgrepo-com.png"
     },
     {
       "id"   : "sample_2",
       "name" : "Gift",
-      "type" : "icon",
+      "type" : "folder",
       "file" : "gift-svgrepo-com.png"
     },
     {
       "id"   : "sample_3",
       "name" : "Heart",
-      "type" : "icon",
+      "type" : "folder",
       "file" : "like-svgrepo-com.png",
       "parent_id" : "sample_1"
     },
     {
       "id"   : "sample_4",
       "name" : "World",
-      "type" : "icon",
+      "type" : "folder",
       "file" : "the-internet-svgrepo-com.png",
       "parent_id" : "sample_1"
     }

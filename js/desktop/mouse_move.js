@@ -14,6 +14,7 @@ export class MouseMove{
       x : e.pageX,
       y : e.pageY,
     }
+    Icon.mouse_options.event = e
     new Icon(Icon.mouse_options)
   }
 

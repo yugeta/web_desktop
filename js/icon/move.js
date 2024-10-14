@@ -3,6 +3,7 @@ import { Convert }   from "../lib/convert.js"
 import { Asset }     from "../lib/asset.js"
 import { Storage }   from "../lib/storage.js"
 import { Clear }     from "../icon/clear.js"
+import { Overlap }   from "../icon/overlap.js"
 
 export class Move{
   constructor(options){
@@ -16,17 +17,26 @@ export class Move{
       break
 
       case "move_end":
-        if(!this.window_in_prohibited_acts(this.options.window || Bootstrap.elm_main)){
+        if(!this.window_in_prohibited_acts(this.options.window || Bootstrap.elm_main)
+        && !Overlap.past_id){
           this.window_change()
           this.moved()
         }
         setTimeout(this.move_end.bind(this), 0)
         this.remove_instance()
+        new Overlap({
+          mode : "end",
+          elm  : this.elm,
+        })
       break
 
       case "move":
       default:
         this.move_instance()
+        new Overlap({
+          elm   : this.elm,
+          event : this.options.event,
+        })
       break
     }
   }
