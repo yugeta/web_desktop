@@ -1,9 +1,13 @@
 export class Bootstrap{
+  static get root(){
+    return document.getElementById("desktop")
+  }
+
   static get elm_main(){
-    return document.querySelector("#desktop main.desktop")
+    return Bootstrap.root.querySelector("main.desktop")
   }
   static get elm_header(){
-    return document.querySelector("#desktop header")
+    return Bootstrap.root.querySelector("header")
   }
   static get window_rect(){
     return Bootstrap.elm_main.getBoundingClientRect()

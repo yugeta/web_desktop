@@ -42,11 +42,11 @@
         </li>
     
         <li>
-          <a href='#contact' data-logined>お問い合わせ</a>
+          <a href='#contact'>お問い合わせ</a>
         </li>
 
         <li>
-          <label for="menu">
+          <label>
             メニュー
           </label>
           <ul>
@@ -61,7 +61,17 @@
             </li>
           </ul>
         </li>
+        <li data-logined>
+          <label id="login_icon"></label>
+          <ul>
+            <li>
+              <a class="item" data-mode="logout">Logout</a>
+            </li>
+          </ul>
+        </li>
       </ul>
+
+      <div class="auth" data-unlogin></div>
 
       <div class='time center'><span class='ymd'></span><span class='his'></span></div>
 

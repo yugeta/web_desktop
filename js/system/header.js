@@ -1,4 +1,5 @@
 import { Storage } from "../lib/storage.js"
+import { Auth }      from "../system/auth.js"
 
 export class Header{
   constructor(){
@@ -19,6 +20,13 @@ export class Header{
       break
 
       case "sort-icon":
+      break
+
+      // Logout
+      case "logout":
+        new Auth({
+          mode : "logout"
+        })
       break
     }
   }

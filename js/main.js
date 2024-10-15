@@ -9,12 +9,13 @@ class Main{
     new Storage()
     console.log(Storage.datas)
     new Event()
-    new System()
+    
     this.asset()
   }
 
   asset(){
     new Asset().promise.then(()=>{
+      new System()
       this.desktop()
     })
   }

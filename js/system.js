@@ -1,5 +1,6 @@
 import { Header } from "./system/header.js"
 import { Time }   from "./system/time.js"
+import { Auth }   from "./system/auth.js"
 
 export class System{
   constructor(options){
@@ -11,6 +12,7 @@ export class System{
         new Time({
           format : "normal"
         })
+        new Auth()
     }
   }
 }
