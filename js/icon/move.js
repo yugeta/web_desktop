@@ -4,6 +4,7 @@ import { Asset }     from "../lib/asset.js"
 import { Storage }   from "../lib/storage.js"
 import { Clear }     from "../icon/clear.js"
 import { Overlap }   from "../icon/overlap.js"
+import { Icon }      from "../icon.js"
 
 export class Move{
   constructor(options){
@@ -91,7 +92,8 @@ export class Move{
     Move.instance = document.createElement("div")
     Move.instance.className = "icon-move-instance"
     Move.instance.setAttribute("data-select", true)
-    const html = new Convert(Asset.get_data("icon").text, {file : this.icon_data.file, name: this.icon_data.name}).text
+    const icon = new Icon(this.icon_data)
+    const html = new Convert(Asset.get_data("icon").text, icon).text
     Move.instance.innerHTML = html
     Bootstrap.elm_main.appendChild(Move.instance)
     const x = this.options.point.x - this.options.diff.x - Bootstrap.window_rect.left

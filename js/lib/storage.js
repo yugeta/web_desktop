@@ -1,7 +1,8 @@
-
 /**
  * desktop操作をした最終履歴を残し、ページへの再アクセス時に復旧するためのデータ保持処理
  */
+
+import { Asset } from "../lib/asset.js"
 
 export class Storage{
   static datas = {
@@ -52,6 +53,7 @@ export class Storage{
       case "init":
       default:
         this.init()
+        this.set_asset()
       break
     }
   }
@@ -59,7 +61,6 @@ export class Storage{
   get data(){
     if(!this.options.data || !this.options.data.mode){return null}
     const data = this.options.data || {}
-    // const storage = this.load() || {}
     const storage = Storage.datas
     if(storage && storage[data.mode] && storage[data.mode].constructor === Array){
       const index = storage[data.mode].findIndex(e => e.id === data.id)
@@ -81,6 +82,23 @@ export class Storage{
   init(){
     const base64 = window.localStorage.getItem(this.name)
     Storage.datas = base64 ? this.dec(base64) : {}
+  }
+
+  get asset_datas(){
+    return Asset.get_data("setting").data.desktop_icons
+  }
+
+  set_asset(){
+    const asset_datas = this.asset_datas
+    if(!Storage.datas.icons){
+      Storage.datas.icons = []
+    }
+    for(const data of asset_datas){
+      const storage_data = Storage.datas.icons.find(e => e.id === data.id)
+      
+      if(storage_data){continue}
+      Storage.datas.icons.push(data)
+    }
   }
 
   // データを追加する

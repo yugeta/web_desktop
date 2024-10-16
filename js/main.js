@@ -6,21 +6,12 @@ import { Storage } from "./lib/storage.js"
 
 class Main{
   constructor(){
-    new Storage()
-    console.log(Storage.datas)
-    new Event()
-    new System()
-    this.asset()
-  }
-
-  asset(){
     new Asset().promise.then(()=>{
-      this.desktop()
+      new Storage()
+      new Event()
+      new System()
+      new Desktop({mode:"init"})
     })
-  }
-
-  desktop(){
-    new Desktop({mode:"init"})
   }
 }
 
