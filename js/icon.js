@@ -8,36 +8,37 @@ import { NameChange } from "./icon/name_change.js"
 
 export class Icon{
   constructor(options){
-    switch(options.mode){
+    this.options = options || {}
+    switch(this.options.mode){
       case "view":
-        new View(options.data, options.parent)
+        new View(this.options.data,this.options.parent)
       break
       
       case "select":
-        new Select(options.icon)
+        new Select(this.options.icon)
       break
 
       case "clear":
-        new Clear(options.click_element)
+        new Clear(this.options.click_element)
       break
 
       case "move":
       case "move_end":
       case "move_start":
-        new Move(options)
+        new Move(this.options)
         
       break
 
       case "alignment":
-        new Alignment(options)
+        new Alignment(this.options)
       break
 
       case "new_folder":
-        new NewFolder(options)
+        new NewFolder(this.options)
       break
 
       case "name_change":
-        new NameChange(options)
+        new NameChange(this.options)
       break
 
       case "name_change_end":
@@ -45,6 +46,57 @@ export class Icon{
           mode : "end"
         })
       break
+    }
+  }
+
+  get id(){
+    if(this.options.id){
+      return this.options.id
+    }
+    if(this.options.elm){
+      return this.options.elm.getAttribute("data-id")
+    }
+  }
+
+  get data(){
+    if(this.id){
+      return Storage.datas.icons.find(e => e.id === this.id)
+    }
+    else{
+      return null
+    }
+  }
+
+  get icon(){
+    if(this.options.icon){
+      return this.options.icon
+    }
+    else{
+      switch(this.options.type){
+        case "file":
+          return "file.svg"
+  
+        case "folder":
+          return "folder.svg"
+  
+        default:
+          return "no-file.svg"
+      }
+    }
+  }
+
+  get name(){
+    if(this.options.name){
+      return this.options.name
+    }
+    else if(this.options.target){
+      return this.options.target.split("/").pop()
+    }
+    else if(this.options.data){
+      return this.data.name
+    }
+    else{
+      return "undefined"
     }
   }
 }

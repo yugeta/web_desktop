@@ -4,23 +4,19 @@ import { Asset }     from "../lib/asset.js"
 import { Convert }   from "../lib/convert.js"
 import { Storage }   from "../lib/storage.js"
 import { Icon }      from "../icon.js"
+import { File }      from "../file.js"
 
 export class View{
   constructor(options){
     if(!options || !options.id){return}
     this.name = options.name
     this.id   = options.id
-    this.storage_data = this.get_storage_data()
     if(this.opened){
       this.active()
     }
     else{
       this.add()
-      new Icon({
-        mode   : "view",
-        data   : this.icons,
-        parent : this.window,
-      })
+      this.body()
     }
   }
 
@@ -33,11 +29,11 @@ export class View{
   }
 
   get uuid(){
-    return this.storage_data ? this.storage_data.id : this.id
+    return this.storage_window_data ? this.storage_window_data.id : this.id
   }
 
   get storage_rect(){
-    return this.storage_data ? this.storage_data : null
+    return this.storage_window_data ? this.storage_window_data : null
   }
 
   get gap(){
@@ -58,6 +54,10 @@ export class View{
 
   get window(){
     return Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"] .body`)
+  }
+
+  get type(){
+
   }
 
   get init_rect(){
@@ -81,7 +81,7 @@ export class View{
 
   }
 
-  get_storage_data(){
+  get storage_window_data(){
     if(Storage.datas
     && Storage.datas.windows){
       return Storage.datas.windows.find(e => e.id === this.id)
@@ -91,12 +91,22 @@ export class View{
     }
   }
 
+  get storage_icon_data(){
+    if(Storage.datas
+    && Storage.datas.icons){
+      return Storage.datas.icons.find(e => e.id === this.id)
+    }
+    else{
+      return null
+    }
+  }
+
   add(){
-    const rect = this.storage_data ? this.storage_rect : this.init_rect
+    const rect = this.storage_window_data ? this.storage_rect : this.init_rect
     const data = {
       id   : this.uuid,
       name : this.get_name(this.uuid),
-      file : this.get_file(this.uuid),
+      icon : this.get_icon(this.uuid),
       x    : rect.x,
       y    : rect.y,
       w    : rect.w,
@@ -106,7 +116,7 @@ export class View{
     Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)
     const elm_window = Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
     new Sort(elm_window)
-    if(!this.storage_data){
+    if(!this.storage_window_data){
       this.set_storage_data(data)
     }
   }
@@ -119,14 +129,7 @@ export class View{
     new Storage({
       mode : "save",
       name : "windows",
-      data : {
-        mode : "windows",
-        id   : data.id,
-        x : data.x,
-        y : data.y,
-        w : data.w,
-        h : data.h,
-      }
+      data : data,
     })
   }
 
@@ -136,9 +139,31 @@ export class View{
     return icon_data ? icon_data.name : ""
   }
 
-  get_file(icon_id){
+  get_icon(icon_id){
     if(!icon_id || !Storage.datas || !Storage.datas.icons){return}
     const icon_data = Storage.datas.icons.find(e => e.id === icon_id)
-    return icon_data ? `img/icon/${icon_data.file}` : ""
+    const icon = new Icon(icon_data)
+    return icon_data ? `img/icon/${icon.icon}` : ""
+  }
+
+  body(){
+    if(!this.storage_icon_data){return}
+    switch(this.storage_icon_data.type){
+      case "file":
+        new File({
+          mode   : "view",
+          id     : this.storage_icon_data.id,
+          parent : this.window,
+        })
+      break
+
+      case "folder":
+        new Icon({
+          mode   : "view",
+          data   : this.icons,
+          parent : this.window,
+        })
+      break
+    }
   }
 }
