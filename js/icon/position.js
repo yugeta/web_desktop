@@ -27,7 +27,7 @@ export class Position{
   }
 
   get icon_num(){
-    const icons = this.parent.querySelectorAll(`:scope > .icon`)
+    const icons = this.parent.querySelectorAll(`:scope > .icon:not([data-id="trash"])`)
     return icons ? icons.length : 0;
   }
 

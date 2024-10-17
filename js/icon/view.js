@@ -2,7 +2,7 @@ import { Bootstrap } from "../lib/bootstrap.js"
 import { Asset }     from "../lib/asset.js"
 import { Convert }   from "../lib/convert.js"
 import { Position }  from "../icon/position.js"
-import { Elm2data }  from "../icon/elm2data.js"
+import { Trash }     from "../icon/trash.js"
 import { Storage }   from "../lib/storage.js"
 import { Icon }      from "../icon.js"
 
@@ -36,8 +36,9 @@ export class View{
       return
     }
     const pos = this.get_pos(data)
+    // console.log(pos,data)
     const datas = {...data, ...pos}
-    this.check_file(datas)
+    datas.icon = new Icon(datas).icon
     this.check_name(datas)
     const html = new Convert(this.html, datas).text
     const parent = this.parent
@@ -55,7 +56,10 @@ export class View{
   }
 
   get_pos(data){
-    if(data && typeof data.x !== "undefined" && typeof data.y !== "undefined"){
+    if(data.type === "trash"){
+      return new Trash().fixed_position
+    }
+    else if(data && typeof data.x === "number" && typeof data.y === "number"){
       return {
         x : data.x,
         y : data.y,
@@ -79,11 +83,6 @@ export class View{
       name : "icons",
       data : data,
     })
-  }
-
-  // 
-  check_file(data){
-    data.icon = new Icon(data).icon
   }
 
   check_name(data){
