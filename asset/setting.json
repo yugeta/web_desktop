@@ -87,7 +87,10 @@
     "window":[
       {
         "name" : "新規フォルダ",
-        "mode" : "new_folder"
+        "mode" : "new_folder",
+        "auth" : {
+          "system_flg" : false
+        }
       },
       {
         "name" : "アイコン整列",
@@ -96,12 +99,22 @@
     ],
     "icon":[
       {
+        "name" : "開く",
+        "mode" : "icon_open"
+      },
+      {
         "name" : "名前変更",
-        "mode" : "name_change"
+        "mode" : "name_change",
+        "auth" : {
+          "system_flg" : false
+        }
       },
       {
         "name" : "ゴミ箱に入れる",
-        "mode" : "to_trash"
+        "mode" : "to_trash",
+        "auth" : {
+          "system_flg" : false
+        }
       }
     ]
   }
