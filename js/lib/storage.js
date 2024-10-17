@@ -81,7 +81,7 @@ export class Storage{
   // 初期処理
   init(){
     const base64 = window.localStorage.getItem(this.name)
-    Storage.datas = base64 ? this.dec(base64) : {}
+    Storage.datas = base64 ? this.dec(base64) : Storage.datas
   }
 
   get asset_datas(){
@@ -90,12 +90,11 @@ export class Storage{
 
   set_asset(){
     const asset_datas = this.asset_datas
-    if(!Storage.datas.icons){
-      Storage.datas.icons = []
-    }
+    // if(!Storage.datas.icons){
+    //   Storage.datas.icons = []
+    // }
     for(const data of asset_datas){
       const storage_data = Storage.datas.icons.find(e => e.id === data.id)
-      
       if(storage_data){continue}
       Storage.datas.icons.push(data)
     }

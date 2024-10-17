@@ -164,6 +164,14 @@ export class View{
           parent : this.window,
         })
       break
+
+      case "trash":
+        new Icon({
+          mode   : "view",
+          data   : this.icons,
+          parent : this.window,
+        })
+      break
     }
   }
 }

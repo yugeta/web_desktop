@@ -5,6 +5,8 @@ import { Move }       from "./icon/move.js"
 import { Alignment }  from "./icon/alignment.js"
 import { NewFolder }  from "./icon/new_folder.js"
 import { NameChange } from "./icon/name_change.js"
+import { Bootstrap }  from "./lib/bootstrap.js"
+import { Storage }    from "./lib/storage.js"
 
 export class Icon{
   constructor(options){
@@ -58,9 +60,16 @@ export class Icon{
     }
   }
 
+  get elm(){
+    return this.options.elm ? this.options.elm : Bootstrap.elm_main.querySelector(`[data-id="${this.id}"]`)
+  }
+
   get data(){
-    if(this.id){
-      return Storage.datas.icons.find(e => e.id === this.id)
+    if(this.id && Storage.datas && Storage.datas.icons){
+      const data = Storage.datas.icons.find(e => e.id === this.id)
+      data.x =  this.x || data.x
+      data.y =  this.y || data.y
+      return data
     }
     else{
       return null
@@ -78,9 +87,12 @@ export class Icon{
   
         case "folder":
           return "folder.svg"
+
+        case "trash":
+          return "trash.svg"
   
         default:
-          return "no-file.svg"
+          return "no-type.svg"
       }
     }
   }
@@ -98,5 +110,12 @@ export class Icon{
     else{
       return "undefined"
     }
+  }
+
+  get x(){
+    return this.elm ? Number(this.elm.style.getPropertyValue("--x").replace("px","") || 0) : null
+  }
+  get y(){
+    return this.elm ? Number(this.elm.style.getPropertyValue("--y").replace("px","") || 0) : null
   }
 }

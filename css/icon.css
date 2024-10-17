@@ -96,9 +96,13 @@
 #desktop .icon-move-instance{
   position : absolute;
   z-index  : var(--z-move-add);
-  top      : 0;
-  left     : 0;
+  /* top      : 0;
+  left     : 0; */
   pointer-events:none;
+}
+#desktop .icon-move-instance .icon{
+  top:0;
+  left:0;
 }
 
 /**

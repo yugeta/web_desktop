@@ -27,9 +27,15 @@ export class Open{
       case "folder":
         this.folder_in(current_data, target_data)
       break
+
+      case "trash":
+        this.trash_in(current_data, target_data)
+      break
+      
     }
   }
 
+  // ウィンドウが開いていない状態でフォルダアイコンのoverlapした処理
   folder_in(from_data, to_data){
     from_data.parent_id = to_data.id
     from_data.x = null
@@ -48,6 +54,19 @@ export class Open{
     else if(from_data.id !== to_data.id){
       current_icon.parentNode.removeChild(current_icon)
     }
+  }
+
+  is_system(from_data){
+    return from_data.system_flg ? true : false
+  }
+
+  trash_in(from_data, to_data){
+    // システムファイル（フォルダ）は、ゴミ箱に入れない
+    if(this.is_system(from_data)){
+      alert("systemデータは削除できません。")
+      return
+    }
+    this.folder_in(from_data, to_data)
   }
 
   finish(){

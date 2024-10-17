@@ -1,7 +1,6 @@
 import { Storage }                from "../lib/storage.js"
 import { Icon }                   from "../icon.js"
 import { Window }                 from "../window.js"
-import { Elm2data as IconData }   from "../icon/elm2data.js"
 import { Elm2data as WindowData } from "../window/elm2data.js"
 
 export class MouseUp{
@@ -16,6 +15,11 @@ export class MouseUp{
       this.save_window()
       Window.mouse_options = null
     }
+  }
+
+  get icon_id(){
+    if(!Icon.mouse_options || !Icon.mouse_options.target){return null}
+    return Icon.mouse_options.target.getAttribute("data-id")
   }
 
   icon_end(e){
@@ -34,7 +38,7 @@ export class MouseUp{
     new Storage({
       mode  : "save",
       name  : "icons",
-      data  : new IconData(Icon.mouse_options.target).datas,
+      data  : new Icon({id : this.icon_id}).data
     })
   }
 

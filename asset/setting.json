@@ -37,6 +37,11 @@
       "type" : "file",
       "parent_id" : "files",
       "target" : "files/サンプルファイル.txt"
+    },
+    {
+      "id"   : "trash",
+      "name" : "ゴミ箱",
+      "type" : "trash"
     }
   ],
 

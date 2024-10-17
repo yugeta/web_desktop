@@ -29,6 +29,12 @@ export class Move{
           mode : "end",
           elm  : this.elm,
         })
+        // console.log(this.options,new Icon({id : this.elm.getAttribute("data-id")}).data)
+        // new Storage({
+        //   mode : "save",
+        //   name : "icons",
+        //   data : new Icon({id : this.elm.getAttribute("data-id")}).data
+        // })
       break
 
       case "move":
@@ -81,6 +87,7 @@ export class Move{
     else{
       const window_body = this.options.target.closest(".window .body")
       const window_rect = window_body.getBoundingClientRect()
+      // console.log(this.options.point.x - this.options.diff.x - window_rect.left, this.options.point.y - this.options.diff.y - window_rect.top)
       return {
         x : this.options.point.x - this.options.diff.x - window_rect.left,
         y : this.options.point.y - this.options.diff.y - window_rect.top,
