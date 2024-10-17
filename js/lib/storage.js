@@ -52,8 +52,9 @@ export class Storage{
 
       case "init":
       default:
-        this.init()
-        this.set_asset()
+        this.get_storage()
+        this.set_setting_json()
+        console.log(Storage.datas)
       break
     }
   }
@@ -79,7 +80,7 @@ export class Storage{
   }
 
   // 初期処理
-  init(){
+  get_storage(){
     const base64 = window.localStorage.getItem(this.name)
     Storage.datas = base64 ? this.dec(base64) : Storage.datas
   }
@@ -88,14 +89,12 @@ export class Storage{
     return Asset.get_data("setting").data.desktop_icons
   }
 
-  set_asset(){
-    const asset_datas = this.asset_datas
-    // if(!Storage.datas.icons){
-    //   Storage.datas.icons = []
-    // }
-    for(const data of asset_datas){
+  set_setting_json(){
+    for(const data of this.asset_datas){
       const storage_data = Storage.datas.icons.find(e => e.id === data.id)
+      storage_data.system_flg = true
       if(storage_data){continue}
+      data.system_flg = true
       Storage.datas.icons.push(data)
     }
   }

@@ -19,9 +19,15 @@ export class NameChange{
         break
 
         default:
-          this.set_input()
-          this.set_event()
-          this.text_select()
+          // システムアイテムの場合は名前変更できない
+          if(this.is_system_item){
+            alert("システムデータの名前変更はできません。")
+          }
+          else{
+            this.set_input()
+            this.set_event()
+            this.text_select()
+          }
       }
     })
   }
@@ -30,8 +36,17 @@ export class NameChange{
     return this.options.target
   }
 
+  get id(){
+    return this.icon.getAttribute("data-id")
+  }
+
   get elm_name(){
     return this.icon.querySelector(".name")
+  }
+
+  get is_system_item(){
+    const data = Storage.datas.icons.find(e => e.id === this.id)
+    return data.system_flg ? true : false
   }
 
   // 名前欄を入力可能にする
