@@ -39,7 +39,7 @@ export class View{
     if(!file){return}
     const xhr = new XMLHttpRequest()
     xhr.withCredentials = true
-    xhr.open('GET' , `data/${file}` , true)
+    xhr.open('GET' , file , true)
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
     xhr.onload = this.loaded.bind(this)
     xhr.send()

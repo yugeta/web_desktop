@@ -36,12 +36,23 @@
       "id"   : "file_1",
       "type" : "file",
       "parent_id" : "files",
-      "target" : "files/サンプルファイル.txt"
+      "target" : "data/files/サンプルファイル.txt"
     },
     {
       "id"   : "trash",
       "name" : "ゴミ箱",
       "type" : "trash"
+    },
+    {
+      "id"   : "contact",
+      "name" : "お問い合わせ",
+      "type" : "app",
+      "parent_id" : "app",
+      "target" : "data/contact/index.html",
+      "window_size" : {
+        "width"  : 500,
+        "height" : 400
+      }
     }
   ],
 

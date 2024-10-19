@@ -5,12 +5,13 @@ import { Convert }   from "../lib/convert.js"
 import { Storage }   from "../lib/storage.js"
 import { Icon }      from "../icon.js"
 import { File }      from "../file.js"
+import { App }       from "../app.js"
 
 export class View{
   constructor(options){
-    if(!options || !options.id){return}
-    this.name = options.name
-    this.id   = options.id
+    this.options = options || {}
+    if(!this.options.id){return}
+    if(!this.icon_data){return}
     if(this.opened){
       this.active()
     }
@@ -18,6 +19,14 @@ export class View{
       this.add()
       this.body()
     }
+  }
+
+  get id(){
+    return this.options.id
+  }
+
+  get name(){
+    return this.options.name
   }
 
   get opened(){
@@ -60,6 +69,11 @@ export class View{
 
   }
 
+  get icon_data(){
+    if(!Storage.datas || !Storage.datas.icons){return null}
+    return Storage.datas.icons.find(e => e.id === this.id)
+  }
+
   get init_rect(){
     // 動かしていないwindow一覧の取得
     const windows = Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
@@ -69,6 +83,13 @@ export class View{
       y : windows.length ? windows[windows.length-1].offsetTop  + this.gap.y : this.pos.y,
       w : this.size.w,
       h : this.size.h,
+    }
+    // 初期サイズ
+    if(this.storage_icon_data.window_size
+    && !this.storage_icon_data.w
+    && !this.storage_icon_data.h){console.log(1)
+      rect.w = this.storage_icon_data.window_size.width  || rect.w
+      rect.h = this.storage_icon_data.window_size.height || rect.h
     }
 
     // 右下制御
@@ -169,6 +190,14 @@ export class View{
         new Icon({
           mode   : "view",
           data   : this.icons,
+          parent : this.window,
+        })
+      break
+
+      case "app":
+        new App({
+          mode   : "view",
+          id     : this.storage_icon_data.id,
           parent : this.window,
         })
       break

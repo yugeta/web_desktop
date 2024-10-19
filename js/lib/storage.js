@@ -92,6 +92,7 @@ export class Storage{
   set_setting_json(){
     for(const data of this.asset_datas){
       const storage_data = Storage.datas.icons.find(e => e.id === data.id)
+      if(!storage_data){continue}
       storage_data.system_flg = true
       if(storage_data){continue}
       data.system_flg = true
