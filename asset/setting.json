@@ -48,7 +48,7 @@
       "name" : "お問い合わせ",
       "type" : "app",
       "parent_id" : "app",
-      "target" : "data/contact/index.html",
+      "target" : "asset/contact/index.html",
       "window_size" : {
         "width"  : 500,
         "height" : 400
