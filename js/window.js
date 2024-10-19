@@ -12,6 +12,7 @@ export class Window{
     switch(options.mode){
       case "init":
       this.init(options.datas)
+      this.hash()
       break
 
       case "view":
@@ -53,5 +54,13 @@ export class Window{
     for(const data of datas){
       new View(data)
     }
+  }
+
+  hash(){
+    if(!location.hash){return}
+    new View({
+      mode : "view",
+      id   : location.hash.split("#")[1],
+    })
   }
 }
