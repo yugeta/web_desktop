@@ -4,7 +4,7 @@
  */
 
 export class Storage{
-  name = "mynt_web_desktop"
+  name = "mynt_web_desktop_13"
 
   constructor(options){
     this.options = options || {}
