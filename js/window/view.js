@@ -84,13 +84,17 @@ export class View{
       w : this.size.w,
       h : this.size.h,
     }
-    // 初期サイズ
-    if(this.storage_icon_data.window_size
-    && !this.storage_icon_data.w
-    && !this.storage_icon_data.h){console.log(1)
-      rect.w = this.storage_icon_data.window_size.width  || rect.w
-      rect.h = this.storage_icon_data.window_size.height || rect.h
-    }
+    // // 初期サイズ
+    // if(this.storage_icon_data.window_size){console.log("window_size")
+    //   if(this.storage_icon_data.window_size.status === "fit"){
+    //     rect.w = this.window.scrollWidth
+    //     rect.h = this.window.scrollHeight
+    //   }
+    //   else if(!this.storage_icon_data.w && !this.storage_icon_data.h){
+    //     rect.w = this.storage_icon_data.window_size.width  || rect.w
+    //     rect.h = this.storage_icon_data.window_size.height || rect.h
+    //   }
+    // }
 
     // 右下制御
     rect.x = rect.x > window_rect.width  - this.size.w ? window_rect.width  - this.size.w : rect.x
@@ -135,6 +139,7 @@ export class View{
     }
     const html = new Convert(this.html, data).text
     Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)
+    this.set_window_size()
     const elm_window = Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
     new Sort(elm_window)
     if(!this.storage_window_data){
@@ -203,4 +208,14 @@ export class View{
       break
     }
   }
+
+  // set_window_size(){
+  //   if(!this.storage_icon_data.window_size){return}
+  //   if(this.storage_icon_data.window_size.status === "fit"){
+  //     const w = this.window.scrollWidth
+  //     const h = this.window.scrollWidth
+  //     this.window.style.setProperty("--w", `${w}px`)
+  //     this.window.style.setProperty("--h", `${h}px`)
+  //   }
+  // }
 }

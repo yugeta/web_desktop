@@ -2,24 +2,23 @@
 * Window
 */
 #desktop .window{
-  --x : 0px;
-  --y : 0px;
-  --w : 200px;
-  --h : 200px;
-  --z : 100;
+  --x       : 0px;
+  --y       : 0px;
+  --w       : 200px;
+  --h       : 200px;
+  --z       : 100;
   --color-1 : #CCC;
   --color-2 : #44F;
   --color-3 : #F44;
-
-  left:var(--x);
-  top :var(--y);
-  width : var(--w);
-  height: var(--h);
-  z-index:var(--z);
+  left      : var(--x);
+  top       : var(--y);
+  width     : var(--w);
+  height    : var(--h);
+  z-index   : var(--z);
 
   position:absolute;
-  min-width: 200px;
-  min-height:200px;
+  min-width  : 100px;
+  min-height : 100px;
   display:flex;
   flex-direction:column;
   box-shadow:4px 4px 20px rgba(0,0,0,0.5);
