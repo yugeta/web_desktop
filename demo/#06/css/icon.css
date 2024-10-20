@@ -1,0 +1,66 @@
+/**
+* Icon
+*/
+
+#desktop{
+  --icon-size      : 50px;
+  --icon-margin    : 10px;
+  --icon-font-size : 10px;
+}
+
+#desktop .icon{
+  --x : 0px;
+  --y : 0px;
+  --z : 1;
+  --z-add : 2000;
+
+  width     : calc(var(--icon-size) + var(--icon-margin) * 2 );
+  display   : flex;
+  flex-direction: column;
+  gap       : 4px;
+  border    : 2px solid transparent;
+  border-radius:5px;
+  overflow  : hidden;
+  z-index   : var(--z);
+}
+#desktop .icon:not([data-status="move"]){
+  transition-property: left,top;
+  transition-duration: 0.3s;
+}
+#desktop .icon[data-status="move"]{
+  z-index : calc(var(--z) + var(--z-add));
+}
+#desktop .icon[data-select]{
+  border-color:rgba(255,255,255,0.5);
+  background-color:rgba(0,0,0,0.3);
+}
+
+#desktop .icon img{
+  display   : block;
+  margin    : 0 var(--icon-margin);
+  width     : var(--icon-size);
+  height    : var(--icon-size);
+  object-fit: contain;
+  pointer-events:none;
+}
+
+#desktop .icon .name{
+  display   : block;
+  margin    : 0;
+  padding   : 3px;
+  width     : 100%;
+  font-size : var(--icon-font-size);
+  text-align: center;
+  line-height: 1.4em;
+  word-break: break-all;
+
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+#desktop .icon[data-select] .name{
+  background-color:rgb(66, 86, 188);
+  color:white;
+}
