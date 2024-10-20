@@ -139,7 +139,7 @@ export class View{
     }
     const html = new Convert(this.html, data).text
     Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)
-    this.set_window_size()
+    // this.set_window_size()
     const elm_window = Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
     new Sort(elm_window)
     if(!this.storage_window_data){
