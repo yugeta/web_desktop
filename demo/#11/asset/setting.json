@@ -1,0 +1,59 @@
+{
+  "desktop_icons" : [
+    {
+      "name" : "Setting",
+      "type" : "icon",
+      "file" : "set-up-svgrepo-com.png"
+    },
+    {
+      "name" : "Gift",
+      "type" : "icon",
+      "file" : "gift-svgrepo-com.png"
+    },
+    {
+      "name" : "Heart",
+      "type" : "icon",
+      "file" : "like-svgrepo-com.png"
+    },
+    {
+      "name" : "World",
+      "type" : "icon",
+      "file" : "the-internet-svgrepo-com.png"
+    }
+  ],
+
+  "window_default" : {
+    "pos" : {
+      "x": 80, 
+      "y": 20
+    },
+    "gap" : {
+      "x": 30, 
+      "y": 40
+    },
+    "size" : {
+      "w" : 300,
+      "h" : 200
+    },
+    "z" : 1000
+  },
+
+  "context_menu" : {
+    "icon":[
+
+    ],
+    "window":[
+
+    ],
+    "desktop":[
+      {
+        "name" : "新規フォルダ",
+        "mode" : "new_folder"
+      },
+      {
+        "name" : "デスクトップの整列",
+        "mode" : "icon_alignment"
+      }
+    ]
+  }
+}
