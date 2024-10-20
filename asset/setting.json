@@ -53,6 +53,16 @@
         "width"  : 500,
         "height" : 400
       }
+    },
+    {
+      "id"   : "calculator",
+      "name" : "計算機",
+      "type" : "app",
+      "parent_id" : "",
+      "target" : "asset/calculator/index.html",
+      "window_size" : {
+        "status" : "fit"
+      }
     }
   ],
 

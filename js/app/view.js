@@ -1,5 +1,6 @@
 import { Storage }   from "../lib/storage.js"
 import { Bootstrap } from "../lib/bootstrap.js"
+import { InnerHtml } from "../lib/inner_html.js"
 
 export class View{
   constructor(options){
@@ -35,6 +36,10 @@ export class View{
     const filename = this.file.split("#")[0].split("?")[0]
     const ext      = filename.split(".").pop()
     return ext.toLowerCase()
+  }
+
+  get root_path(){
+    return "asset/calculator"
   }
 
   get type(){
@@ -109,7 +114,12 @@ export class View{
   }
 
   view_html(html){
-    this.body.innerHTML = html
+    // this.body.innerHTML = html
+    new InnerHtml({
+      html   : html,
+      target : this.body,
+      root   : this.root_path,
+    })
   }
 
   view_img(src){
