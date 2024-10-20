@@ -8,7 +8,7 @@ export class Storage{
     icons   : [],
     windows : [],
   }
-  name = "mynt_web_desktop"
+  name = "mynt_web_desktop_18"
   
   constructor(options){
     this.options = options || {}
