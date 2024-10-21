@@ -13,6 +13,7 @@ export class Event{
     Bootstrap.elm_main.addEventListener("mouseup"     , ((e)=> new MouseUp(e)))
     Bootstrap.elm_main.addEventListener("click"       , ((e)=> new Click(e)))
     Bootstrap.elm_main.addEventListener("dblclick"    , ((e)=> new DoubleClick(e)))
-    Bootstrap.elm_main.addEventListener("contextmenu" , ((e)=> new ContextMenu(e)))
+    Bootstrap.elm_main.oncontextmenu = function(){return false}
+    Bootstrap.elm_main.addEventListener("contextmenu" , ((e)=> {new ContextMenu(e);return false}))
   }
 }

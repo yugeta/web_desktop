@@ -59,11 +59,19 @@ export class ContextMenu{
 
   view_content(target){
     if(!target){return}
-    const elm_icon    = target.closest(".icon")
-    const elm_window  = target.closest(".window .body")
-    const elm_desktop = target.closest(".desktop")
+    const elm_icon          = target.closest(".icon")
+    const elm_window        = target.closest(".window")
+    const elm_window_head   = target.closest(".window .header")
+    const elm_window_body   = target.closest(".window .body")
+    const elm_window_resize = target.closest(".window .resize")
+    const elm_desktop       = target.closest(".desktop")
 
-    if(elm_icon){
+    if(elm_window_resize
+    || elm_window_head){
+      // e.preventDefault()
+      return false
+    }
+    else if(elm_icon){
       this.mode = "icon"
       this.options.preventDefault()
       Bootstrap.context_menu = {
@@ -76,7 +84,7 @@ export class ContextMenu{
       this.mode = "window"
       this.options.preventDefault()
       Bootstrap.context_menu = {
-        target : elm_window
+        target : elm_window_body
       }
       this.view_lists(Asset.get_data("setting").data.context_menu.window)
     }
