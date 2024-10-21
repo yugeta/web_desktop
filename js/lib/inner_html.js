@@ -51,7 +51,7 @@ export class InnerHtml{
     if(target_script.closest("svg")){
       this.exec_scripts()
     }
-    else if(target_script.getAttribute('src')){
+    else if(target_script.hasAttribute('src')){
       this.exec_script_src(target_script)
     }
     else{
@@ -61,9 +61,13 @@ export class InnerHtml{
   }
 
   exec_script_src(script){
+    const src = script.getAttribute("src")
+    const dt = (+new Date())
+    const new_src = src.indexOf("?") === -1 ? `${src}?${dt}` : `${src}&${dt}`
     const new_script = document.createElement('script')
     new_script.onload = this.exec_scripts.bind(this)
     this.copy_attributes(script , new_script)
+    new_script.setAttribute("src" , new_src)
     script.parentNode.insertBefore(new_script , script)
   }
 
