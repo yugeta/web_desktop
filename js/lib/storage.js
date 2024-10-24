@@ -1,7 +1,8 @@
-
 /**
  * desktop操作をした最終履歴を残し、ページへの再アクセス時に復旧するためのデータ保持処理
  */
+
+import { Asset } from "../lib/asset.js"
 
 export class Storage{
   static datas = {
@@ -29,6 +30,10 @@ export class Storage{
         this.save(Storage.datas)
       break
 
+      case "remove":
+        this.remove(this.options)
+      break
+
       case "load":
         this.datas = this.load(this.options.name)
       break
@@ -51,7 +56,8 @@ export class Storage{
 
       case "init":
       default:
-        this.init()
+        this.get_storage()
+        this.set_setting_json()
       break
     }
   }
@@ -59,7 +65,6 @@ export class Storage{
   get data(){
     if(!this.options.data || !this.options.data.mode){return null}
     const data = this.options.data || {}
-    // const storage = this.load() || {}
     const storage = Storage.datas
     if(storage && storage[data.mode] && storage[data.mode].constructor === Array){
       const index = storage[data.mode].findIndex(e => e.id === data.id)
@@ -78,9 +83,24 @@ export class Storage{
   }
 
   // 初期処理
-  init(){
+  get_storage(){
     const base64 = window.localStorage.getItem(this.name)
-    Storage.datas = base64 ? this.dec(base64) : {}
+    Storage.datas = base64 ? this.dec(base64) : Storage.datas
+  }
+
+  get asset_datas(){
+    return Asset.get_data("setting").data.desktop_icons
+  }
+
+  set_setting_json(){
+    for(const data of this.asset_datas){
+      const storage_data = Storage.datas.icons.find(e => e.id === data.id)
+      if(!storage_data){continue}
+      storage_data.system_flg = true
+      if(storage_data){continue}
+      data.system_flg = true
+      Storage.datas.icons.push(data)
+    }
   }
 
   // データを追加する
@@ -135,10 +155,7 @@ export class Storage{
     }
   }
 
-  // データを全て削除する
-  del_all(){
-    window.localStorage.removeItem(this.name)
-  }
+  
 
   // 任意項目のデータを削除する (mode)
   del_mode(data){
@@ -160,8 +177,22 @@ export class Storage{
     this.save(storage_data)
   }
 
-  // データを全て削除する。
-  destroy(){console.log("destroy")
+  // 2階層目のデータを削除する
+  remove(data){
+    if(!data.id || !data.name || !Storage.datas[data.name]){return}
+    const index = Storage.datas[data.name].findIndex(e => e.id)
+    if(index < -1){return}
+    Storage.datas[data.name].splice(index,1)
+    Storage.datas[data.name] = Storage.datas[data.name].filter(e => e)
+    this.save(Storage.datas)
+    
+  }
+
+  // データを全て削除する
+  del_all(){
+    window.localStorage.removeItem(this.name)
+  }
+  destroy(){
     Storage.datas = null
     window.localStorage.removeItem(this.name)
     location.reload()

@@ -54,24 +54,14 @@ export class Google{
     const script = document.createElement('script')
     const dt = (+new Date())
     script.src = `${this.google_client_src}?temp=${dt}`
-    // script.async = true
-    // script.defer = true
+    script.async = true
+    script.defer = true
     script.addEventListener('load' , this.loaded_module.bind(this))
     document.querySelector('head').appendChild(script)
   }
 
   loaded_module(){
     setTimeout(this.mode.bind(this) , 100)
-    // switch(this.options.mode){
-    //   case 'logout':
-    //     setTimeout(this.logout.bind(this) , 100)
-    //     break
-
-    //   case 'login':
-    //   default:
-    //     setTimeout(this.login.bind(this) , 100)
-    //     break
-    // }
   }
 
   mode(){
@@ -79,26 +69,12 @@ export class Google{
       case "login":
         this.login()
       break
-
-      // case 'view_header_login':
-      //   this.view_header_login()
-      // break
-
-      // default:
-      //   this.check_module()
-      // break
     }
   }
 
   login(){
     if(!this.google_function || !this.options.elm){return}
-    // this.google_function.accounts.id.initialize({
-    //   prompt_parent_id      : this.parent_id,
-    //   client_id             : this.client_id,
-    //   prompt_close_button : false,
-    //   callback              : this.login_callback.bind(this),
-    // })
-    google.accounts.id.initialize({
+    this.google_function.accounts.id.initialize({
       client_id          : this.google_client_id,
       prompt_parent_id   : 'google_login',
       style              : 'position:static;',
@@ -106,60 +82,22 @@ export class Google{
       auto_select        : true,
       cancel_on_tap_outside : true,
       callback           : this.logined.bind(this),
-      // callback           : ((e) => this.logined(e)).bind(this),
-      // callback           : ((e)=>{
-      //   console.log(e)
-      //   this.logined(e)
-      // }),
     })
     this.google_function.accounts.id.renderButton(
       /** @type{!HTMLElement} */ this.options.elm,
       /** @type{!GsiButtonConfiguration} */ {
-        // theme : 'filled_blue',
         logo_alignment : 'center',
-        // width : 280,
         size : 'large',
       }
     )
-    // this.view_login_button()
   }
 
   logined(datas){
-    // Google.res = datas
-    // Google.datas = {...datas, ...this.jwt_decode(datas.credential)}
     Google.datas = this.jwt_decode(datas.credential)
     this.finish()
   }
-
-  // view_login_button(){
-  //   if(!this.options.elm){return}
-  //   google.accounts.id.initialize({
-  //     client_id          : this.google_client_id,
-  //     prompt_parent_id   : 'google_login',
-  //     style              : 'position:static;',
-  //     auto_prompt        : true,
-  //     auto_select        : true,
-  //     cancel_on_tap_outside : true,
-  //     callback           : ((e)=>{console.log(e)}),
-  //   })
-  //   // this.google_function.accounts.id.renderButton(
-  //   //   /** @type{!HTMLElement} */ this.options.elm,
-  //   //   /** @type{!GsiButtonConfiguration} */ {
-  //   //     // theme : 'filled_blue',
-  //   //     logo_alignment : 'center',
-  //   //     // width : 280,
-  //   //     size : 'large',
-  //   //   }
-  //   // )
-  // }
-
-
-  
   
   check_ui_cancel(e){
-    // console.log(e)
-    // alert(e)
-    // console.log(this.google_module.accounts.id)
     if(e.l === 'suppressed_by_user'){
       /**
        * error
@@ -187,22 +125,15 @@ export class Google{
     return true
   }
 
-  
   cancel(e){
     console.log(e)
     console.log(this.google_module.accounts.id)
     this.google_module.accounts.id.cancel()
   }
 
-  
   prompt(){
     this.google_module.accounts.id.prompt(this.check_ui_cancel.bind(this))
   }
-  
-  
-  
-  
-  
 
   login_close(){
 
@@ -226,8 +157,6 @@ export class Google{
     const str3 = decodeURIComponent(str2)
     return JSON.parse(str3)
   }
-
-
 
   finish(){
     this.login_close()

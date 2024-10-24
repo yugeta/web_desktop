@@ -1,0 +1,7 @@
+#desktop main{
+  height : var(--main-size);
+  position:relative;
+  z-index:1;
+  background: linear-gradient(-45deg, var(--color-bg1), var(--color-bg2));
+  overflow:hidden;
+}

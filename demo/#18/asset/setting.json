@@ -1,0 +1,91 @@
+{
+  "desktop_icons" : [
+    {
+      "id"   : "sample_1",
+      "name" : "Setting",
+      "type" : "folder",
+      "file" : "set-up-svgrepo-com.png"
+    },
+    {
+      "id"   : "sample_2",
+      "name" : "Gift",
+      "type" : "folder",
+      "file" : "gift-svgrepo-com.png"
+    },
+    {
+      "id"   : "sample_3",
+      "name" : "Heart",
+      "type" : "folder",
+      "file" : "like-svgrepo-com.png",
+      "parent_id" : "sample_1"
+    },
+    {
+      "id"   : "sample_4",
+      "name" : "World",
+      "type" : "folder",
+      "file" : "the-internet-svgrepo-com.png",
+      "parent_id" : "sample_1"
+    }
+  ],
+
+  "icon" : {
+    "size" : {
+      "w" : 100,
+      "h" : 100,
+      "z" : 1
+    }
+  },
+
+  "window" : {
+    "pos" : {
+      "x": 80, 
+      "y": 20
+    },
+    "gap" : {
+      "x": 30, 
+      "y": 40
+    },
+    "size" : {
+      "w" : 300,
+      "h" : 200
+    },
+    "z" : 1000
+  },
+
+  "context_menu" : {
+    "desktop":[
+      {
+        "name" : "新規フォルダ",
+        "mode" : "new_folder"
+      },
+      {
+        "name" : "アイコン整列",
+        "mode" : "icon_alignment"
+      },
+      {
+        "name" : "ウィンドウ整列",
+        "mode" : "window_alignment"
+      }
+    ],
+    "window":[
+      {
+        "name" : "新規フォルダ",
+        "mode" : "new_folder"
+      },
+      {
+        "name" : "アイコン整列",
+        "mode" : "icon_alignment"
+      }
+    ],
+    "icon":[
+      {
+        "name" : "名前変更",
+        "mode" : "name_change"
+      },
+      {
+        "name" : "ゴミ箱に入れる",
+        "mode" : "to_trash"
+      }
+    ]
+  }
+}

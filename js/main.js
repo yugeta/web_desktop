@@ -3,25 +3,17 @@ import { Asset }   from "./lib/asset.js"
 import { Desktop } from "./desktop.js"
 import { System }  from "./system.js"
 import { Storage } from "./lib/storage.js"
+import { Hash }    from "./system/hash.js"
 
 class Main{
   constructor(){
-    new Storage()
-    console.log(Storage.datas)
-    new Event()
-    
-    this.asset()
-  }
-
-  asset(){
     new Asset().promise.then(()=>{
+      new Storage()
+      new Hash()
+      new Event()
       new System()
-      this.desktop()
+      new Desktop({mode:"init"})
     })
-  }
-
-  desktop(){
-    new Desktop({mode:"init"})
   }
 }
 

@@ -8,6 +8,7 @@
 @import "window_view_type.css";
 @import "time.css";
 @import "auth.css";
+@import "file.css";
 
 html,body{
   width:100%;

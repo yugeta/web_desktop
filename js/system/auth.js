@@ -7,6 +7,8 @@ import { Google }    from "../system/google.js"
  */
 
 export class Auth{
+  name = "google_auth"
+
   constructor(options){
     this.options = options || {}
     switch(this.options.mode){
@@ -23,7 +25,7 @@ export class Auth{
 
   get storage_data(){
     if(!Storage.datas.system){return null}
-    return Storage.datas.system.find(e => e.id === "google_auth")
+    return Storage.datas.system.find(e => e.id === this.name) || null
   }
 
   get auth(){
@@ -64,16 +66,22 @@ export class Auth{
 
   google_logined(){
     this.set_root_flg(true)
-    Google.datas.id = "google_auth"
+    Google.datas.id = this.name
     new Storage({
       mode : "save",
       name : "system",
       data : Google.datas,
     })
+    location.reload()
   }
 
   logout(){
-    console.log("logout")
+    new Storage({
+      mode : "remove",
+      name : "system",
+      id   : this.name,
+    })
+    location.reload()
   }
 
 }
