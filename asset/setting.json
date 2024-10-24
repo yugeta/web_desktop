@@ -68,6 +68,11 @@
       "id"   : "blogger",
       "name" : "Blog",
       "type" : "app"
+    },
+    {
+      "id"   : "spreadsheet",
+      "name" : "Spread Sheet",
+      "type" : "app"
     }
   ],
 
