@@ -2,12 +2,14 @@ import { Asset }       from "../lib/asset.js"
 import { Storage }     from "../lib/storage.js"
 import { Window }      from "../window.js"
 import { Icon }        from "../icon.js"
+import { Background }  from "./background.js"
 import { Elm2data as IconData } from "../icon/elm2data.js"
 
 export class Init{
   constructor(){
     this.view_icon()
     this.view_window()
+    new Background()
   }
 
   get setting_icons(){
