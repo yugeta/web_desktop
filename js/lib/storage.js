@@ -24,7 +24,7 @@ export class Storage{
   fork(){
     switch(this.options.mode){
       case "save":
-        if(this.options.name){
+        if(this.options.name && this.options.data){
           this.mix_data(this.options)
         }
         this.save(Storage.datas)
@@ -155,8 +155,6 @@ export class Storage{
     }
   }
 
-  
-
   // 任意項目のデータを削除する (mode)
   del_mode(data){
     if(!data || !data.mode){return}
@@ -185,7 +183,6 @@ export class Storage{
     Storage.datas[data.name].splice(index,1)
     Storage.datas[data.name] = Storage.datas[data.name].filter(e => e)
     this.save(Storage.datas)
-    
   }
 
   // データを全て削除する
