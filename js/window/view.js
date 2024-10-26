@@ -152,9 +152,9 @@ export class View{
     // this.set_window_size()
     const elm_window = Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
     new Sort(elm_window)
-    // if(!this.storage_window_data && this.save_flg === true){
+    if(this.options.mode === "view"){
       this.set_storage_data(data)
-    // }
+    }
   }
 
   active(){

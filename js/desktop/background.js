@@ -39,7 +39,7 @@ export class Background{
 
   window_view(){
     new Window({
-      mode : "view",
+      mode : "view_only",
       id   : Background.window_name,
       name : this.name,
       window_size : {
@@ -54,7 +54,7 @@ export class Background{
     this.body.innerHTML = new Convert(Asset.get_data("background_modal").text,data).text
   }
 
-  first_select(){console.log(this.value)
+  first_select(){
     const target_input = this.root.querySelector(`input[value="${this.value}"]`)
     if(!target_input){return}
     target_input.checked = true

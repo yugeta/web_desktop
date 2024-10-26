@@ -43,10 +43,12 @@ export class MouseUp{
   }
 
   save_window(){
+    const data = new WindowData(Window.mouse_options.target).datas
+    if(!Storage.has_icon_data(data.id)){return}
     new Storage({
       mode : "save",
       name : "windows",
-      data : new WindowData(Window.mouse_options.target).datas,
+      data : data,
     })
   }
 }

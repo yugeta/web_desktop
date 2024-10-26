@@ -198,4 +198,9 @@ export class Storage{
   finish(){
     this.resolve()
   }
+
+  static has_icon_data(id){
+    return Storage.datas.icons.find(e => e.id === id) ? true : false
+  }
+
 }
