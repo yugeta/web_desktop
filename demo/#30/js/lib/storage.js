@@ -9,7 +9,7 @@ export class Storage{
     icons   : [],
     windows : [],
   }
-  name = "mynt_web_desktop_30"
+  name = "mynt_web_desktop"
   
   constructor(options){
     this.options = options || {}
@@ -24,7 +24,7 @@ export class Storage{
   fork(){
     switch(this.options.mode){
       case "save":
-        if(this.options.name){
+        if(this.options.name && this.options.data){
           this.mix_data(this.options)
         }
         this.save(Storage.datas)
@@ -155,8 +155,6 @@ export class Storage{
     }
   }
 
-  
-
   // 任意項目のデータを削除する (mode)
   del_mode(data){
     if(!data || !data.mode){return}
@@ -185,7 +183,6 @@ export class Storage{
     Storage.datas[data.name].splice(index,1)
     Storage.datas[data.name] = Storage.datas[data.name].filter(e => e)
     this.save(Storage.datas)
-    
   }
 
   // データを全て削除する
@@ -201,4 +198,9 @@ export class Storage{
   finish(){
     this.resolve()
   }
+
+  static has_icon_data(id){
+    return Storage.datas.icons.find(e => e.id === id) ? true : false
+  }
+
 }
