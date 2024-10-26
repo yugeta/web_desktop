@@ -45,6 +45,9 @@
   padding:2p;
   background-color:white;
 }
+#desktop .window .header .thumb[src=""]{
+  display:none;
+}
 #desktop .window .header .name{
   white-space:nowrap;
   overflow: hidden;

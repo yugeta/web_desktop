@@ -1,9 +1,10 @@
-import { Bootstrap } from "../lib/bootstrap.js"
-import { Asset }     from "../lib/asset.js"
-import { Convert }   from "../lib/convert.js"
-import { Storage }   from "../lib/storage.js"
-import { Icon }      from "../icon.js"
-import { Window }    from "../window.js"
+import { Bootstrap }  from "../lib/bootstrap.js"
+import { Asset }      from "../lib/asset.js"
+import { Convert }    from "../lib/convert.js"
+import { Storage }    from "../lib/storage.js"
+import { Icon }       from "../icon.js"
+import { Window }     from "../window.js"
+import { Background } from "./background.js"
 
 /**
  * 右クリックメニュー
@@ -194,6 +195,11 @@ export class ContextMenu{
           id   : icon.getAttribute("data-id"),
           name : name,
         })
+      break
+
+      // 壁紙の変更
+      case "change_background":
+        new Background({mode: "view_modal"})
       break
     }
     

@@ -21,6 +21,10 @@ export class Asset{
     {
       name : "context_menu_item",
       file : "context_menu_item.html"
+    },
+    {
+      name : "background_modal",
+      file : "background_modal.html"
     }
   ]
 

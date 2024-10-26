@@ -27,6 +27,10 @@ export class View{
     return Storage.datas.icons.find(e => e.id === this.id)
   }
 
+  get ext(){
+    return this.data.target.split(".").pop()
+  }
+
   exec(){
     const div = document.createElement("div")
     div.className = "file"
@@ -46,7 +50,12 @@ export class View{
   }
 
   loaded(e){
-    this.target.textContent = e.target.response
+    if(this.ext === "html"){
+      this.target.innerHTML = e.target.response
+    }
+    else{
+      this.target.innerText = e.target.response
+    }
     const pos = this.get_inner_size(this.target)
     this.window.style.setProperty("--w",`${pos.w}px`,"")
     this.window.style.setProperty("--h",`${pos.h}px`,"")

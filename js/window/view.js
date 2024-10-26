@@ -9,16 +9,21 @@ import { App }       from "../app.js"
 
 export class View{
   constructor(options){
-    this.options = options || {}
-    if(!this.options.id){return}
-    if(!this.icon_data){return}
-    if(this.opened){
-      this.active()
-    }
-    else{
-      this.add()
-      this.body()
-    }
+    this.promise = new Promise((resolve, reject)=>{
+      this.resolve = resolve
+      this.reject  = reject
+      this.options = options || {}
+      if(!this.options.id){return}
+      // if(!this.icon_data){return}
+      if(this.opened){
+        this.active()
+      }
+      else{
+        this.add()
+        this.body()
+      }
+      this.finish()
+    })
   }
 
   get id(){
@@ -68,6 +73,10 @@ export class View{
   get type(){
 
   }
+
+  // get save_flg(){
+  //   return this.options.save_flg === undefined ? true : this.options.save_flg
+  // }
 
   get icon_data(){
     if(!Storage.datas || !Storage.datas.icons){return null}
@@ -130,7 +139,8 @@ export class View{
     const rect = this.storage_window_data ? this.storage_rect : this.init_rect
     const data = {
       id   : this.uuid,
-      name : this.get_name(this.uuid),
+      // name : this.get_name(this.uuid),
+      name : this.name,
       icon : this.get_icon(this.uuid),
       x    : rect.x,
       y    : rect.y,
@@ -142,9 +152,9 @@ export class View{
     // this.set_window_size()
     const elm_window = Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
     new Sort(elm_window)
-    if(!this.storage_window_data){
+    // if(!this.storage_window_data && this.save_flg === true){
       this.set_storage_data(data)
-    }
+    // }
   }
 
   active(){
@@ -152,6 +162,7 @@ export class View{
   }
 
   set_storage_data(data){
+    if(this.storage_window_data || !this.icon_data){return}
     new Storage({
       mode : "save",
       name : "windows",
@@ -159,11 +170,15 @@ export class View{
     })
   }
 
-  get_name(icon_id){
-    if(!icon_id || !Storage.datas || !Storage.datas.icons){return}
-    const icon_data = Storage.datas.icons.find(e => e.id === icon_id)
-    return icon_data ? icon_data.name : ""
-  }
+  // get_name(icon_id){
+  //   if(icon_id && Storage.datas && Storage.datas.icons){
+  //     const icon_data = Storage.datas.icons.find(e => e.id === icon_id)
+  //     return icon_data ? icon_data.name : ""
+  //   }
+  //   else{
+  //     return this.name
+  //   }
+  // }
 
   get_icon(icon_id){
     if(!icon_id || !Storage.datas || !Storage.datas.icons){return}
@@ -218,4 +233,8 @@ export class View{
   //     this.window.style.setProperty("--h", `${h}px`)
   //   }
   // }
+
+  finish(){
+    this.resolve()
+  }
 }
