@@ -67,8 +67,8 @@ export class Background{
     if(!li){return}
     const input = li.querySelector(`input[name="background"]`)
     const value = input.getAttribute("value")
-    this.set_bg(value)
-    // document.querySelector(`#desktop main`).style.setProperty("background", value , "")
+    // this.set_bg(value)
+    document.querySelector(`#desktop main`).style.setProperty("background", value , "")
     // Background.sheets.set_value("#desktop main", "background", value, "important")
     // console.log(Background.sheets.get_value("#desktop main", "background"))
   }
