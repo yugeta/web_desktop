@@ -19,6 +19,7 @@ export class Window{
         break
   
         case "view":
+        case "view_only":
           new View(options).promise.then(this.finish.bind(this))
         break
   
