@@ -1,0 +1,54 @@
+.window[data-id="blogger"] .body .lists{
+  display:flex;
+  flex-direction:column;
+  gap:0px;
+  width:100%;
+  padding:0px!important;
+}
+.window[data-id="blogger"] .body .lists > *{
+  min-height:100px;
+  display:flex;
+  gap:10px;
+  /* align-items:center; */
+  padding:10px!important;
+}
+.window[data-id="blogger"] .body .lists > *:nth-of-type(n+2){
+  border-top:1px solid #CCC;
+}
+
+.window[data-id="blogger"] .body .lists > * img{
+  width:120px;
+  height:100%;
+  object-fit:cover;
+}
+
+.window[data-id="blogger"] .body .lists > * .text{
+  height:100%;
+  flex:1;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.window[data-id="blogger"] .body .lists > * .text .title{
+  display:block;
+  text-decoration:none;
+  color:black;
+}
+.window[data-id="blogger"] .body .lists > * .text .labels{
+  display:flex;
+  gap:5px;
+  justify-content:end;
+}
+.window[data-id="blogger"] .body .lists > * .text .labels > *{
+  font-size:0.7em;
+  background-color:red;
+  color:white;
+  padding:5px!important;
+  border-radius:5px;
+}
+.window[data-id="blogger"] .body .lists > * .text .datetime{
+  margin:0;
+  font-size:0.8em;
+  text-align:right;
+}
