@@ -1,0 +1,42 @@
+#desktop header .time{
+  padding-right:10px;
+  background-color:#eee;
+  border-radius:5px;
+  padding:2px 10px;
+  box-shadow : inset 1px 1px 4px rgba(0,0,0,0.5);
+}
+#desktop header .time *{
+  font-size:0.8em;
+  display:block;
+  height:30%;
+  text-align:right;
+  white-space:nowrap;
+}
+#desktop header .time > *{
+  display:block;
+  margin:0;
+}
+
+#desktop header .time.center *{
+  text-align:center;
+}
+
+#desktop header .time{
+  padding-right:10px;
+}
+#desktop header .time *{
+  font-size:0.8em;
+  display:block;
+  height:30%;
+  text-align:right;
+}
+#desktop header .time > *{
+  display:block;
+  margin:0;
+}
+
+@media (max-width:500px){
+  #desktop header .time{
+    padding:0;
+  }
+}
