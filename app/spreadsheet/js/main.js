@@ -31,7 +31,7 @@ export class Main{
   load(){
     // const xhr = new XMLHttpRequest()
     // xhr.withCredentials = true
-    // xhr.open('POST' , Setting.datas.url , true)
+    // xhr.open('GET' , Setting.datas.url , true)
     // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
     // xhr.onload = this.loaded.bind(this)
     // xhr.send()
