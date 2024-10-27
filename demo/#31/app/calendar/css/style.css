@@ -1,0 +1,12 @@
+.window[data-id="calendar"] table.lists{
+  border-collapse:collapse;
+  width:100%;
+}
+
+.window[data-id="calendar"] table.lists th,
+.window[data-id="calendar"] table.lists td{
+  border:1px solid black;
+  padding:5px;
+}
+
+

@@ -73,6 +73,11 @@
       "id"   : "spreadsheet",
       "name" : "Spread Sheet",
       "type" : "app"
+    },
+    {
+      "id"   : "calendar",
+      "name" : "カレンダー",
+      "type" : "app"
     }
   ],
 
