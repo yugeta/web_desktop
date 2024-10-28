@@ -1,0 +1,14 @@
+{
+  "domain" : "",
+  "domains" : [
+    {
+      "domain" : "blog.myntinc.com",
+      "label"  : []
+    },
+    {
+      "domain" : "nakamura-harumi.blogspot.com",
+      "label"  : []
+    }
+  ],
+  "max_results" : 20
+}
