@@ -16,25 +16,35 @@
 */
 
 #desktop .menu{
-  --hover-color: #FDD;
+  --hover-color: #1212a3;
   height:100%;
   margin-left:auto;
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:20px;
 }
 
 #desktop .menu li{
   height:100%;
-  padding:5px;
+  padding:0px;
   
   display:flex;
-  gap:2px;
+  gap:0px;
   align-items:center;
   justify-content:center;
-  cursor:pointer;
+  
 
   position:relative;
+}
+
+#desktop .menu li label,
+#desktop .menu li a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  cursor:pointer;
 }
 
 #desktop .menu *{
@@ -59,15 +69,17 @@
 #desktop .menu > li > ul{
   display:flex;
   flex-direction:column;
-  background-color:white;
+  background-color:rgba(255,255,255,0.7);
+  backdrop-filter:blur(2.0px);
   min-width:100px;
+  border-radius:5px;
 
   position:absolute;
   top:100%;
   left:50%;
   transform:translateX(-50%);
   margin:0;
-  padding:0;
+  padding:5px;
 
   box-shadow:4px 4px 20px rgba(0,0,0,0.5);
 }
@@ -83,14 +95,16 @@
   margin-left:4px;
 }
 #desktop .menu > li:hover{
-  background-color: var(--hover-color);
+  /* background-color: var(--hover-color); */
 }
-#desktop .menu > li:not(:hover) > ul{
+/* #desktop .menu > li:not(:hover) > ul{ */
+#desktop .menu > li:not([data-active]) > ul{
   display:none;
 }
+
 #desktop .menu > li > ul li{
-  height:var(--header-size);
-  padding:5px 10px;
+  /* height:var(--header-size); */
+  /* padding:5px 10px; */
   cursor:pointer;
   justify-content:start;
 }
@@ -98,8 +112,19 @@
   white-space:nowrap;
 }
 #desktop .menu > li > ul li:hover{
-  background-color: var(--hover-color);
+  
 }
+#desktop .menu > li > ul li a{
+  border-radius:3px;
+  font-size: 0.8em;
+  padding: 2px 5px;
+}
+#desktop .menu > li > ul li:hover a{
+  background-color: var(--hover-color);
+  color:white;
+}
+
+
 
 /**
 * Logo

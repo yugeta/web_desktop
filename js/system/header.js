@@ -3,14 +3,15 @@ import { Auth }      from "../system/auth.js"
 
 export class Header{
   constructor(){
-    this.menu.addEventListener("click" , this.click.bind(this))
+    // this.menu.addEventListener("click" , this.menu_click.bind(this))
+    window.addEventListener("click" , this.window_click.bind(this))
   }
   
   get menu(){
     return document.querySelector(`#desktop header .menu`)
   }
 
-  click(e){
+  menu_click(e){
     const item = e.target.closest(".item")
     if(!item){return}
     switch(item.getAttribute("data-mode")){
@@ -31,5 +32,35 @@ export class Header{
     }
   }
 
+  window_click(e){
+    if(e.target.closest("#desktop header .menu a")){
+      const a = e.target.closest("a")
+      this.menu_click({target : a})
+      this.clear()
+    }
+    else if(e.target.closest("#desktop header .menu label")){
+      const label = e.target.closest("label")
+      const li    = label.parentNode
+      const flg   = li.hasAttribute("data-active")
+      this.clear()
+      if(flg){
+        li.removeAttribute("data-active")
+      }
+      else{
+        li.setAttribute("data-active", true)
+      }
+    }
+    else{
+      this.clear()
+    }
+  }
+
+  clear(){
+    const elms = this.menu.querySelectorAll("li[data-active]")
+    if(!elms){return}
+    for(const elm of elms){
+      elm.removeAttribute("data-active")
+    }
+  }
 
 }
