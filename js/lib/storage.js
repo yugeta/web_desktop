@@ -54,12 +54,12 @@ export class Storage{
         this.destroy()
       break
 
-      case "export":
-        this.export()
+      case "download":
+        this.download()
       break
 
-      case "import":
-        this.import()
+      case "upload":
+        this.upload()
       break
 
       case "init":
@@ -211,12 +211,13 @@ export class Storage{
     return Storage.datas.icons.find(e => e.id === id) ? true : false
   }
 
-  export(){
-    console.log("export")
+  download(){
+    console.log("download")
+    
   }
 
-  import(){
-    console.log("import")
+  upload(){
+    console.log("upload")
   }
 
 }

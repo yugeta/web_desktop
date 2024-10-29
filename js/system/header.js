@@ -21,12 +21,12 @@ export class Header{
         new Storage({mode: "destroy"})
       break
 
-      case "storage-export":
-        new Storage({mode: "export"})
+      case "storage-download":
+        new Storage({mode: "download"})
       break
 
-      case "storage-import":
-        new Storage({mode: "import"})
+      case "storage-upload":
+        new Storage({mode: "upload"})
       break
 
       case "sort-icon":
