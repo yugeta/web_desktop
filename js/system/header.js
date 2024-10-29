@@ -1,5 +1,6 @@
 import { Storage } from "../lib/storage.js"
 import { Auth }      from "../system/auth.js"
+import { Icon }       from "../icon.js"
 
 export class Header{
   constructor(){
@@ -20,7 +21,19 @@ export class Header{
         new Storage({mode: "destroy"})
       break
 
+      case "storage-export":
+        new Storage({mode: "export"})
+      break
+
+      case "storage-import":
+        new Storage({mode: "import"})
+      break
+
       case "sort-icon":
+        new Icon({
+          mode   : "alignment",
+          target : null,
+        })
       break
 
       // Logout

@@ -54,6 +54,14 @@ export class Storage{
         this.destroy()
       break
 
+      case "export":
+        this.export()
+      break
+
+      case "import":
+        this.import()
+      break
+
       case "init":
       default:
         this.get_storage()
@@ -201,6 +209,14 @@ export class Storage{
 
   static has_icon_data(id){
     return Storage.datas.icons.find(e => e.id === id) ? true : false
+  }
+
+  export(){
+    console.log("export")
+  }
+
+  import(){
+    console.log("import")
   }
 
 }

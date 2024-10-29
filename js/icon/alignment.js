@@ -1,23 +1,19 @@
-import { Position } from "../icon/position.js"
-import { Storage }  from "../lib/storage.js"
-import { Elm2data } from "../icon/elm2data.js"
+import { Position }  from "../icon/position.js"
+import { Storage }   from "../lib/storage.js"
+import { Trash }     from "../icon/trash.js"
+import { Icon }      from "../icon.js"
+import { Bootstrap } from "../lib/bootstrap.js"
 
 export class Alignment{
   constructor(options){
     this.options = options || {}
     this.move_clear()
-    this.exec()
-    // new Storage({
-    //   mode : "del_mode",
-    //   name : "name",
-    //   data : {
-    //     mode : "icons"
-    //   }
-    // })
+    this.sort_icon()
+    this.sort_trash()
   }
 
   get root(){
-    return this.options.target
+    return this.options.target || Bootstrap.elm_main
   }
 
   move_clear(){
@@ -28,19 +24,8 @@ export class Alignment{
     }
   }
 
-  exec(){
-    const icons = Array.from(this.root.querySelectorAll(`:scope > .icon`))
-
-    // // 順番に並べ替え
-    // icons.sort((a,b)=>{
-    //   const a_x = a.style.getPropertyValue("--x")
-    //   const a_y = a.style.getPropertyValue("--y")
-    //   const b_x = b.style.getPropertyValue("--x")
-    //   const b_y = b.style.getPropertyValue("--y")
-    //   if(a_x < b_x && a_y < b_y){return -1}
-    //   if(a_x > b_x && a_y > b_y){return +1}
-    //   return 0
-    // })
+  sort_icon(){
+    const icons = Array.from(this.root.querySelectorAll(`:scope > .icon:not([type="trash"])`))
 
     // 整列移動
     for(let i=0; i<icons.length; i++){
@@ -53,11 +38,19 @@ export class Alignment{
     }
   }
 
+  sort_trash(){
+    const trash = this.root.querySelector(`:scope > .icon[type="trash"]`)
+    if(!trash){return}
+    const pos = new Trash().fixed_position
+    trash.style.setProperty("--x", `${pos.x}px`, "")
+    trash.style.setProperty("--y", `${pos.y}px`, "")
+  }
+
   save_storage(elm){
     new Storage({
       mode : "save",
       name : "icons",
-      data : new Elm2data(elm).datas,
+      data : new Icon({elm:elm}),
     })
   }
 }
