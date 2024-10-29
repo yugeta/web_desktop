@@ -10,6 +10,7 @@ export class Storage{
     windows : [],
   }
   name = "mynt_web_desktop"
+  ext  = "webd"
   
   constructor(options){
     this.options = options || {}
@@ -212,12 +213,45 @@ export class Storage{
   }
 
   download(){
-    console.log("download")
-    
+    const json = JSON.stringify(Storage.datas, null , "  ")
+    const data = this.enc(json)
+    const bom = new Uint8Array([0xef, 0xbb, 0xbf])
+    const blob = new Blob([bom, data], { type: "text/plane" })
+    const a = document.createElement("a")
+    a.href = (window.URL || window.webkitURL).createObjectURL(blob)
+    a.download = `web_desktop_${(+new Date())}.${this.ext}`
+    a.hidden = true
+    document.body.appendChild(a)
+    a.click()
+    a.parentNode.removeChild(a)
   }
 
   upload(){
-    console.log("upload")
+    // アップロードモジュールを作成
+    const file = document.createElement("input")
+    file.id = `web_desktop_upload_file_${(+new Date())}`
+    file.type = "file"
+    file.hidden = true
+    file.accept = `.${this.ext}`
+    file.onchange = this.upload_file_loaded.bind(this,file.id)
+    document.body.appendChild(file)
+    file.click()
+  }
+  upload_file_loaded(id, e){
+    const file = document.getElementById(id)
+    if(!file){return}
+    const reader = new FileReader()
+    reader.readAsText(file.files[0])
+    reader.onload = ((e)=>{
+      const json = this.dec(e.target.result)
+      const data = JSON.parse(json)
+      this.save(data)
+      location.reload()
+    }).bind(this)
+    // アップロードモジュールを削除
+    if(file){
+      file.parentNode.removeChild(file)
+    }
   }
 
 }

@@ -7,16 +7,16 @@
 export class Asset{
   lists = [
     {
+      name : "setting",
+      file : "setting.json"
+    },
+    {
       name : "window",
       file : "window.html",
     },
     {
       name : "icon",
       file : "icon.html",
-    },
-    {
-      name : "setting",
-      file : "setting.json"
     },
     {
       name : "context_menu_item",
