@@ -83,7 +83,7 @@ export class View{
     // 動かしていないwindow一覧の取得
     const windows = Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
     const window_rect = Bootstrap.window_rect
-    const window_size = this.storage_icon_data ? this.storage_icon_data.window_size : {}
+    const window_size = this.storage_icon_data ? this.storage_icon_data.window_size || {} : {}
     const rect     = {
       x : windows.length ? windows[windows.length-1].offsetLeft + this.gap.x : this.pos.x,
       y : windows.length ? windows[windows.length-1].offsetTop  + this.gap.y : this.pos.y,
