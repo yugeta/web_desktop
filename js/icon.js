@@ -66,7 +66,7 @@ export class Icon{
 
   get data(){
     if(this.id && Storage.datas && Storage.datas.icons){
-      const data = Storage.datas.icons.find(e => e.id === this.id)
+      const data = Storage.datas.icons.find(e => e.id === this.id) || {x:0,y:0}
       data.x =  this.x || data.x
       data.y =  this.y || data.y
       return data
