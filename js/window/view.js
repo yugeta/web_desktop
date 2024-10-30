@@ -71,7 +71,7 @@ export class View{
   }
 
   get type(){
-
+    return this.icon_data.type
   }
 
   get icon_data(){
@@ -126,6 +126,7 @@ export class View{
     const data = {
       id   : this.uuid,
       name : this.name,
+      type : this.type,
       icon : this.get_icon(this.uuid),
       x    : rect.x,
       y    : rect.y,

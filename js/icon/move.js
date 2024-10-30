@@ -29,12 +29,6 @@ export class Move{
           mode : "end",
           elm  : this.elm,
         })
-        // console.log(this.options,new Icon({id : this.elm.getAttribute("data-id")}).data)
-        // new Storage({
-        //   mode : "save",
-        //   name : "icons",
-        //   data : new Icon({id : this.elm.getAttribute("data-id")}).data
-        // })
       break
 
       case "move":
@@ -87,7 +81,6 @@ export class Move{
     else{
       const window_body = this.options.target.closest(".window .body")
       const window_rect = window_body.getBoundingClientRect()
-      // console.log(this.options.point.x - this.options.diff.x - window_rect.left, this.options.point.y - this.options.diff.y - window_rect.top)
       return {
         x : this.options.point.x - this.options.diff.x - window_rect.left,
         y : this.options.point.y - this.options.diff.y - window_rect.top,
@@ -147,14 +140,19 @@ export class Move{
     }
   }
   
-  // 禁止事項（アイコンをウィンドウに入れる時に、自分（フォルダアイコン）の中に入れることはできない）
+  // 禁止事項（アイコンをウィンドウに入れる時に、自分（フォルダアイコン）または、folder以外の中に入れることはできない）
   window_in_prohibited_acts(parent){
     const parent_id = parent ? parent.getAttribute("data-id") : null
     const first_id  = this.options.first_window ? this.options.first_window.getAttribute("data-id") : null
-    
+
     // 現在と同じ場合は、そのまま
     if(parent_id === first_id){
       return false
+    }
+    // フォルダ以外は移動無し
+    if(parent.getAttribute("data-type") !== "folder"
+    && parent.getAttribute("data-type") !== "trash"){
+      return true
     }
 
     // 同じIDのwindowには移動できない

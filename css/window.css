@@ -209,7 +209,8 @@
   border-color:var(--color-2);
 }
 #desktop .window[data-overlap="prohibited"]{
-  border-color:var(--color-3);
+  /* border-color:var(--color-3); */
+  border-color:transparent;
 }
 
 

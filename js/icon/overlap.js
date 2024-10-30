@@ -56,7 +56,7 @@ export class Overlap{
     if(win){
       data.id     = win.getAttribute("data-id")
       data.target = win
-      data.status = ""
+      data.status = win.getAttribute("data-type") === "folder" || win.getAttribute("data-type") === "trash" ? "" : "prohibited"
     }
     if(data.id === current_id){
       data.status = "prohibited" // 禁止
@@ -67,7 +67,8 @@ export class Overlap{
   // アイコンの重なり処理
   exec_icon(){
     const data = this.overlap_icon
-    if(data.target && !data.target.hasAttribute("data-overlap")){
+    if(data.target
+    && !data.target.hasAttribute("data-overlap")){
       data.target.setAttribute("data-overlap" , data.status)
     }
 
@@ -111,7 +112,6 @@ export class Overlap{
     }
     Overlap.icon    = null
     Overlap.window  = null
-    
   }
 
   open(){
