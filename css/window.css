@@ -70,13 +70,13 @@
   height: 100%;
   /* background-color: black; */
 }
-#desktop .window[data-view-type="icon"] .header .view-type::before{
+#desktop .window[data-view-type="list"] .header .view-type::before{
   /* clip-path: polygon(49% 7%, 83% 21%, 90% 57%, 68% 89%, 32% 89%, 6% 56%, 15% 23%); */
   background-image:url("../img/window/apps.svg");
   background-size:100%;
   
 }
-#desktop .window[data-view-type="list"] .header .view-type::before{
+#desktop .window[data-view-type="icon"] .header .view-type::before{
   background-color:black;
   clip-path:polygon(
     20% 20%,
