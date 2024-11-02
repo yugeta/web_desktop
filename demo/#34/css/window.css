@@ -1,0 +1,216 @@
+/**
+* Window
+*/
+#desktop .window{
+  --x       : 0px;
+  --y       : 0px;
+  --w       : 200px;
+  --h       : 200px;
+  --z       : 100;
+  --color-1 : #CCC;
+  --color-2 : #44F;
+  --color-3 : #F44;
+  left      : var(--x);
+  top       : var(--y);
+  width     : var(--w);
+  height    : var(--h);
+  z-index   : var(--z);
+
+  position:absolute;
+  min-width  : 200px;
+  min-height : 100px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:4px 4px 20px rgba(0,0,0,0.5);
+  border-radius:10px;
+  overflow:hidden;
+
+  border-style:solid;
+  border-width:2px;
+  border-color:var(--color-1);
+}
+#desktop .window .header{
+  height:30px;
+  background-color:var(--color-1);
+  /* cursor:move; */
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:10px;
+  z-index:10;
+}
+#desktop .window .header .thumb{
+  width:24px;
+  height:24px;
+  padding:2p;
+  background-color:white;
+}
+#desktop .window .header .thumb[src=""]{
+  display:none;
+}
+#desktop .window .header .name{
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#desktop .window .header .view-type{
+  margin-left:auto;
+  width: 20px;
+  height: 20px;
+  cursor:pointer;
+  background-color:white;
+  border:1px solid black;
+  position:relative;
+}
+#desktop .window .header .view-type::before{
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* background-color: black; */
+}
+#desktop .window[data-view-type="list"] .header .view-type::before{
+  /* clip-path: polygon(49% 7%, 83% 21%, 90% 57%, 68% 89%, 32% 89%, 6% 56%, 15% 23%); */
+  background-image:url("../img/window/apps.svg");
+  background-size:100%;
+  
+}
+#desktop .window[data-view-type="icon"] .header .view-type::before{
+  background-color:black;
+  clip-path:polygon(
+    20% 20%,
+    80% 20%,
+    80% 30%,
+    20% 30%,
+    20% 20%,
+
+    20% 45%,
+    80% 45%,
+    80% 55%,
+    20% 55%,
+    20% 45%,
+
+    20% 70%,
+    80% 70%,
+    80% 80%,
+    20% 80%,
+    20% 70%
+  );
+}
+
+#desktop .window .header .wide{
+  width: 20px;
+  height: 20px;
+  cursor:pointer;
+  background-color:white;
+  border:1px solid black;
+  position:relative;
+}
+
+#desktop .window .header .wide::before{
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  
+  /* clip-path: polygon(85% 60%, 85% 15%, 40% 15%, 85% 60%, 60% 85%, 15% 40%, 15% 85%, 60% 85%, 85% 60%); */
+  background-image:url(../img/window/full.svg);
+  /* background-image:url(../img/window/expand.svg); */
+  background-size:100%;
+}
+
+#desktop .window[data-wide-flg] .header .wide::before {
+  /* background-color: black;
+  clip-path: polygon(20% 80%, 80% 80%, 80% 70%, 20% 70%); */
+  background-image:url(../img/window/mini.svg);
+}
+
+#desktop .window .header .close{
+  width: 20px;
+  height: 20px;
+  cursor:pointer;
+  background-color:white;
+  border:1px solid black;
+  position:relative;
+}
+#desktop .window .header .close::before,
+#desktop .window .header .close::after{
+  content:"";
+  display:block;
+  width:100%;
+  height:1px;
+  background-color:black;
+  position:absolute;
+  top:50%;
+  left:50%;
+}
+
+#desktop .window .header .close::before{
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+#desktop .window .header .close::after{
+  transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+#desktop .window .body{
+  flex:1;
+  background-color:white;
+  overflow:auto;
+  position:relative;
+  z-index:1;
+}
+
+/**
+* Wide
+*/
+#desktop .window[data-wide-flg]{
+  width : 100%!important;
+  height: 100%!important;
+  top:0!important;
+  left:0!important;
+}
+
+/**
+* Resize
+*/
+#desktop .window{
+  --resize-width : 4px;
+}
+#desktop .window .resize[name="horizontal"]{
+  position:absolute;
+  width:var(--resize-width);
+  height:100%;
+  z-index:8;
+  top:0;
+  right:0;
+  cursor:ew-resize;
+}
+#desktop .window .resize[name="vertical"]{
+  position:absolute;
+  width:100%;
+  height:var(--resize-width);
+  z-index:8;
+  bottom:0;
+  left:0;
+  cursor:ns-resize;
+}
+#desktop .window .resize[name="both"]{
+  position:absolute;
+  width:calc(var(--resize-width) * 2);
+  height:calc(var(--resize-width) * 2);
+  z-index:9;
+  bottom:0;
+  right:0;
+  cursor:nwse-resize;
+}
+
+#desktop .window[data-overlap]{
+  border-color:var(--color-2);
+}
+#desktop .window[data-overlap="prohibited"]{
+  /* border-color:var(--color-3); */
+  border-color:transparent;
+}
+
+
