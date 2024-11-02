@@ -114,8 +114,15 @@ export class View{
   }
 
   get init_rect(){
+<<<<<<< HEAD
     const window_size = this.storage_icon_data ? this.storage_icon_data.window_size || {} : {}
     const window_pos  = new Position(this)
+=======
+    // 動かしていないwindow一覧の取得
+    const windows = Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
+    const window_rect = Bootstrap.window_rect
+    const window_size = this.storage_icon_data ? this.storage_icon_data.window_size : {}
+>>>>>>> origin/main
     const rect     = {
       x : window_pos.x,
       y : window_pos.y,
