@@ -1,5 +1,6 @@
 import { Bootstrap } from "../lib/bootstrap.js"
 import { Sort }      from "./sort.js"
+import { Position }  from "./position.js"
 import { Asset }     from "../lib/asset.js"
 import { Convert }   from "../lib/convert.js"
 import { Storage }   from "../lib/storage.js"
@@ -59,7 +60,40 @@ export class View{
   }
 
   get size(){
-    return Asset.get_data("setting").data.window.size
+    // const window_size = this.storage_icon_data ? this.storage_icon_data.window_size || {} : {}
+    if(this.options.w && this.options.h){
+      return {
+        w : this.options.w,
+        h : this.options.h,
+      }
+    }
+    if(this.storage_icon_data && this.storage_icon_data.window_size){
+      return {
+        w : this.storage_icon_data.window_size.w,
+        h : this.storage_icon_data.window_size.h,
+      }
+    }
+    const asset_size = Asset.get_data("setting").data.window.size
+    if(asset_size){
+      
+      return {
+        w : asset_size.w,
+        h : asset_size.h,
+      }
+    }
+    // return {
+    //   w : window_size.width  || this.size.w,
+    //   h : window_size.height || this.size.h,
+    // }
+    // return Asset.get_data("setting").data.window.size
+  }
+
+  get position(){
+    return this.options.position || null
+  }
+
+  get offset(){
+    return this.options.offset || null
   }
 
   get icons(){
@@ -71,7 +105,7 @@ export class View{
   }
 
   get type(){
-
+    return this.icon_data.type
   }
 
   get icon_data(){
@@ -80,25 +114,22 @@ export class View{
   }
 
   get init_rect(){
+<<<<<<< HEAD
+    const window_size = this.storage_icon_data ? this.storage_icon_data.window_size || {} : {}
+    const window_pos  = new Position(this)
+=======
     // 動かしていないwindow一覧の取得
     const windows = Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
     const window_rect = Bootstrap.window_rect
     const window_size = this.storage_icon_data ? this.storage_icon_data.window_size : {}
+>>>>>>> origin/main
     const rect     = {
-      x : windows.length ? windows[windows.length-1].offsetLeft + this.gap.x : this.pos.x,
-      y : windows.length ? windows[windows.length-1].offsetTop  + this.gap.y : this.pos.y,
+      x : window_pos.x,
+      y : window_pos.y,
       w : window_size.width  || this.size.w,
       h : window_size.height || this.size.h,
     }
-
-    // 右下制御
-    rect.x = rect.x > window_rect.width  - this.size.w ? window_rect.width  - this.size.w : rect.x
-    rect.y = rect.y > window_rect.width  - this.size.w ? window_rect.width  - this.size.w : rect.y
     return rect
-  }
-
-  get icon_name(){
-
   }
 
   get storage_window_data(){
@@ -126,11 +157,13 @@ export class View{
     const data = {
       id   : this.uuid,
       name : this.name,
+      type : this.type,
       icon : this.get_icon(this.uuid),
       x    : rect.x,
       y    : rect.y,
       w    : rect.w,
       h    : rect.h,
+      position : this.options.position || {},
     }
     const html = new Convert(this.html, data).text
     Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)

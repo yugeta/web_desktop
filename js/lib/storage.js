@@ -97,18 +97,19 @@ export class Storage{
     Storage.datas = base64 ? this.dec(base64) : Storage.datas
   }
 
-  get asset_datas(){
-    return Asset.get_data("setting").data.desktop_icons
+  get asset_icons(){
+    return Asset.get_data("setting").data.desktop_icons || []
   }
 
   set_setting_json(){
-    for(const data of this.asset_datas){
+    // icons
+    for(const data of this.asset_icons){
       const storage_data = Storage.datas.icons.find(e => e.id === data.id)
       if(!storage_data){continue}
       storage_data.system_flg = true
-      if(storage_data){continue}
-      data.system_flg = true
-      Storage.datas.icons.push(data)
+      // if(storage_data){continue}
+      // data.system_flg = true
+      // Storage.datas.icons.push(data)
     }
   }
 

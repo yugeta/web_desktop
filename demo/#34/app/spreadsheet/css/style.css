@@ -1,0 +1,13 @@
+.window[data-id="spreadsheet"] table.lists{
+  border-collapse:collapse;
+  width:100%;
+  min-width:500px;
+}
+
+.window[data-id="spreadsheet"] table.lists th,
+.window[data-id="spreadsheet"] table.lists td{
+  border:1px solid black;
+  padding:5px;
+}
+
+
