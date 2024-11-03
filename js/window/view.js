@@ -60,7 +60,6 @@ export class View{
   }
 
   get size(){
-    // const window_size = this.storage_icon_data ? this.storage_icon_data.window_size || {} : {}
     if(this.options.w && this.options.h){
       return {
         w : this.options.w,
@@ -81,11 +80,6 @@ export class View{
         h : asset_size.h,
       }
     }
-    // return {
-    //   w : window_size.width  || this.size.w,
-    //   h : window_size.height || this.size.h,
-    // }
-    // return Asset.get_data("setting").data.window.size
   }
 
   get position(){
@@ -114,15 +108,8 @@ export class View{
   }
 
   get init_rect(){
-<<<<<<< HEAD
     const window_size = this.storage_icon_data ? this.storage_icon_data.window_size || {} : {}
     const window_pos  = new Position(this)
-=======
-    // 動かしていないwindow一覧の取得
-    const windows = Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
-    const window_rect = Bootstrap.window_rect
-    const window_size = this.storage_icon_data ? this.storage_icon_data.window_size : {}
->>>>>>> origin/main
     const rect     = {
       x : window_pos.x,
       y : window_pos.y,
@@ -231,22 +218,6 @@ export class View{
       break
     }
   }
-
-  // set_window_size(){
-  //   // setTimeout((()=>{
-  //   // console.log(this.window.scrollWidth, this.window.scrollHeight)
-  //   // }).bind(this),1000)
-  //   // if(!this.storage_icon_data.window_size){return}
-  //   // if(this.storage_icon_data.window_size.status === "fit"){
-      
-  //     const w = this.window.scrollWidth
-  //     const h = this.window.scrollHeight
-  //     console.log(w,h,this.window.innerHTML)
-  //     // this.window.style.setProperty("--w", `${w}px`)
-  //     // this.window.style.setProperty("--h", `${h}px`)
-      
-  //   // }
-  // }
 
   finish(){
     this.resolve()
