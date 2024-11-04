@@ -1,0 +1,9 @@
+@media(max-width:768px){
+  #desktop main{
+    overflow:scroll;
+    padding:10px;
+
+    display:flex;
+    flex-wrap:wrap;
+  }
+}

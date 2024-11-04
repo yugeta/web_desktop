@@ -1,0 +1,136 @@
+@media (max-width:768px){
+  #desktop header{
+    justify-content:space-between;
+  }
+
+  #desktop header .menu{
+    /* display:none; */
+
+    width:250px;
+    height:auto;
+    padding:10px;
+    background-color:white;
+    border-radius:5px;
+    overflow:hidden;
+
+    position:absolute;
+    z-index:20000;
+    /* top:calc(var(--header-size) + 10px); */
+    top:50vh;
+    left:50%;
+    /* transform:translateX(-50%); */
+    transform:translate(-50%, calc(-50% - 100px));
+    box-shadow:2px 2px 10px rgba(0,0,0,0.5);
+
+    transition-property:transform, opacity;
+    transition-duration:0.3s;
+    margin-top:-50px;
+    opacity:0;
+    flex-direction:column;
+    gap:0;
+    pointer-events:none;
+  }
+  #desktop header .menu *{
+    font-size:0.9em;
+    width:100%;
+  }
+  #desktop header .menu label{
+    /* background-color:var(--hover-color);
+    color:white;
+    border-radius:30px; */
+  }
+  #desktop header .menu a,
+  #desktop header .menu label{
+    padding:5px;
+  }
+
+  #desktop .menu > li{
+    flex-direction:column;
+  }
+  #desktop .menu > li > ul{
+    width:100%;
+    position:static;
+    display:flex!important;
+    box-shadow:none;
+    background:none;
+    min-width:auto;
+    backdrop-filter:unset;
+    transform:none;
+
+    /* background-color:var(--hover-color); */
+  }
+  #desktop input#hamburger[type="checkbox"]:checked ~ header::before{
+    content:"";
+    display:block;
+    width:100vw;
+    height:100vh;
+    position:fixed;
+    top:var(--header-size);
+    left:0;
+    background-color:rgba(0,0,0,0.5);
+    z-index:10000;
+  }
+  #desktop input#hamburger[type="checkbox"]:checked ~ header .menu{
+    /* display:block; */
+    
+    transform:translate(-50%, -50%);
+    margin-top:0px;
+    opacity:1;
+    pointer-events:all;
+  }
+  #desktop .menu > li > ul > li{
+    width:100%;
+
+  }
+  #desktop .menu > li > ul > li a{
+    font-size:inherit;
+    padding:5px;
+  }
+
+  #desktop .menu > li:has(ul)::after{
+    display:none;
+  }
+
+  #desktop .menu > li > .auth{
+    width:100%;
+    padding:5px 0;
+    display:flex;
+    justify-content:center;
+  }
+
+  #desktop .menu li:active > a{
+    background-color: var(--hover-color);
+    color:white;
+  }
+}
+
+@media (max-width:768px) and (hover:hover){
+  #desktop .menu li:hover > a{
+    background-color: var(--hover-color);
+    color:white;
+  }
+}
+
+@media (max-width:500px){
+  #desktop .logo .name{
+    font-size:0.9em;
+  }
+  /* #desktop label[for='menu_toggle']{
+    display:block;
+  }
+  #desktop header nav{
+    height:100%;
+    margin:0;
+    width:100%;
+  }
+  #desktop header .menu{
+    justify-content:flex-start;
+    width:100%;
+    height:100%;
+    background-color:var(--color-body-bg);
+  }
+  #desktop header .menu > *{
+    padding:0;
+    flex-grow:1;
+  } */
+}

@@ -1,0 +1,66 @@
+.window[data-id="calendar"] table.lists{
+  border-collapse:collapse;
+  width:100%;
+  table-layout: fixed;
+}
+
+.window[data-id="calendar"] table.lists th,
+.window[data-id="calendar"] table.lists td{
+  border:1px solid black;
+  padding:5px;
+}
+
+.window[data-id="calendar"] table.lists th{
+  background-color:#DDD;
+}
+.window[data-id="calendar"] table.lists td{
+  vertical-align:top;
+  height:60px;
+}
+
+.window[data-id="calendar"] table.lists td:empty{
+  background-color:#EEE;
+}
+
+.window[data-id="calendar"] .title{
+  text-align:center;
+}
+.window[data-id="calendar"] .ym{
+  text-align:center;
+}
+
+.window[data-id="calendar"] table.lists tbody td .event{
+  font-size:0.6em;
+  padding:3px;
+  background-color:red;
+  color:white;
+}
+
+.window[data-id="calendar"] .year-month{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  align-items:center;
+}
+
+.window[data-id="calendar"] .button-past-month::before,
+.window[data-id="calendar"] .button-next-month::before{
+  content:"";
+  display:block;
+  width:1em;
+  height:1em;
+  background-color:black;
+  cursor:pointer;
+}
+
+.window[data-id="calendar"] .button-past-month::before{
+  clip-path:polygon(30% 50%, 100% 0, 100% 100%);
+}
+.window[data-id="calendar"] .button-next-month::before{
+  clip-path:polygon(70% 50%, 0 0, 0 100%);
+}
+
+.window[data-id="calendar"] .button-past-month:hover,
+.window[data-id="calendar"] .button-next-month:hover{
+  opacity:0.5;
+}

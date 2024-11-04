@@ -1,0 +1,18 @@
+@media (max-width:768px){
+  /* #desktop main{
+    display:flex;
+    flex-wrap:wrap;
+  } */
+
+
+  #desktop .icon{
+    position:static;
+    display:block;
+    order:-1;
+  }
+
+  /* ゴミ箱を一番最後の順番に並び替える */
+  #desktop .icon[type="trash"]{
+    order:10;
+  }
+}
