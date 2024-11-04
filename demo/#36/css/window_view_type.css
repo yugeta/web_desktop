@@ -1,0 +1,36 @@
+/**
+* リスト表示
+*/
+#desktop .window[data-view-type="list"] .body{
+  display:flex;
+  gap:0px;
+  flex-direction:column;
+}
+#desktop .window[data-view-type="list"] .body > *{
+  position:static;
+  width:100%;
+  height:50px;
+  min-height:50px;
+  border-bottom:1px solid #ddd;
+}
+
+#desktop .window[data-view-type="list"] .body .icon{
+  flex-direction:row;
+  gap:10px;
+  align-items:center;
+}
+
+#desktop .window[data-view-type="list"] .body .icon .name{
+  flex:1;
+  text-align:left;
+}
+
+#desktop .window[data-view-type="list"] .body .icon[data-select] .name{
+  background-color:transparent;
+  color:inherit;
+}
+
+#desktop .window[data-view-type="list"] .icon{
+  cursor:initial;
+}
+

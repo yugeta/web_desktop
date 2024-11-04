@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html>
+{{html}}
+<head>
+
+<b:include data='blog' name='all-head-content'/>
+
+<b:skin><![CDATA[
+{{theme_css}}
+]]></b:skin>
+
+<script type="module">/*<![CDATA[*/
+{{theme_js}}
+/*]]>*/</script>
+
+{{head}}
+
+</head>
+
+{{body}}
+
+</html>
