@@ -1,5 +1,6 @@
 /**
  * ゴミ箱のModelモジュール
+ * 左下に配置
  */
 
 import { Bootstrap } from "../lib/bootstrap.js"
@@ -27,7 +28,8 @@ export class Trash{
   // 定位置
   get fixed_position(){
     return {
-      x : Bootstrap.elm_main.offsetWidth  - this.size.w,
+      x : 0,
+      // x : Bootstrap.elm_main.offsetWidth  - this.size.w,
       y : Bootstrap.elm_main.offsetHeight - this.size.h,
     }
   }
