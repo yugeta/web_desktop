@@ -39,12 +39,23 @@ export class Alignment{
     for(let i=0; i<windows.length; i++){
       const data = {
         id   : windows[i].getAttribute("data-id"),
-        name : windows[i].getAttribute("name"),
+        name : windows[i].querySelector(`.header .name`).textContent,
         x    : (i % this.cols_count) * this.window_width,
         y    : Math.floor(i / this.cols_count) * this.window_height,
         w    : this.window_width,
         h    : this.window_height,
       }
+      // const data = {
+      //   id   : this.uuid,
+      //   name : this.name,
+      //   type : this.type,
+      //   icon : this.get_icon(this.uuid),
+      //   x    : rect.x,
+      //   y    : rect.y,
+      //   w    : rect.w,
+      //   h    : rect.h,
+      //   position : this.options.position || {},
+      // }
 
       windows[i].style.setProperty("--x", `${data.x}px`, "")
       windows[i].style.setProperty("--y", `${data.y}px`, "")
