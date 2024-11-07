@@ -1,8 +1,8 @@
-import { Event }   from "./lib/event.js"
-import { Desktop } from "./desktop.js"
-import { System }  from "./system.js"
-import { Storage } from "./lib/storage.js"
-import { Hash }    from "./system/hash.js"
+import { Event }   from "./controller/lib/event.js"
+import { Desktop } from "./controller/desktop.js"
+import { System }  from "./controller/system.js"
+import { Storage } from "./controller/lib/storage.js"
+import { Hash }    from "./controller/system/hash.js"
 
 class Main{
   constructor(){
