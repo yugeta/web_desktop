@@ -1,5 +1,6 @@
 import { Bootstrap } from "../lib/bootstrap.js"
-import { Asset }     from "../lib/asset.js"
+import { Setting }   from "../component/setting.js"
+import { Html }      from "../component/html.js"
 import { Convert }   from "../lib/convert.js"
 import { Style }     from "../lib/style.js"
 import { Storage }   from "../lib/storage.js"
@@ -51,7 +52,7 @@ export class Background{
 
   set_body(){
     const data = {}
-    this.body.innerHTML = new Convert(Asset.get_data("background_modal").text,data).text
+    this.body.innerHTML = new Convert(Html.background_modal,data).text
   }
 
   first_select(){
@@ -80,17 +81,11 @@ export class Background{
   }
 
   get value(){
-    return this.storage_data || this.setting_data
+    return this.storage_data || Setting.background
   }
 
   get storage_data(){
     return Storage.datas.background || null
-  }
-
-  get setting_data(){
-    const setting_data = Asset.get_data("setting")
-    if(!setting_data || !setting_data.data){return}
-    return Asset.get_data("setting").data.background
   }
 
   // 初期の背景をセット

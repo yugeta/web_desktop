@@ -1,5 +1,5 @@
 import { Bootstrap } from "../lib/bootstrap.js"
-import { Asset }     from "../lib/asset.js"
+import { Html }      from "../component/html.js"
 import { Convert }   from "../lib/convert.js"
 import { Position }  from "../icon/position.js"
 import { Trash }     from "../icon/trash.js"
@@ -23,7 +23,7 @@ export class View{
   }
 
   get html(){
-    return Asset.get_data("icon").text
+    return Html.icon
   }
 
   check_id(data){

@@ -2,7 +2,7 @@
  * desktop操作をした最終履歴を残し、ページへの再アクセス時に復旧するためのデータ保持処理
  */
 
-import { Asset } from "../lib/asset.js"
+import { Setting } from "../component/setting.js"
 
 export class Storage{
   static datas = {
@@ -98,7 +98,7 @@ export class Storage{
   }
 
   get asset_icons(){
-    return Asset.get_data("setting").data.desktop_icons || []
+    return Setting.desktop_icons || []
   }
 
   set_setting_json(){

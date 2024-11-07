@@ -1,5 +1,5 @@
 import { Bootstrap }  from "../lib/bootstrap.js"
-import { Asset }      from "../lib/asset.js"
+import { Setting }    from "../component/setting.js"
 
 export class Sort{
   constructor(active_window){
@@ -10,7 +10,7 @@ export class Sort{
   }
 
   get z(){
-    return Asset.get_data("setting").data.window.z
+    return Setting.window.z
   }
 
   // 表示されているwindow一覧を取得

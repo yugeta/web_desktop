@@ -1,5 +1,5 @@
 import { Bootstrap } from "../lib/bootstrap.js"
-import { Asset }     from "../lib/asset.js"
+import { Setting }   from "../component/setting.js"
 
 /**
  * アイコンの座標を取得する
@@ -32,7 +32,7 @@ export class Position{
   }
 
   get icon_size(){
-    return Asset.get_data("setting").data.icon.size
+    return Setting.icon.size
   }
 
   get_new_pos(){

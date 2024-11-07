@@ -1,4 +1,4 @@
-import { Asset }       from "../lib/asset.js"
+import { Setting }     from "../component/setting.js"
 import { Storage }     from "../lib/storage.js"
 import { Window }      from "../window.js"
 import { Icon }        from "../icon.js"
@@ -13,10 +13,10 @@ export class Init{
   }
 
   get setting_icons(){
-    return Asset.get_data("setting").data.desktop_icons
+    return Setting.desktop_icons
   }
   get setting_windows(){
-    return Asset.get_data("setting").data.windows
+    return Setting.windows || null
   }
 
   init_icon_storage_data_merge(){

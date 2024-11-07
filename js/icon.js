@@ -80,6 +80,9 @@ export class Icon{
     if(this.options.icon){
       return this.options.icon
     }
+    // else if(this.data && this.data.icon){console.log(this.data)
+    //   return this.data.icon
+    // }
     else{
       switch(this.options.type){
         case "file":
@@ -109,6 +112,9 @@ export class Icon{
     }
     else if(this.options.data){
       return this.data.name
+    }
+    else if(this.elm){
+      return this.elm.querySelector(".name").textContent
     }
     else{
       return "undefined"

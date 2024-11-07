@@ -1,6 +1,5 @@
 import { Bootstrap } from "../lib/bootstrap.js"
 import { Storage }   from "../lib/storage.js"
-import { Asset }     from "../lib/asset.js"
 import { Google }    from "../system/google.js"
 
 /**
@@ -11,7 +10,6 @@ export class Auth{
   name = "google_auth"
 
   constructor(options){
-    // if(!Asset.get_data("setting").data.google_auth){return}
     this.options = options || {}
     switch(this.options.mode){
       case "logout":

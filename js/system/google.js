@@ -1,4 +1,4 @@
-import { Asset }  from '../lib/asset.js'
+import { Setting }  from '../component/setting.js'
 
 export class Google{
   static datas = null
@@ -43,11 +43,11 @@ export class Google{
   }
 
   get google_client_id(){
-    return Asset.get_data("setting").data.google_auth.client_id
+    return Setting.google_auth.client_id
   }
 
   get google_client_src(){
-    return Asset.get_data("setting").data.google_auth.module_src
+    return Setting.google_auth.module_src
   }
 
   load_module(){

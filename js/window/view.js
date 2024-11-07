@@ -1,7 +1,8 @@
 import { Bootstrap } from "../lib/bootstrap.js"
 import { Sort }      from "./sort.js"
 import { Position }  from "./position.js"
-import { Asset }     from "../lib/asset.js"
+import { Setting }   from "../component/setting.js"
+import { Html }      from "../component/html.js"
 import { Convert }   from "../lib/convert.js"
 import { Storage }   from "../lib/storage.js"
 import { Icon }      from "../icon.js"
@@ -40,7 +41,7 @@ export class View{
   }
 
   get html(){
-    return Asset.get_data("window").text
+    return Html.window
   }
 
   get uuid(){
@@ -52,11 +53,11 @@ export class View{
   }
 
   get gap(){
-    return Asset.get_data("setting").data.window.gap
+    return Setting.window.gap
   }
 
   get pos(){
-    return Asset.get_data("setting").data.window.pos
+    return Setting.window.pos
   }
 
   get size(){
@@ -72,7 +73,7 @@ export class View{
         h : this.storage_icon_data.window_size.h,
       }
     }
-    const asset_size = Asset.get_data("setting").data.window.size
+    const asset_size = Setting.window.size
     if(asset_size){
       
       return {

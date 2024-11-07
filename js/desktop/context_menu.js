@@ -1,5 +1,6 @@
 import { Bootstrap }  from "../lib/bootstrap.js"
-import { Asset }      from "../lib/asset.js"
+import { Setting }    from "../component/setting.js"
+import { Html }       from "../component/html.js"
 import { Convert }    from "../lib/convert.js"
 import { Storage }    from "../lib/storage.js"
 import { Icon }       from "../icon.js"
@@ -79,7 +80,7 @@ export class ContextMenu{
       Bootstrap.context_menu = {
         target : elm_icon
       }
-      this.view_lists(Asset.get_data("setting").data.context_menu.icon)
+      this.view_lists(Setting.context_menu.icon)
     }
 
     else if(elm_window){
@@ -88,7 +89,7 @@ export class ContextMenu{
       Bootstrap.context_menu = {
         target : elm_window_body
       }
-      this.view_lists(Asset.get_data("setting").data.context_menu.window)
+      this.view_lists(Setting.context_menu.window)
     }
 
     else if(elm_desktop){
@@ -97,7 +98,7 @@ export class ContextMenu{
       Bootstrap.context_menu = {
         target : elm_desktop
       }
-      this.view_lists(Asset.get_data("setting").data.context_menu.desktop)
+      this.view_lists(Setting.context_menu.desktop)
     }
   }
 
@@ -107,7 +108,7 @@ export class ContextMenu{
     ul.className = this.name
     for(const list of lists){
       if(!this.check_auth(list)){continue}
-      const html = new Convert(Asset.get_data("context_menu_item").text).double_bracket(list)
+      const html = new Convert(Html.context_menu_item).double_bracket(list)
       ul.insertAdjacentHTML("beforeend", html)
     }
     Bootstrap.elm_main.appendChild(ul)
