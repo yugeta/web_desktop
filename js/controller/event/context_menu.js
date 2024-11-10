@@ -1,11 +1,11 @@
 import { Bootstrap }   from "../../controller/lib/bootstrap.js"
-import { ContextMenu as ComponentContextMenu } from "../../model/component/context_menu.js"
-import { Html }        from "../../model/component/html.js"
+import { ContextMenu as ComponentContextMenu } from "../../component/context_menu.js"
+import { Html }        from "../../component/html.js"
 import { Convert }     from "../../controller/lib/convert.js"
 import { Storage }     from "../../controller/lib/storage.js"
 import { Icon }        from "../../controller/icon.js"
 import { Window }      from "../../controller/window.js"
-import { Background }  from "./background.js"
+import { Background }  from "../../controller/desktop/background.js"
 import { Modal }       from "../../controller/system/modal.js"
 
 /**

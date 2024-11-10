@@ -1,13 +1,14 @@
 import { Bootstrap } from "../controller/lib/bootstrap.js"
 import { Sort }      from "../controller/window/sort.js"
 import { Position }  from "../controller/window/position.js"
-import { Setting }   from "../model/component/setting.js"
-import { Html }      from "../model/component/html.js"
+import { Setting }   from "../component/setting.js"
+import { Html }      from "../component/html.js"
 import { Convert }   from "../controller/lib/convert.js"
 import { Storage }   from "../controller/lib/storage.js"
 import { Icon }      from "../controller/icon.js"
 import { File }      from "../controller/file.js"
 import { App }       from "../controller/app.js"
+import { Windows }   from "../model/windows.js"
 
 export class Window{
   constructor(options){
@@ -67,10 +68,10 @@ export class Window{
         h : this.options.h,
       }
     }
-    if(this.storage_icon_data && this.storage_icon_data.window_size){
+    if(this.data && this.data.window_size){
       return {
-        w : this.storage_icon_data.window_size.w,
-        h : this.storage_icon_data.window_size.h,
+        w : this.data.window_size.w,
+        h : this.data.window_size.h,
       }
     }
     const asset_size = Setting.window.size
@@ -108,8 +109,12 @@ export class Window{
     return Storage.datas.icons.find(e => e.id === this.id)
   }
 
+  get data(){
+    return Windows.datas.find(e => e.id === this.id)
+  }
+
   get init_rect(){
-    const window_size = this.storage_icon_data ? this.storage_icon_data.window_size || {} : {}
+    const window_size = this.size || {}
     const window_pos  = new Position(this)
     const rect     = {
       x : window_pos.x,
@@ -141,7 +146,7 @@ export class Window{
   }
 
   add(){
-    const rect = this.storage_window_data ? this.storage_rect : this.init_rect
+    const rect = this.init_rect
     const data = {
       id   : this.uuid,
       name : this.name,
@@ -215,7 +220,6 @@ export class Window{
           id     : this.storage_icon_data.id,
           parent : this.window,
         })
-        // .promise.then(this.set_window_size.bind(this))
       break
     }
   }

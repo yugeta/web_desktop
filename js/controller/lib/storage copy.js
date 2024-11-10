@@ -1,17 +1,14 @@
-import { Icons }   from "../../model/icons.js"
-import { Windows } from "../../model/windows.js"
+import { Setting } from "../../component/setting.js"
 
 /**
  * desktop操作をした最終履歴を残し、ページへの再アクセス時に復旧するためのデータ保持処理
  */
 
 export class Storage{
-
   static datas = {
-    icons   : Icons.datas,
-    windows : Windows.datas,
+    icons   : [],
+    windows : [],
   }
-
   name = "mynt_web_desktop"
   ext  = "webd"
   
@@ -20,56 +17,57 @@ export class Storage{
     this.promise = new Promise((resolve, reject)=>{
       this.resolve = resolve
       this.reject  = reject
-      switch(this.options.mode){
-        case "save":
-          this.save(this.datas())
-        break
-  
-        case "remove":
-          this.remove(this.options)
-        break
-  
-        case "load":
-          this.datas = this.load(this.options.name)
-        break
-  
-        case "del_all":
-          this.del_all(this.options.data)
-        break
-  
-        case "del_mode":
-          this.del_mode(this.options.data)
-        break
-  
-        case "del_id":
-          this.del_id(this.options.data)
-        break
-  
-        case "destroy":
-          this.destroy()
-        break
-  
-        case "download":
-          this.download()
-        break
-  
-        case "upload":
-          this.upload()
-        break
-  
-        case "init":
-        default:
-          this.init()
-        break
-      }
+      this.fork()
       this.finish()
     })
   }
 
-  datas(){
-    return {
-      icons   : Icons.datas,
-      windows : Windows.datas,
+  fork(){
+    switch(this.options.mode){
+      case "save":
+        if(this.options.name && this.options.data){
+          this.mix_data(this.options)
+        }
+        this.save(Storage.datas)
+      break
+
+      case "remove":
+        this.remove(this.options)
+      break
+
+      case "load":
+        this.datas = this.load(this.options.name)
+      break
+
+      case "del_all":
+        this.del_all(this.options.data)
+      break
+
+      case "del_mode":
+        this.del_mode(this.options.data)
+      break
+
+      case "del_id":
+        this.del_id(this.options.data)
+      break
+
+      case "destroy":
+        this.destroy()
+      break
+
+      case "download":
+        this.download()
+      break
+
+      case "upload":
+        this.upload()
+      break
+
+      case "init":
+      default:
+        this.get_storage()
+        this.set_setting()
+      break
     }
   }
 
@@ -92,37 +90,45 @@ export class Storage{
     }
     return storage
   }
-  
-  init(){
+
+  // 初期処理
+  get_storage(){
     const base64 = window.localStorage.getItem(this.name)
-    if(!base64){return}
-    const datas = this.dec(base64)
-    if(datas.icons){
-      for(const data of datas.icons){
-        const index = Icons.datas.findIndex(e => e.id === data.id)
-        if(index >= 0){
-          Icons.datas[index] = data
-        }
-        else{
-          Icons.datas.push(data)
-        }
-      }
+    Storage.datas = base64 ? this.dec(base64) : Storage.datas
+  }
+
+  get asset_icons(){
+    return Setting.icons || []
+  }
+
+  set_setting(){
+    // icons
+    for(const data of this.asset_icons){
+      const storage_data = Storage.datas.icons.find(e => e.id === data.id)
+      if(!storage_data){continue}
+      storage_data.system_flg = true
+      // if(storage_data){continue}
+      // data.system_flg = true
+      // Storage.datas.icons.push(data)
     }
-    if(datas.windows){
-      for(const data of datas.windows){
-        const index = Windows.datas.findIndex(e => e.id === data.id)
-        if(index >= 0){
-          Windows.datas[index] = data
-        }
-        else{
-          Windows.datas.push(data)
-        }
-      }
+  }
+
+  // データを追加する
+  mix_data(data){
+    if(!Storage.datas[data.name]){
+      Storage.datas[data.name] = []
+    }
+    const index = Storage.datas[data.name].findIndex(e => e.id === data.data.id)
+    if(index === -1){
+      Storage.datas[data.name].push(data.data)
+    }
+    else{
+      Storage.datas[data.name][index] = data.data
     }
   }
 
   // localStorageに書き込み
-  save(datas){//console.log(datas)
+  save(datas){
     const enc_datas = this.enc(datas)
     window.localStorage.setItem(this.name, enc_datas)
     return Storage.datas
@@ -204,7 +210,7 @@ export class Storage{
   }
 
   static has_icon_data(id){
-    return Icons.datas.find(e => e.id === id) ? true : false
+    return Storage.datas.icons.find(e => e.id === id) ? true : false
   }
 
   download(){

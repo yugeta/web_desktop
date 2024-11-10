@@ -1,5 +1,5 @@
 import { Bootstrap } from "../controller/lib/bootstrap.js"
-import { Html }      from "../model/component/html.js"
+import { Html }      from "../component/html.js"
 import { Convert }   from "../controller/lib/convert.js"
 import { Position }  from "../controller/icon/position.js"
 import { Trash }     from "../controller/icon/trash.js"
@@ -30,12 +30,13 @@ export class Icon{
     return data.id ? true : false
   }
 
-  single_icon_view(data){
+  single_icon_view(data){//console.log(data)
     if(!data.id){return}
     if(this.get_parent(data.parent_id) !== this.parent){
       return
     }
     const pos = this.get_pos(data)
+    // console.log(pos)
     const datas = {...data, ...pos}
     datas.icon = new ControllerIcon(datas).icon
     this.check_name(datas)
@@ -74,12 +75,12 @@ export class Icon{
     const parent = this.get_parent(data.parent_id)
     if(!parent){return}
     const icon = parent.querySelector(`.icon[data-id="${data.id}"]`)
-    if(!icon){return}
-    new Storage({
-      mode : "save",
-      name : "icons",
-      data : data,
-    })
+    // if(!icon){return}
+    // new Storage({
+    //   mode : "save",
+    //   name : "icons",
+    //   data : data,
+    // })
   }
 
   check_name(data){

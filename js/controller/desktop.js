@@ -1,7 +1,7 @@
 
 import { Icon }        from "../controller/icon.js"
 import { Init }        from "../controller/desktop/init.js"
-import { ContextMenu } from "../controller/desktop/context_menu.js"
+import { ContextMenu } from "../controller/event/context_menu.js"
 
 export class Desktop{
   constructor(options){

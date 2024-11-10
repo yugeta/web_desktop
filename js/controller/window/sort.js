@@ -1,5 +1,5 @@
 import { Bootstrap }  from "../../controller/lib/bootstrap.js"
-import { Setting }    from "../../model/component/setting.js"
+import { Setting }    from "../../component/setting.js"
 
 export class Sort{
   constructor(active_window){

@@ -1,7 +1,9 @@
+import { Bootstrap }              from "../../controller/lib/bootstrap.js"
 import { Storage }                from "../../controller/lib/storage.js"
 import { Icon }                   from "../../controller/icon.js"
+import { Icons }                  from "../../model/icons.js"
+import { Windows }                from "../../model/windows.js"
 import { Window }                 from "../../controller/window.js"
-import { Elm2data as WindowData } from "../../controller/window/elm2data.js"
 
 export class MouseUp{
   constructor(e){
@@ -22,6 +24,19 @@ export class MouseUp{
     return Icon.mouse_options.target.getAttribute("data-id")
   }
 
+  get icon_elm(){
+    return Bootstrap.elm_main.querySelector(`.icon[data-id="${this.icon_id}"]`)
+  }
+
+  get window_id(){
+    if(!Window.mouse_options || !Window.mouse_options.target){return null}
+    return Window.mouse_options.target.getAttribute("data-id")
+  }
+
+  get window_elm(){
+    return Bootstrap.elm_main.querySelector(`.window[data-id="${this.window_id}"]`)
+  }
+
   icon_end(e){
     Icon.mouse_options.mode = "move_end"
     Icon.mouse_options.window = e.target.closest(".window")
@@ -35,20 +50,21 @@ export class MouseUp{
 
   // データキャッシュ
   save_icon(){
+    new Icons({
+      mode : "set_icon",
+      id   : this.icon_id,
+    })
     new Storage({
       mode  : "save",
-      name  : "icons",
-      data  : new Icon({id : this.icon_id}).data
     })
   }
 
   save_window(){
-    const data = new WindowData(Window.mouse_options.target).datas
-    if(!Storage.has_icon_data(data.id)){return}
-    new Storage({
-      mode : "save",
-      name : "windows",
-      data : data,
-    })
+    const data = Windows.datas.find(e => e.id === this.window_id)
+    if(!data){return}
+    data.x = Number(this.window_elm.style.getPropertyValue("--x").replace("px","") || 0)
+    data.y = Number(this.window_elm.style.getPropertyValue("--y").replace("px","") || 0)
+    data.move = true
+    new Storage({mode  : "save"})
   }
 }

@@ -1,6 +1,6 @@
-export class Html{
+export const Html = {}
 
-  static background_modal = `
+Html.background_modal = `
 <link rel="stylesheet" href="css/background_modal.css"/>
 
 <div id="background_modal">
@@ -41,15 +41,15 @@ export class Html{
   </ul>
 </div>`
 
-  static context_menu_item = `<li class="item" data-mode="{{mode}}">{{name}}</li>`
+Html.context_menu_item = `<li class="item" data-mode="{{mode}}">{{name}}</li>`
 
-  static icon = `
-<div class="icon" type="{{type}}" data-id="{{id}}" style="--x:{{x}}px;--y:{{y}}px;--z:{{z}};">
+Html.icon = `
+<div class="icon" type="{{type}}" data-id="{{id}}" style="--x:{{x}}px;--y:{{y}}px;--z:{{z}};" data-move="{{move}}">
   <img src="{{icon}}" onerror="this.onerror=null;this.src='img/icon/file_{{type}}.svg';">
   <p class="name">{{name}}</p>
 </div>`
 
-  static window = `
+Html.window = `
 <div class="window" data-type="{{type}}" data-id="{{id}}" data-view-type="icon" style="--x:{{x}}px;--y:{{y}}px;--w:{{w}}px;--h:{{h}}px;--z:{{z}};">
   <div class="header">
     <img class="thumb" src="{{icon}}" draggable="false">
@@ -63,5 +63,3 @@ export class Html{
   <div class="resize" name="vertical"></div>
   <div class="resize" name="both"></div>
 </div>`
-
-}

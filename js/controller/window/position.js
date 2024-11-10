@@ -1,4 +1,5 @@
 import { Bootstrap } from "../../controller/lib/bootstrap.js"
+import { Windows }   from "../../model/windows.js"
 
 export class Position{
   data = {
@@ -8,29 +9,17 @@ export class Position{
 
   constructor(options){
     this.options = options || {}
-
-    
-    // const windows = Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
-    
-    const data    = {x : 0, y : 0}
-
-    // let x = windows.length ? windows[windows.length-1].offsetLeft + options.gap.x : options.pos.x
-    // let y = windows.length ? windows[windows.length-1].offsetTop  + options.gap.y : options.pos.y
-    if(this.options.position){//console.log("assign")
-      data.x = this.assign_pos.x
-      data.y = this.assign_pos.y
+    const data = this.default_pos(options.id)
+    if(data.x === undefined && data.y === undefined){
+      data.x = this.options.position ? this.assign_pos.x : this.normal_pos.x
+      data.y = this.options.position ? this.assign_pos.y : this.normal_pos.y
     }
-    else{
-      // data.x = windows.length ? windows[windows.length-1].offsetLeft + options.gap.x : options.pos.x
-      // data.y = windows.length ? windows[windows.length-1].offsetTop  + options.gap.y : options.pos.y
-      data.x = this.normal_pos.x
-      data.y = this.normal_pos.y
-    }
-    
     // 右下制御
     const rect    = Bootstrap.window_rect
     data.x = data.x > rect.width  - options.size.w ? rect.width  - options.size.w : data.x
     data.y = data.y > rect.width  - options.size.w ? rect.width  - options.size.w : data.y
+
+    
 
     this.data = data
   }
@@ -110,6 +99,22 @@ export class Position{
     return {
       x : x,
       y : y,
+    }
+  }
+
+  default_pos(id){
+    if(id){
+      const data = Windows.datas.find(e => e.id === id)
+      return {
+        x : data.x, 
+        y : data.y,
+      }
+    }
+    else{
+      return {
+        x : 0, 
+        y : 0,
+      }
     }
   }
 

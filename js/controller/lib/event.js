@@ -1,9 +1,9 @@
-import { MouseDown }   from "../../controller/desktop/mouse_down.js"
-import { MouseMove }   from "../../controller/desktop/mouse_move.js"
-import { MouseUp }     from "../../controller/desktop/mouse_up.js"
-import { Click }       from "../../controller/desktop/click.js"
-import { DoubleClick } from "../../controller/desktop/double_click.js"
-import { ContextMenu } from "../../controller/desktop/context_menu.js"
+import { MouseDown }   from "../../controller/event/mouse_down.js"
+import { MouseMove }   from "../../controller/event/mouse_move.js"
+import { MouseUp }     from "../../controller/event/mouse_up.js"
+import { Click }       from "../../controller/event/click.js"
+import { DoubleClick } from "../../controller/event/double_click.js"
+import { ContextMenu } from "../../controller/event/context_menu.js"
 import { Bootstrap }   from "../../controller/lib/bootstrap.js"
 
 export class Event{

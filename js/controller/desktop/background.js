@@ -1,6 +1,6 @@
 import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Setting }   from "../../model/component/setting.js"
-import { Html }      from "../../model/component/html.js"
+import { Setting }   from "../../component/setting.js"
+import { Html }      from "../../component/html.js"
 import { Convert }   from "../../controller/lib/convert.js"
 import { Style }     from "../../controller/lib/style.js"
 import { Storage }   from "../../controller/lib/storage.js"

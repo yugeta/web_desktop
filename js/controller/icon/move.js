@@ -4,7 +4,9 @@ import { Storage }   from "../../controller/lib/storage.js"
 import { Clear }     from "../../controller/icon/clear.js"
 import { Overlap }   from "../../controller/icon/overlap.js"
 import { Icon }      from "../../controller/icon.js"
-import { Html }      from "../../model/component/html.js"
+// import { Icons }     from "../../component/icons.js"
+import { Icons }     from "../../model/icons.js"
+import { Html }      from "../../component/html.js"
 
 export class Move{
   constructor(options){
@@ -47,9 +49,10 @@ export class Move{
   }
 
   get icon_data(){
-    const icon_datas = new Storage({mode: "load", name:"icons"}).datas
-    if(!icon_datas || !icon_datas.length){return null}
-    return icon_datas.find(e => e.id === this.icon_id)
+    // const icon_datas = new Storage({mode: "load", name:"icons"}).datas
+    // if(!icon_datas || !icon_datas.length){return null}
+    // return icon_datas.find(e => e.id === this.icon_id)
+    return Icons.datas.find(e => e.id === this.icon_id)
   }
 
   move_start(){
@@ -180,7 +183,7 @@ export class Move{
     const datas = []
     let id = parent_id
     while(id !== null){
-      const storage_data = Storage.datas.icons.find(e => e.id === id)
+      const storage_data = Icons.datas.find(e => e.id === id)
       if(storage_data && storage_data.parent_id){
         datas.push(storage_data.parent_id)
         id = storage_data.parent_id

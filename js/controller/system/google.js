@@ -1,4 +1,4 @@
-import { Auth }     from '../../model/component/auth.js'
+import { Auth }     from '../../component/auth.js'
 
 export class Google{
   static datas = null

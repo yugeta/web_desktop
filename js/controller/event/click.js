@@ -1,6 +1,6 @@
 import { Window }      from "../../controller/window.js"
-import { ContextMenu } from "./context_menu.js"
-import { DoubleClick } from "./double_click.js"
+import { ContextMenu } from "../../controller/event/context_menu.js"
+import { DoubleClick } from "../../controller/event/double_click.js"
 
 export class Click{
   constructor(e){
