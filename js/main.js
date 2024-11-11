@@ -11,7 +11,7 @@ class Main{
     new Event()
     new System()
     new Desktop({mode:"init"})
-    // console.log(Storage.datas)
+    console.log(Storage.datas)
   }
 }
 

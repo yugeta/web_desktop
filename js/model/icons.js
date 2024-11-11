@@ -31,18 +31,33 @@ export class Icons {
   set_icon(){
     if(!this.elm || !this.id){return}
     const index = Icons.datas.findIndex(e => e.id === this.id)
-    if(index < 0){return}
-    const data = this.get_icon_data()
-    for(const key in data){
-      Icons.datas[index][key] = data[key]
+    if(index >= 0){
+      const data = this.get_add_data()
+      for(const key in data){
+        Icons.datas[index][key] = data[key]
+      }
+    }
+    else{
+      const data = this.get_elm_data()
+      Icons.datas.push(data)
     }
   }
 
-  get_icon_data(){
+  get_add_data(){
     return {
       x : Number(this.elm.style.getPropertyValue("--x").replace("px","") || 0),
       y : Number(this.elm.style.getPropertyValue("--y").replace("px","") || 0),
       move : this.elm.getAttribute("data-move") || "",
+    }
+  }
+  get_elm_data(){
+    const elm = this.elm
+    return {
+      id   : elm.getAttribute("data-id"),
+      name : elm.querySelector(".name").innerText,
+      type : elm.getAttribute("data-type"),
+      icon : elm.querySelector("img").getAttribute("src"),
+      parent_id : "",
     }
   }
 

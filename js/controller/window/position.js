@@ -105,17 +105,14 @@ export class Position{
   default_pos(id){
     if(id){
       const data = Windows.datas.find(e => e.id === id)
-      return {
-        x : data.x, 
-        y : data.y,
+      if(data){
+        return {
+          x : data.x, 
+          y : data.y,
+        }
       }
     }
-    else{
-      return {
-        x : 0, 
-        y : 0,
-      }
-    }
+    return this.data
   }
 
 }

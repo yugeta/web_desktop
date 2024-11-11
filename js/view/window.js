@@ -156,6 +156,7 @@ export class Window{
       y    : rect.y,
       w    : rect.w,
       h    : rect.h,
+      z    : this.data ? this.data.z : "",
       position : this.options.position || {},
     }
     const html = new Convert(this.html, data).text

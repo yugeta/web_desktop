@@ -38,9 +38,9 @@ export class MouseUp{
   }
 
   icon_end(e){
-    Icon.mouse_options.mode = "move_end"
+    Icon.mouse_options.mode   = "move_end"
     Icon.mouse_options.window = e.target.closest(".window")
-    Icon.mouse_options.event = e
+    Icon.mouse_options.event  = e
     new Icon(Icon.mouse_options)
   }
 
@@ -60,11 +60,15 @@ export class MouseUp{
   }
 
   save_window(){
-    const data = Windows.datas.find(e => e.id === this.window_id)
-    if(!data){return}
-    data.x = Number(this.window_elm.style.getPropertyValue("--x").replace("px","") || 0)
-    data.y = Number(this.window_elm.style.getPropertyValue("--y").replace("px","") || 0)
-    data.move = true
+    // const data = Windows.datas.find(e => e.id === this.window_id)
+    // if(!data){return}
+    // data.x = Number(this.window_elm.style.getPropertyValue("--x").replace("px","") || 0)
+    // data.y = Number(this.window_elm.style.getPropertyValue("--y").replace("px","") || 0)
+    // data.move = true
+    new Windows({
+      mode : "set_window",
+      id   : this.window_id,
+    })
     new Storage({mode  : "save"})
   }
 }

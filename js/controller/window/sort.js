@@ -1,5 +1,6 @@
 import { Bootstrap }  from "../../controller/lib/bootstrap.js"
 import { Setting }    from "../../component/setting.js"
+import { Windows }    from "../../model/windows.js"
 
 export class Sort{
   constructor(active_window){
@@ -28,14 +29,22 @@ export class Sort{
 
   replacement(windows){
     let num = 0
+    let z   = 0
     for(const elm of windows){
       if(elm === this.active_window){
+        z = windows.length + this.z
         elm.style.setProperty("--z", windows.length + this.z, "")
       }
       else{
+        z = num + 1 + this.z
         elm.style.setProperty("--z", num + 1 + this.z, "")
         num++
       }
+      console.log(z)
+      new Windows({
+        mode : "set_window",
+        elm  : elm,
+      })
     }
   }
 }
