@@ -1,8 +1,8 @@
-import { Window }      from "../../controller/window.js"
-import { Windows }     from "../../model/windows.js"
-import { Storage }     from "../../controller/lib/storage.js"
+import { ControllerWindow } from "../controller/window.js"
+import { ModelWindows }     from "../model/windows.js"
+import { ModelStorage }     from "../model/storage.js"
 
-export class DoubleClick{
+export class EventDoubleClick{
   constructor(e){
     this.event(e.target)
   }
@@ -14,16 +14,16 @@ export class DoubleClick{
     if(icon){
       const id   = icon.getAttribute("data-id")
       const name = icon.querySelector(".name").textContent
-      new Window({
+      new ControllerWindow({
         mode : "view",
         id   : id,
         name : name,
       })
-      new Windows({
+      new ModelWindows({
         mode : "set_window",
         id   : id,
       })
-      new Storage({
+      new ModelStorage({
         mode  : "save",
       })
     }

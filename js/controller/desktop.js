@@ -1,9 +1,9 @@
 
-import { Icon }        from "../controller/icon.js"
-import { Init }        from "../controller/desktop/init.js"
-import { ContextMenu } from "../controller/event/context_menu.js"
+import { ControllerIcon }   from "../controller/icon.js"
+import { Init }             from "../controller/desktop/init.js"
+import { EventContextMenu } from "../event/context_menu.js"
 
-export class Desktop{
+export class ControllerDesktop{
   constructor(options){
     this.options = options || {}
     switch(this.options.mode){
@@ -11,9 +11,9 @@ export class Desktop{
       break
 
       case "icon_sort":
-        new Icon({
+        new ControllerIcon({
           mode : "sort",
-          target : ContextMenu.datas.target,
+          target : EventContextMenu.datas.target,
         })
       break
 

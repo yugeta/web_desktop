@@ -1,5 +1,5 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Windows }   from "../../model/windows.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
+import { ModelWindows }   from "../../model/windows.js"
 
 export class Position{
   data = {
@@ -15,7 +15,7 @@ export class Position{
       data.y = this.options.position ? this.assign_pos.y : this.normal_pos.y
     }
     // 右下制御
-    const rect    = Bootstrap.window_rect
+    const rect    = ModelBootstrap.window_rect
     data.x = data.x > rect.width  - options.size.w ? rect.width  - options.size.w : data.x
     data.y = data.y > rect.width  - options.size.w ? rect.width  - options.size.w : data.y
 
@@ -26,7 +26,7 @@ export class Position{
 
   // 動かしていないwindow一覧の取得
   get no_moved_windows(){
-    return Bootstrap.elm_main.querySelectorAll(".window:not([data-move])")
+    return ModelBootstrap.elm_main.querySelectorAll(".window:not([data-move])")
   }
 
   get x(){
@@ -54,16 +54,7 @@ export class Position{
   }
 
   get assign_pos(){
-    // const rect    = Bootstrap.window_rect
-    // return {
-    //   x : 0,
-    //   y : 0,
-    // }
-    // return {
-    //   x : (rect.width / 2) - (this.options.size.w / 2),
-    //   y : (rect.height / 2) - (this.options.size.h / 2),
-    // }
-    const rect    = Bootstrap.window_rect
+    const rect    = ModelBootstrap.window_rect
     let x,y
 
     switch(this.position.x){
@@ -104,7 +95,7 @@ export class Position{
 
   default_pos(id){
     if(id){
-      const data = Windows.datas.find(e => e.id === id)
+      const data = ModelWindows.datas.find(e => e.id === id)
       if(data){
         return {
           x : data.x, 

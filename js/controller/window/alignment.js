@@ -1,5 +1,5 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Storage }   from "../../controller/lib/storage.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
+import { ModelStorage }   from "../../model/storage.js"
 
 export class Alignment{
   constructor(options){
@@ -7,7 +7,7 @@ export class Alignment{
   }
 
   get windows(){
-    return Array.from(Bootstrap.elm_main.querySelectorAll(`:scope > .window`))
+    return Array.from(ModelBootstrap.elm_main.querySelectorAll(`:scope > .window`))
   }
 
   get windows_count(){
@@ -16,7 +16,7 @@ export class Alignment{
 
   // 横並び個数
   get cols_count(){
-    return Math.ceil(Bootstrap.elm_main.offsetWidth / 500)
+    return Math.ceil(ModelBootstrap.elm_main.offsetWidth / 500)
   }
 
   get rows_count(){
@@ -24,11 +24,11 @@ export class Alignment{
   }
 
   get window_width(){
-    return Math.floor(Bootstrap.elm_main.offsetWidth / this.cols_count)
+    return Math.floor(ModelBootstrap.elm_main.offsetWidth / this.cols_count)
   }
 
   get window_height(){
-    const height = Math.floor(Bootstrap.elm_main.offsetWidth / this.rows_count)
+    const height = Math.floor(ModelBootstrap.elm_main.offsetWidth / this.rows_count)
     return height >= 300 ? 300 : height
   }
 
@@ -56,7 +56,7 @@ export class Alignment{
   }
 
   set_storage_data(data){console.log(data)
-    new Storage({
+    new ModelStorage({
       mode : "save",
       name : "windows",
       data : {

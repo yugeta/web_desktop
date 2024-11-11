@@ -1,6 +1,6 @@
-import { App as ViewApp } from "../view/app.js"
+import { ViewApp } from "../view/app.js"
 
-export class App{
+export class ControllerApp{
   constructor(options){
     this.promise = new Promise((resolve, reject)=>{
       this.resolve = resolve

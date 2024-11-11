@@ -1,5 +1,5 @@
-import { Icon as ViewIcon } from "../../view/icon.js"
-import { Uuid }             from "../../controller/lib/uuid.js"
+import { ViewIcon } from "../../view/icon.js"
+import { Uuid }     from "../../lib/uuid.js"
 
 export class NewFolder{
   constructor(options){

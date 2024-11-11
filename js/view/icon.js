@@ -1,15 +1,14 @@
-import { Bootstrap } from "../controller/lib/bootstrap.js"
-import { Html }      from "../component/html.js"
-import { Convert }   from "../controller/lib/convert.js"
-import { Position }  from "../controller/icon/position.js"
-import { Trash }     from "../controller/icon/trash.js"
-import { Storage }   from "../controller/lib/storage.js"
-import { Icon as ControllerIcon }      from "../controller/icon.js"
+import { ModelBootstrap } from "../model/bootstrap.js"
+import { ComponentHtml }  from "../component/html.js"
+import { Convert }        from "../lib/convert.js"
+import { Position }       from "../controller/icon/position.js"
+import { Trash }          from "../controller/icon/trash.js"
+import { ControllerIcon } from "../controller/icon.js"
 
-export class Icon{
+export class ViewIcon{
   constructor(data, parent){
     if(!data){return}
-    this.parent = parent || Bootstrap.elm_main
+    this.parent = parent || ModelBootstrap.elm_main
     if(data.constructor === Array){
       for(const single_data of data){
         const res = this.single_icon_view(single_data)
@@ -23,7 +22,7 @@ export class Icon{
   }
 
   get html(){
-    return Html.icon
+    return ComponentHtml.icon
   }
 
   check_id(data){
@@ -48,10 +47,10 @@ export class Icon{
 
   get_parent(parent_id){
     if(parent_id){
-      return Bootstrap.elm_main.querySelector(`.window[data-id="${parent_id}"] .body`)
+      return ModelBootstrap.elm_main.querySelector(`.window[data-id="${parent_id}"] .body`)
     }
     else{
-      return Bootstrap.elm_main
+      return ModelBootstrap.elm_main
     }
   }
 

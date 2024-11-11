@@ -1,5 +1,5 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Open }      from "../../controller/icon/open.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
+import { Open }           from "../../controller/icon/open.js"
 
 export class Overlap{
   constructor(options){
@@ -108,7 +108,7 @@ export class Overlap{
 
   end(type){
     type = type ? `.${type}` : ""
-    const elms = Bootstrap.elm_main.querySelectorAll(`${type}[data-overlap]`)
+    const elms = ModelBootstrap.elm_main.querySelectorAll(`${type}[data-overlap]`)
     for(const elm of elms){
       elm.removeAttribute("data-overlap")
     }

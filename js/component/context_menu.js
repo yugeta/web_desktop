@@ -1,4 +1,4 @@
-export const ContextMenu = {
+export const ComponentContextMenu = {
   desktop  : [
     {
       name : "新規フォルダ",

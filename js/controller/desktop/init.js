@@ -1,8 +1,8 @@
-import { Icons }       from "../../model/icons.js"
-import { Windows }     from "../../model/windows.js"
-import { Window }      from "../../controller/window.js"
-import { Icon }        from "../../controller/icon.js"
-import { Background }  from "./background.js"
+import { ModelIcons }       from "../../model/icons.js"
+import { ModelWindows }     from "../../model/windows.js"
+import { ControllerWindow } from "../../controller/window.js"
+import { ControllerIcon }   from "../../controller/icon.js"
+import { Background }       from "./background.js"
 
 export class Init{
   constructor(){
@@ -12,16 +12,16 @@ export class Init{
   }
 
   view_icon(){
-    new Icon({
+    new ControllerIcon({
       mode : "view",
-      data : Icons.datas,
+      data : ModelIcons.datas,
     })
   }
 
   view_window(){
-    new Window({
+    new ControllerWindow({
       mode  : "init",
-      datas : Windows.datas,
+      datas : ModelWindows.datas,
     })
   }
 }

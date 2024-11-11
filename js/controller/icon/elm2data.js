@@ -1,4 +1,4 @@
-import { Storage } from "../../controller/lib/storage.js"
+import { ModelStorage } from "../../model/storage.js"
 
 /**
  * アイコンのelementから、storageセーブデータを生成する
@@ -19,7 +19,7 @@ export class Elm2data{
   }
 
   set_datas(){
-    this.datas = Storage.datas.icons.find(e => e.id === this.id)
+    this.datas = ModelStorage.datas.icons.find(e => e.id === this.id)
   }
 
   get id(){

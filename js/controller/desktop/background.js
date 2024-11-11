@@ -1,10 +1,10 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Setting }   from "../../component/setting.js"
-import { Html }      from "../../component/html.js"
-import { Convert }   from "../../controller/lib/convert.js"
-import { Style }     from "../../controller/lib/style.js"
-import { Storage }   from "../../controller/lib/storage.js"
-import { Window }    from "../../controller/window.js"
+import { ModelBootstrap }   from "../../model/bootstrap.js"
+import { ComponentSetting } from "../../component/setting.js"
+import { ComponentHtml }    from "../../component/html.js"
+import { Convert }          from "../../lib/convert.js"
+import { Style }            from "../../lib/style.js"
+import { ModelStorage }     from "../../model/storage.js"
+import { ControllerWindow } from "../../controller/window.js"
 
 export class Background{
   static window_name = "background_modal"
@@ -27,7 +27,7 @@ export class Background{
   }
 
   get root(){
-    return Bootstrap.elm_main.querySelector(`.window[data-id="${Background.window_name}"]`)
+    return ModelBootstrap.elm_main.querySelector(`.window[data-id="${Background.window_name}"]`)
   }
 
   get body(){
@@ -39,7 +39,7 @@ export class Background{
   }
 
   window_view(){
-    new Window({
+    new ControllerWindow({
       mode : "view_only",
       id   : Background.window_name,
       name : this.name,
@@ -52,7 +52,7 @@ export class Background{
 
   set_body(){
     const data = {}
-    this.body.innerHTML = new Convert(Html.background_modal,data).text
+    this.body.innerHTML = new Convert(ComponentHtml.background_modal,data).text
   }
 
   first_select(){
@@ -76,16 +76,16 @@ export class Background{
     const value = input.getAttribute("value")
     this.set_bg(value)
     document.querySelector(`#desktop main`).style.setProperty("background", value , "") // GoogleChromeの為の特殊処理
-    Storage.datas.background = value
-    new Storage({mode : "save"})
+    ModelStorage.datas.background = value
+    new ModelStorage({mode : "save"})
   }
 
   get value(){
-    return this.storage_data || Setting.background
+    return this.storage_data || ComponentSetting.background
   }
 
   get storage_data(){
-    return Storage.datas.background || null
+    return ModelStorage.datas.background || null
   }
 
   // 初期の背景をセット

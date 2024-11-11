@@ -1,6 +1,6 @@
-import { Bootstrap }  from "../../controller/lib/bootstrap.js"
-import { Setting }    from "../../component/setting.js"
-import { Windows }    from "../../model/windows.js"
+import { ModelBootstrap }   from "../../model/bootstrap.js"
+import { ComponentSetting } from "../../component/setting.js"
+import { ModelWindows }     from "../../model/windows.js"
 
 export class Sort{
   constructor(active_window){
@@ -11,12 +11,12 @@ export class Sort{
   }
 
   get z(){
-    return Setting.window.z
+    return ComponentSetting.window.z
   }
 
   // 表示されているwindow一覧を取得
   get_windows(){
-    const windows = Array.from(Bootstrap.elm_main.querySelectorAll(".window"))
+    const windows = Array.from(ModelBootstrap.elm_main.querySelectorAll(".window"))
     if(windows){
       windows.sort((a,b)=>{
         if(Number(a.style.getPropertyValue("--z") || 0) < Number(b.style.getPropertyValue("--z") || 0)){return -1}
@@ -40,8 +40,7 @@ export class Sort{
         elm.style.setProperty("--z", num + 1 + this.z, "")
         num++
       }
-      console.log(z)
-      new Windows({
+      new ModelWindows({
         mode : "set_window",
         elm  : elm,
       })

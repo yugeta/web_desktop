@@ -1,17 +1,17 @@
-import { Event }   from "./controller/lib/event.js"
-import { Desktop } from "./controller/desktop.js"
-import { System }  from "./controller/system.js"
-import { Storage } from "./controller/lib/storage.js"
-import { Hash }    from "./controller/system/hash.js"
+import { Event }             from "./lib/event.js"
+import { ControllerDesktop } from "./controller/desktop.js"
+import { ControllerSystem }  from "./controller/system.js"
+import { ModelStorage }      from "./model/storage.js"
+import { ControllerHash }    from "./controller/hash.js"
 
 class Main{
   constructor(){
-    new Storage()
-    new Hash()
+    new ModelStorage()
+    new ControllerHash()
     new Event()
-    new System()
-    new Desktop({mode:"init"})
-    console.log(Storage.datas)
+    new ControllerSystem()
+    new ControllerDesktop({mode:"init"})
+    console.log(ModelStorage.datas)
   }
 }
 

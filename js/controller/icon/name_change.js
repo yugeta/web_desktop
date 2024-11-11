@@ -1,5 +1,5 @@
-import { Storage }   from "../../controller/lib/storage.js"
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
+import { ModelStorage }   from "../../model/storage.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
 
 /**
  * アイコンの名前を変更する処理
@@ -14,7 +14,7 @@ export class NameChange{
       this.reject  = reject
       switch(options.mode){
         case "end":
-          const elm = Bootstrap.elm_main.querySelector(`.icon .name[contenteditable]`)
+          const elm = ModelBootstrap.elm_main.querySelector(`.icon .name[contenteditable]`)
           this.decision_name(elm)
         break
 
@@ -45,7 +45,7 @@ export class NameChange{
   }
 
   get is_system_item(){
-    const data = Storage.datas.icons.find(e => e.id === this.id)
+    const data = ModelStorage.datas.icons.find(e => e.id === this.id)
     return data.system_flg ? true : false
   }
 
@@ -89,9 +89,9 @@ export class NameChange{
     const icon = elm_name.closest(".icon")
     const id   = icon.getAttribute("data-id")
     const name = elm_name.innerText
-    const data = Storage.datas.icons.find(e => e.id === id)
+    const data = ModelStorage.datas.icons.find(e => e.id === id)
     data.name = name
-    new Storage({
+    new ModelStorage({
       mode : "save",
       name : "icons",
       data : data,

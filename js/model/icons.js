@@ -1,6 +1,6 @@
-import { Bootstrap } from "../controller/lib/bootstrap.js"
+import { ModelBootstrap } from "../model/bootstrap.js"
 
-export class Icons {
+export class ModelIcons {
   constructor(options){
     this.options = options || {}
     switch(options.mode){
@@ -24,22 +24,22 @@ export class Icons {
       return this.options.elm
     }
     else if(this.id){
-      return Bootstrap.elm_main.querySelector(`.icon[data-id="${this.id}"]`)
+      return ModelBootstrap.elm_main.querySelector(`.icon[data-id="${this.id}"]`)
     }
   }
 
   set_icon(){
     if(!this.elm || !this.id){return}
-    const index = Icons.datas.findIndex(e => e.id === this.id)
+    const index = ModelIcons.datas.findIndex(e => e.id === this.id)
     if(index >= 0){
       const data = this.get_add_data()
       for(const key in data){
-        Icons.datas[index][key] = data[key]
+        ModelIcons.datas[index][key] = data[key]
       }
     }
     else{
       const data = this.get_elm_data()
-      Icons.datas.push(data)
+      ModelIcons.datas.push(data)
     }
   }
 

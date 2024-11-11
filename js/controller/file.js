@@ -1,6 +1,6 @@
-import { File as ViewFile } from "../view/file.js"
+import { ViewFile } from "../view/file.js"
 
-export class File{
+export class ControllerFile{
   constructor(options){
     this.options = options || {}
     switch(this.options.mode){

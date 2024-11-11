@@ -1,8 +1,8 @@
-import { Icon }        from "../../controller/icon.js"
-import { Window }      from "../../controller/window.js"
-import { ContextMenu } from "../../controller/event/context_menu.js"
+import { ControllerIcon }   from "../controller/icon.js"
+import { ControllerWindow } from "../controller/window.js"
+import { EventContextMenu } from "../event/context_menu.js"
 
-export class MouseDown{
+export class EventMouseDown{
   constructor(e){
     this.event(e)
   }
@@ -45,18 +45,18 @@ export class MouseDown{
     // 右クリックメニューの非表示
     this.hidden_context_menu(context_menu)
 
-    new Icon({
+    new ControllerIcon({
       mode : "name_change_end"
     })
   }
 
   icon_push(icon){
     if(!icon){return}
-    new Icon({
+    new ControllerIcon({
       mode : "select",
       icon : icon,
     })
-    new Icon({
+    new ControllerIcon({
       mode : "sort",
       icon : icon,
     })
@@ -64,7 +64,7 @@ export class MouseDown{
 
   icon_move_init(icon, e){
     const rect = icon.getBoundingClientRect()
-    Icon.mouse_options = {
+    ControllerIcon.mouse_options = {
       mode   : "move_start",
       target : icon,
       point  : {
@@ -78,11 +78,11 @@ export class MouseDown{
       rect   : rect,
       first_window : icon.closest(".window"),
     }
-    new Icon(Icon.mouse_options)
+    new ControllerIcon(ControllerIcon.mouse_options)
   }
 
   window_move_init(elm_window, e){
-    Window.mouse_options = {
+    ControllerWindow.mouse_options = {
       mode   : "move",
       target : elm_window,
       point  : {
@@ -98,7 +98,7 @@ export class MouseDown{
 
   window_resize_init(elm_window_resize, e){
     const elm_window = elm_window_resize.closest(".window")
-    Window.mouse_options = {
+    ControllerWindow.mouse_options = {
       mode   : "resize",
       name   : elm_window_resize.getAttribute("name"),
       target : elm_window_resize.closest(".window"),
@@ -115,7 +115,7 @@ export class MouseDown{
 
   window_push(elm_win){
     if(!elm_win){return}
-    new Window({
+    new ControllerWindow({
       mode : "sort",
       active_window : elm_win,
     })
@@ -123,7 +123,7 @@ export class MouseDown{
 
   icon_unselect(target){
     if(!target){return}
-    new Icon({
+    new ControllerIcon({
       mode    : "clear",
       click_element : target,
     })
@@ -132,6 +132,6 @@ export class MouseDown{
   // 右クリックメニューを非表示
   hidden_context_menu(context_menu){
     if(context_menu){return}
-    new ContextMenu({mode: "clear"})
+    new EventContextMenu({mode: "clear"})
   }
 }

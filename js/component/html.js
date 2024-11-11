@@ -1,6 +1,6 @@
-export const Html = {}
+export const ComponentHtml = {}
 
-Html.background_modal = `
+ComponentHtml.background_modal = `
 <link rel="stylesheet" href="css/background_modal.css"/>
 
 <div id="background_modal">
@@ -41,15 +41,15 @@ Html.background_modal = `
   </ul>
 </div>`
 
-Html.context_menu_item = `<li class="item" data-mode="{{mode}}">{{name}}</li>`
+ComponentHtml.context_menu_item = `<li class="item" data-mode="{{mode}}">{{name}}</li>`
 
-Html.icon = `
+ComponentHtml.icon = `
 <div class="icon" type="{{type}}" data-id="{{id}}" style="--x:{{x}}px;--y:{{y}}px;--z:{{z}};" data-move="{{move}}">
   <img src="{{icon}}" onerror="this.onerror=null;this.src='img/icon/file_{{type}}.svg';">
   <p class="name">{{name}}</p>
 </div>`
 
-Html.window = `
+ComponentHtml.window = `
 <div class="window" data-type="{{type}}" data-id="{{id}}" data-view-type="icon" style="--x:{{x}}px;--y:{{y}}px;--w:{{w}}px;--h:{{h}}px;--z:{{z}};">
   <div class="header">
     <img class="thumb" src="{{icon}}" draggable="false">

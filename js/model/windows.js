@@ -1,6 +1,6 @@
-import { Bootstrap } from "../controller/lib/bootstrap.js"
+import { ModelBootstrap } from "../model/bootstrap.js"
 
-export class Windows {
+export class ModelWindows {
   constructor(options){
     this.options = options || {}
     switch(options.mode){
@@ -23,34 +23,34 @@ export class Windows {
       return this.options.elm
     }
     else if(this.id){
-      return Bootstrap.elm_main.querySelector(`.window[data-id="${this.id}"]`)
+      return ModelBootstrap.elm_main.querySelector(`.window[data-id="${this.id}"]`)
     }
   }
 
   set_window(){
     if(!this.elm || !this.id){return}
-    const index = Windows.datas.findIndex(e => e.id === this.id)
+    const index = ModelWindows.datas.findIndex(e => e.id === this.id)
     if(index >= 0){
       const data = this.get_add_data()
       for(const key in data){
-        Windows.datas[index][key] = data[key]
+        ModelWindows.datas[index][key] = data[key]
       }
     }
     else{
       const data = this.get_elm_data()
-      Windows.datas.push(data)
+      ModelWindows.datas.push(data)
     }
   }
 
   get_add_data(){
     const elm = this.elm
     return {
-      id : this.id,
-      w : Number(elm.style.getPropertyValue("--w").replace("px","") || 0),
-      h : Number(elm.style.getPropertyValue("--h").replace("px","") || 0),
-      x : Number(elm.style.getPropertyValue("--x").replace("px","") || 0),
-      y : Number(elm.style.getPropertyValue("--y").replace("px","") || 0),
-      z : Number(elm.style.getPropertyValue("--z") || 1),
+      id   : this.id,
+      w    : Number(elm.style.getPropertyValue("--w").replace("px","") || 0),
+      h    : Number(elm.style.getPropertyValue("--h").replace("px","") || 0),
+      x    : Number(elm.style.getPropertyValue("--x").replace("px","") || 0),
+      y    : Number(elm.style.getPropertyValue("--y").replace("px","") || 0),
+      z    : Number(elm.style.getPropertyValue("--z") || 1),
       move : elm.getAttribute("data-move") || "",
     }
   }
@@ -58,12 +58,12 @@ export class Windows {
   get_elm_data(){
     const elm = this.elm
     return {
-      id : this.id,
-      w : Number(elm.style.getPropertyValue("--w").replace("px","") || 0),
-      h : Number(elm.style.getPropertyValue("--h").replace("px","") || 0),
-      x : Number(elm.style.getPropertyValue("--x").replace("px","") || 0),
-      y : Number(elm.style.getPropertyValue("--y").replace("px","") || 0),
-      z : Number(elm.style.getPropertyValue("--z") || 1),
+      id   : this.id,
+      w    : Number(elm.style.getPropertyValue("--w").replace("px","") || 0),
+      h    : Number(elm.style.getPropertyValue("--h").replace("px","") || 0),
+      x    : Number(elm.style.getPropertyValue("--x").replace("px","") || 0),
+      y    : Number(elm.style.getPropertyValue("--y").replace("px","") || 0),
+      z    : Number(elm.style.getPropertyValue("--z") || 1),
       move : elm.getAttribute("data-move") || "",
       position : {},
       offset : {},

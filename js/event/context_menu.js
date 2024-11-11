@@ -1,18 +1,18 @@
-import { Bootstrap }   from "../../controller/lib/bootstrap.js"
-import { ContextMenu as ComponentContextMenu } from "../../component/context_menu.js"
-import { Html }        from "../../component/html.js"
-import { Convert }     from "../../controller/lib/convert.js"
-import { Storage }     from "../../controller/lib/storage.js"
-import { Icon }        from "../../controller/icon.js"
-import { Window }      from "../../controller/window.js"
-import { Background }  from "../../controller/desktop/background.js"
-import { Modal }       from "../../controller/system/modal.js"
+import { ModelBootstrap }       from "../model/bootstrap.js"
+import { ComponentContextMenu } from "../component/context_menu.js"
+import { ComponentHtml }        from "../component/html.js"
+import { Convert }              from "../lib/convert.js"
+import { ModelStorage }         from "../model/storage.js"
+import { ControllerIcon }       from "../controller/icon.js"
+import { ControllerWindow }     from "../controller/window.js"
+import { Background }           from "../controller/desktop/background.js"
+import { ControllerModal }      from "../controller/modal.js"
 
 /**
  * 右クリックメニュー
  */
 
-export class ContextMenu{
+export class EventContextMenu{
   static datas = null
 
   constructor(options){
@@ -37,7 +37,7 @@ export class ContextMenu{
   status = null
 
   get root_rect(){
-    return Bootstrap.elm_main.getBoundingClientRect()
+    return ModelBootstrap.elm_main.getBoundingClientRect()
   }
 
   get_target_data(elm){
@@ -45,17 +45,17 @@ export class ContextMenu{
     switch(this.mode){
       case "icon":
         const icon_id = elm.getAttribute("data-id")
-        return Storage.datas.icons ? Storage.datas.icons.find(e => e.id === icon_id) : null
+        return ModelStorage.datas.icons ? ModelStorage.datas.icons.find(e => e.id === icon_id) : null
       case "window":
         const window_id = elm.getAttribute("data-id")
-        return Storage.datas.windows ? Storage.datas.windows.find(e => e.id === window_id) : null
+        return ModelStorage.datas.windows ? ModelStorage.datas.windows.find(e => e.id === window_id) : null
       case "desktop":
         return null
     }
   }
 
   clear(){
-    const elm = Bootstrap.elm_main.querySelector(`.${this.name}`)
+    const elm = ModelBootstrap.elm_main.querySelector(`.${this.name}`)
     if(!elm){return}
     elm.parentNode.removeChild(elm)
   }
@@ -77,7 +77,7 @@ export class ContextMenu{
     else if(elm_icon){
       this.mode = "icon"
       this.options.preventDefault()
-      Bootstrap.context_menu = {
+      ModelBootstrap.context_menu = {
         target : elm_icon
       }
       this.view_lists(ComponentContextMenu.icon)
@@ -86,7 +86,7 @@ export class ContextMenu{
     else if(elm_window){
       this.mode = "window"
       this.options.preventDefault()
-      Bootstrap.context_menu = {
+      ModelBootstrap.context_menu = {
         target : elm_window_body
       }
       this.view_lists(ComponentContextMenu.window)
@@ -95,7 +95,7 @@ export class ContextMenu{
     else if(elm_desktop){
       this.mode = "desktop"
       this.options.preventDefault()
-      Bootstrap.context_menu = {
+      ModelBootstrap.context_menu = {
         target : elm_desktop
       }
       this.view_lists(ComponentContextMenu.desktop)
@@ -108,10 +108,10 @@ export class ContextMenu{
     ul.className = this.name
     for(const list of lists){
       if(!this.check_auth(list)){continue}
-      const html = new Convert(Html.context_menu_item).double_bracket(list)
+      const html = new Convert(ComponentHtml.context_menu_item).double_bracket(list)
       ul.insertAdjacentHTML("beforeend", html)
     }
-    Bootstrap.elm_main.appendChild(ul)
+    ModelBootstrap.elm_main.appendChild(ul)
     
     const pos = this.position(ul)
     ul.style.setProperty("--x", `${pos.x}px` , "")
@@ -125,7 +125,7 @@ export class ContextMenu{
       switch(auth_key){
         // システムデータ確認
         case "system_flg":
-          const data = this.get_target_data(Bootstrap.context_menu.target)
+          const data = this.get_target_data(ModelBootstrap.context_menu.target)
           const system_flg = data && data.system_flg === true ? true : false
           flg += list_data.auth[auth_key] === system_flg ? +1 : 0
 
@@ -159,40 +159,40 @@ export class ContextMenu{
     switch(item.getAttribute("data-mode")){
       // アイコン整列処理
       case "icon_alignment":
-        new Icon({
+        new ControllerIcon({
           mode   : "alignment",
-          target : Bootstrap.context_menu ? Bootstrap.context_menu.target : null,
+          target : ModelBootstrap.context_menu ? ModelBootstrap.context_menu.target : null,
         })
       break
 
       // ウィンドウ整列処理
       case "window_alignment":
-        new Window({
+        new ControllerWindow({
           mode   : "alignment",
         })
       break
 
       // 新規フォルダ
       case "new_folder":
-        new Icon({
+        new ControllerIcon({
           mode : "new_folder",
-          target : Bootstrap.context_menu ? Bootstrap.context_menu.target : null,
+          target : ModelBootstrap.context_menu ? ModelBootstrap.context_menu.target : null,
         })
       break
 
       // アイコンの名前変更
       case "name_change":
-        new Icon({
+        new ControllerIcon({
           mode   : "name_change",
-          target : Bootstrap.context_menu ? Bootstrap.context_menu.target : null,
+          target : ModelBootstrap.context_menu ? ModelBootstrap.context_menu.target : null,
         })
       break
 
       // 「開く」アイコンをダブルクリックした時と同じ挙動
       case "icon_open":
-        const icon = Bootstrap.context_menu.target
+        const icon = ModelBootstrap.context_menu.target
         const name = icon.querySelector(".name").textContent
-        new Window({
+        new ControllerWindow({
           mode : "view",
           id   : icon.getAttribute("data-id"),
           name : name,
@@ -207,7 +207,7 @@ export class ContextMenu{
       // アラート表示
       case "view_modal":
         // new Modal("アラート表示なう！！")
-        new Modal({
+        new ControllerModal({
           message : "アラート表示なう！！",
           buttons : [
             {

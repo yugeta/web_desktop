@@ -1,16 +1,16 @@
-import { Bootstrap } from "../controller/lib/bootstrap.js"
-import { Sort }      from "../controller/window/sort.js"
-import { Position }  from "../controller/window/position.js"
-import { Setting }   from "../component/setting.js"
-import { Html }      from "../component/html.js"
-import { Convert }   from "../controller/lib/convert.js"
-import { Storage }   from "../controller/lib/storage.js"
-import { Icon }      from "../controller/icon.js"
-import { File }      from "../controller/file.js"
-import { App }       from "../controller/app.js"
-import { Windows }   from "../model/windows.js"
+import { ModelBootstrap }   from "../model/bootstrap.js"
+import { Sort }             from "../controller/window/sort.js"
+import { Position }         from "../controller/window/position.js"
+import { ComponentSetting } from "../component/setting.js"
+import { ComponentHtml }    from "../component/html.js"
+import { Convert }          from "../lib/convert.js"
+import { ModelStorage }     from "../model/storage.js"
+import { ControllerIcon }   from "../controller/icon.js"
+import { ControllerFile }   from "../controller/file.js"
+import { ControllerApp }    from "../controller/app.js"
+import { ModelWindows }     from "../model/windows.js"
 
-export class Window{
+export class ViewWindow{
   constructor(options){
     this.promise = new Promise((resolve, reject)=>{
       this.resolve = resolve
@@ -38,11 +38,11 @@ export class Window{
   }
 
   get opened(){
-    return Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
+    return ModelBootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
   }
 
   get html(){
-    return Html.window
+    return ComponentHtml.window
   }
 
   get uuid(){
@@ -54,11 +54,11 @@ export class Window{
   }
 
   get gap(){
-    return Setting.window.gap
+    return ComponentSetting.window.gap
   }
 
   get pos(){
-    return Setting.window.pos
+    return ComponentSetting.window.pos
   }
 
   get size(){
@@ -74,7 +74,7 @@ export class Window{
         h : this.data.window_size.h,
       }
     }
-    const asset_size = Setting.window.size
+    const asset_size = ComponentSetting.window.size
     if(asset_size){
       
       return {
@@ -93,11 +93,11 @@ export class Window{
   }
 
   get icons(){
-    return Storage.datas.icons.filter(e => e.parent_id === this.uuid)
+    return ModelStorage.datas.icons.filter(e => e.parent_id === this.uuid)
   }
 
   get window(){
-    return Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"] .body`)
+    return ModelBootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"] .body`)
   }
 
   get type(){
@@ -105,12 +105,12 @@ export class Window{
   }
 
   get icon_data(){
-    if(!Storage.datas || !Storage.datas.icons){return null}
-    return Storage.datas.icons.find(e => e.id === this.id)
+    if(!ModelStorage.datas || !ModelStorage.datas.icons){return null}
+    return ModelStorage.datas.icons.find(e => e.id === this.id)
   }
 
   get data(){
-    return Windows.datas.find(e => e.id === this.id)
+    return ModelWindows.datas.find(e => e.id === this.id)
   }
 
   get init_rect(){
@@ -126,9 +126,9 @@ export class Window{
   }
 
   get storage_window_data(){
-    if(Storage.datas
-    && Storage.datas.windows){
-      return Storage.datas.windows.find(e => e.id === this.id)
+    if(ModelStorage.datas
+    && ModelStorage.datas.windows){
+      return ModelStorage.datas.windows.find(e => e.id === this.id)
     }
     else{
       return null
@@ -136,9 +136,9 @@ export class Window{
   }
 
   get storage_icon_data(){
-    if(Storage.datas
-    && Storage.datas.icons){
-      return Storage.datas.icons.find(e => e.id === this.id)
+    if(ModelStorage.datas
+    && ModelStorage.datas.icons){
+      return ModelStorage.datas.icons.find(e => e.id === this.id)
     }
     else{
       return null
@@ -160,8 +160,8 @@ export class Window{
       position : this.options.position || {},
     }
     const html = new Convert(this.html, data).text
-    Bootstrap.elm_main.insertAdjacentHTML("beforeend", html)
-    const elm_window = Bootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
+    ModelBootstrap.elm_main.insertAdjacentHTML("beforeend", html)
+    const elm_window = ModelBootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
     new Sort(elm_window)
     if(this.options.mode === "view"){
       this.set_storage_data(data)
@@ -174,7 +174,7 @@ export class Window{
 
   set_storage_data(data){
     if(this.storage_window_data || !this.icon_data){return}
-    new Storage({
+    new ModelStorage({
       mode : "save",
       name : "windows",
       data : data,
@@ -182,9 +182,9 @@ export class Window{
   }
 
   get_icon(icon_id){
-    if(!icon_id || !Storage.datas || !Storage.datas.icons){return}
-    const icon_data = Storage.datas.icons.find(e => e.id === icon_id)
-    const icon = new Icon(icon_data)
+    if(!icon_id || !ModelStorage.datas || !ModelStorage.datas.icons){return}
+    const icon_data = ModelStorage.datas.icons.find(e => e.id === icon_id)
+    const icon = new ControllerIcon(icon_data)
     return icon_data ? `${icon.icon}` : ""
   }
 
@@ -192,7 +192,7 @@ export class Window{
     if(!this.storage_icon_data){return}
     switch(this.storage_icon_data.type){
       case "file":
-        new File({
+        new ControllerFile({
           mode   : "view",
           id     : this.storage_icon_data.id,
           parent : this.window,
@@ -200,7 +200,7 @@ export class Window{
       break
 
       case "folder":
-        new Icon({
+        new ControllerIcon({
           mode   : "view",
           data   : this.icons,
           parent : this.window,
@@ -208,7 +208,7 @@ export class Window{
       break
 
       case "trash":
-        new Icon({
+        new ControllerIcon({
           mode   : "view",
           data   : this.icons,
           parent : this.window,
@@ -216,7 +216,7 @@ export class Window{
       break
 
       case "app":
-        new App({
+        new ControllerApp({
           mode   : "view",
           id     : this.storage_icon_data.id,
           parent : this.window,

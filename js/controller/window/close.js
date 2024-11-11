@@ -1,11 +1,11 @@
-import { Storage }   from "../../controller/lib/storage.js"
-import { Hash }      from "../../controller/system/hash.js"
+import { ModelStorage }   from "../../model/storage.js"
+import { ControllerHash } from "../../controller/hash.js"
 
 export class Close{
   constructor(target_window){
     this.elm = target_window
 
-    new Hash({
+    new ControllerHash({
       mode : "window_close",
       id   : this.elm.getAttribute("data-id")
     })
@@ -15,7 +15,7 @@ export class Close{
   }
 
   del_storage_data(){
-    new Storage({
+    new ModelStorage({
       mode : "del_id",
       name : "windows",
       data : {

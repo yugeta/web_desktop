@@ -1,9 +1,9 @@
-import { Window }    from "../../controller/window.js"
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Storage }   from "../../controller/lib/storage.js"
+import { ControllerWindow } from "../controller/window.js"
+import { ModelBootstrap }   from "../model/bootstrap.js"
+import { ModelStorage }     from "../model/storage.js"
 
-export class Hash{
-  constructor(options){//console.log(options,this.hash_name)
+export class ControllerHash{
+  constructor(options){
     this.options = options || {}
     switch(this.options.mode){
       case "window_close":
@@ -22,8 +22,8 @@ export class Hash{
 
   // iconデータが存在確認（存在しないidの場合は、hashを削除する）
   get is_data(){
-    if(!Storage.datas ||!Storage.datas.icons){return}
-    return Storage.datas.icons.find(e => e.id === this.hash_name) ? true : false
+    if(!ModelStorage.datas ||!ModelStorage.datas.icons){return}
+    return ModelStorage.datas.icons.find(e => e.id === this.hash_name) ? true : false
   }
 
 
@@ -45,7 +45,7 @@ export class Hash{
   }
 
   window_view(){
-    new Window({
+    new ControllerWindow({
       mode : "view",
       id   : this.hash_name,
     })
@@ -55,7 +55,7 @@ export class Hash{
     if(!location.hash
     || !this.options.id
     || location.hash !== `#${this.options.id}`){return}
-    const elm_window = Bootstrap.elm_main.querySelector(`.window[data-id="${this.options.id}"]`)
+    const elm_window = ModelBootstrap.elm_main.querySelector(`.window[data-id="${this.options.id}"]`)
     if(!elm_window){return}
     this.clear()
   }

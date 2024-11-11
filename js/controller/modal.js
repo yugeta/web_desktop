@@ -1,4 +1,4 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
+import { ModelBootstrap } from "../model/bootstrap.js"
 
 /**
  * アラート(Modal)表示
@@ -30,7 +30,7 @@ import { Bootstrap } from "../../controller/lib/bootstrap.js"
  * ※ buttonsのkeyに"close"をセットした場合は、自動的に閉じるボタンになる。
  */
 
-export class Modal{
+export class ControllerModal{
   constructor(options){
     if(this.is_viewing){return}
     if(typeof options === "string"){
@@ -57,7 +57,7 @@ export class Modal{
     const html = `${message}
 ${this.get_button()}`
     div.innerHTML = html
-    Bootstrap.elm_main.appendChild(div)
+    ModelBootstrap.elm_main.appendChild(div)
     this.set_event()
   }
 
@@ -113,7 +113,7 @@ ${this.get_button()}`
     const html = `${option.message}
 <div class="buttons">${buttons_html}</div>`
     div.innerHTML = html
-    Bootstrap.elm_main.appendChild(div)
+    ModelBootstrap.elm_main.appendChild(div)
     this.set_events(option.buttons)
   }
 

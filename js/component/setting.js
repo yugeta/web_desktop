@@ -1,6 +1,6 @@
-export const Setting = {}
+export const ComponentSetting = {}
 
-Setting.icon = {
+ComponentSetting.icon = {
     size : {
       w : 100,
       h : 100,
@@ -8,7 +8,7 @@ Setting.icon = {
     }
   }
 
-Setting.window = {
+ComponentSetting.window = {
   pos : {
     x: 80, 
     y: 20
@@ -24,4 +24,4 @@ Setting.window = {
   z : 1000
 }
 
-Setting. background = "linear-gradient(-45deg, #6bd8e5, #98cead)"
+ComponentSetting.background = "linear-gradient(-45deg, #6bd8e5, #98cead)"

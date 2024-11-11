@@ -1,10 +1,10 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
+import { ModelBootstrap } from "../model/bootstrap.js"
 
 /**
  * Web-osのデスクトップ上部の日付、時計をリアルタイム更新する機能
  */
 
-export class Time{
+export class ControllerTime{
   format = "normal" // ["normal" , "ja", "short"]
 
   constructor(options){
@@ -16,7 +16,7 @@ export class Time{
   }
 
   get root(){
-    return Bootstrap.elm_header.querySelector(`.time`)
+    return ModelBootstrap.elm_header.querySelector(`.time`)
   }
 
   get elm_date(){

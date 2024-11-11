@@ -1,18 +1,18 @@
-import { Header } from "../controller/system/header.js"
-import { Time }   from "../controller/system/time.js"
-import { Auth }   from "../controller/system/auth.js"
+import { ControllerHeader } from "../controller/header.js"
+import { ControllerTime }   from "../controller/time.js"
+import { ControllerAuth }   from "../controller/auth.js"
 
-export class System{
+export class ControllerSystem{
   constructor(options){
     this.options = options || {}
     switch(this.options.mode){
 
       default:
-        new Header()
-        new Time({
+        new ControllerHeader()
+        new ControllerTime({
           format : "normal"
         })
-        new Auth()
+        new ControllerAuth()
     }
   }
 }

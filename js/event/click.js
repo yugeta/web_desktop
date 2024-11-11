@@ -1,8 +1,8 @@
-import { Window }      from "../../controller/window.js"
-import { ContextMenu } from "../../controller/event/context_menu.js"
-import { DoubleClick } from "../../controller/event/double_click.js"
+import { ControllerWindow } from "../controller/window.js"
+import { EventContextMenu } from "../event/context_menu.js"
+import { EventDoubleClick } from "../event/double_click.js"
 
-export class Click{
+export class EventClick{
   constructor(e){
     this.event(e.target)
     // スマホ（タッチイベントがある場合）
@@ -21,7 +21,7 @@ export class Click{
     // windowのクローズボタンをクリック
     if(close){
       const elm_window = target.closest(".window")
-      new Window({
+      new ControllerWindow({
         mode : "close",
         target_window : elm_window,
       })
@@ -30,7 +30,7 @@ export class Click{
     // window-最大化（もう一度押すと戻る）をクリック
     else if(elm_win_wide){
       const elm_window = target.closest(".window")
-      new Window({
+      new ControllerWindow({
         mode : "wide",
         active_window : elm_window,
       })
@@ -38,7 +38,7 @@ export class Click{
 
     else if(view_type){
       const elm_window = target.closest(".window")
-      new Window({
+      new ControllerWindow({
         mode : "view_type",
         active_window : elm_window,
       })
@@ -46,15 +46,15 @@ export class Click{
     
     else if(context_menu){
       // 右クリックメニューの非表示
-      new ContextMenu({mode: "clear"})
-      new ContextMenu({mode: "click", target: target})
+      new EventContextMenu({mode: "clear"})
+      new EventContextMenu({mode: "click", target: target})
     }
   }
 
   event_sp(target){
     const icon   = target.closest(".icon")
     if(icon){
-      new DoubleClick({target : target})
+      new EventDoubleClick({target : target})
     }
   }
 }

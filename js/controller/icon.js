@@ -1,14 +1,14 @@
-import { Select }     from "../controller/icon/select.js"
-import { Clear }      from "../controller/icon/clear.js"
-import { Icon as ViewIcon } from "../view/icon.js"
-import { Move }       from "../controller/icon/move.js"
-import { Alignment }  from "../controller/icon/alignment.js"
-import { NewFolder }  from "../controller/icon/new_folder.js"
-import { NameChange } from "../controller/icon/name_change.js"
-import { Bootstrap }  from "../controller/lib/bootstrap.js"
-import { Storage }    from "../controller/lib/storage.js"
+import { Select }          from "../controller/icon/select.js"
+import { Clear }           from "../controller/icon/clear.js"
+import { ViewIcon }        from "../view/icon.js"
+import { Move }            from "../controller/icon/move.js"
+import { Alignment }       from "../controller/icon/alignment.js"
+import { NewFolder }       from "../controller/icon/new_folder.js"
+import { NameChange }      from "../controller/icon/name_change.js"
+import { ModelBootstrap }  from "../model/bootstrap.js"
+import { ModelStorage }    from "../model/storage.js"
 
-export class Icon{
+export class ControllerIcon{
   constructor(options){
     this.options = options || {}
     switch(this.options.mode){
@@ -61,12 +61,12 @@ export class Icon{
   }
 
   get elm(){
-    return this.options.elm ? this.options.elm : Bootstrap.elm_main.querySelector(`[data-id="${this.id}"]`)
+    return this.options.elm ? this.options.elm : ModelBootstrap.elm_main.querySelector(`[data-id="${this.id}"]`)
   }
 
   get data(){
-    if(this.id && Storage.datas && Storage.datas.icons){
-      const data = Storage.datas.icons.find(e => e.id === this.id) || {x:0,y:0}
+    if(this.id && ModelStorage.datas && ModelStorage.datas.icons){
+      const data = ModelStorage.datas.icons.find(e => e.id === this.id) || {x:0,y:0}
       data.x =  this.x || data.x
       data.y =  this.y || data.y
       return data

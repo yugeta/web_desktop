@@ -1,12 +1,12 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Storage }   from "../../controller/lib/storage.js"
-import { Google }    from "../../controller/system/google.js"
+import { ModelBootstrap } from "../model/bootstrap.js"
+import { ModelStorage }   from "../model/storage.js"
+import { Google }         from "../lib/google.js"
 
 /**
  * ログイン処理
  */
 
-export class Auth{
+export class ControllerAuth{
   name = "google_auth"
 
   constructor(options){
@@ -24,16 +24,16 @@ export class Auth{
   }
 
   get storage_data(){
-    if(!Storage.datas.system){return null}
-    return Storage.datas.system.find(e => e.id === this.name) || null
+    if(!ModelStorage.datas.system){return null}
+    return ModelStorage.datas.system.find(e => e.id === this.name) || null
   }
 
   get auth(){
-    return Bootstrap.elm_header.querySelector(`.auth`)
+    return ModelBootstrap.elm_header.querySelector(`.auth`)
   }
 
   get login_icon_area(){
-    return Bootstrap.elm_header.querySelector(`#login_icon`)
+    return ModelBootstrap.elm_header.querySelector(`#login_icon`)
   }
 
   get is_auth(){
@@ -55,7 +55,7 @@ export class Auth{
   }
 
   set_root_flg(flg = false){
-    Bootstrap.root.setAttribute("data-logined" , flg)
+    ModelBootstrap.root.setAttribute("data-logined" , flg)
   }
 
   icon_view(){
@@ -67,7 +67,7 @@ export class Auth{
   google_logined(){
     this.set_root_flg(true)
     Google.datas.id = this.name
-    new Storage({
+    new ModelStorage({
       mode : "save",
       name : "system",
       data : Google.datas,
@@ -76,7 +76,7 @@ export class Auth{
   }
 
   logout(){
-    new Storage({
+    new ModelStorage({
       mode : "remove",
       name : "system",
       id   : this.name,

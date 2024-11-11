@@ -1,4 +1,4 @@
-import { Auth }     from '../../component/auth.js'
+import { ComponentAuth }     from '../component/auth.js'
 
 export class Google{
   static datas = null
@@ -43,11 +43,11 @@ export class Google{
   }
 
   get google_client_id(){
-    return Auth.google_auth.client_id
+    return ComponentAuth.google_auth.client_id
   }
 
   get google_client_src(){
-    return Auth.google_auth.module_src
+    return ComponentAuth.google_auth.module_src
   }
 
   load_module(){

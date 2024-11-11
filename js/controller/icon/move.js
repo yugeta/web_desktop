@@ -1,12 +1,10 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Convert }   from "../../controller/lib/convert.js"
-import { Storage }   from "../../controller/lib/storage.js"
-import { Clear }     from "../../controller/icon/clear.js"
-import { Overlap }   from "../../controller/icon/overlap.js"
-import { Icon }      from "../../controller/icon.js"
-// import { Icons }     from "../../component/icons.js"
-import { Icons }     from "../../model/icons.js"
-import { Html }      from "../../component/html.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
+import { Convert }        from "../../lib/convert.js"
+import { Clear }          from "../../controller/icon/clear.js"
+import { Overlap }        from "../../controller/icon/overlap.js"
+import { ControllerIcon } from "../../controller/icon.js"
+import { ModelIcons }     from "../../model/icons.js"
+import { ComponentHtml }  from "../../component/html.js"
 
 export class Move{
   constructor(options){
@@ -20,7 +18,7 @@ export class Move{
       break
 
       case "move_end":
-        if(!this.window_in_prohibited_acts(this.options.window || Bootstrap.elm_main)
+        if(!this.window_in_prohibited_acts(this.options.window || ModelBootstrap.elm_main)
         && !Overlap.past_id){
           this.window_change()
           this.moved()
@@ -52,7 +50,7 @@ export class Move{
     // const icon_datas = new Storage({mode: "load", name:"icons"}).datas
     // if(!icon_datas || !icon_datas.length){return null}
     // return icon_datas.find(e => e.id === this.icon_id)
-    return Icons.datas.find(e => e.id === this.icon_id)
+    return ModelIcons.datas.find(e => e.id === this.icon_id)
   }
 
   move_start(){
@@ -73,10 +71,10 @@ export class Move{
 
   moved_pos(){
     // desktop on icon
-    if(this.options.target.parentNode === Bootstrap.elm_main){
+    if(this.options.target.parentNode === ModelBootstrap.elm_main){
       return {
-        x : this.options.point.x - this.options.diff.x - Bootstrap.window_rect.left,
-        y : this.options.point.y - this.options.diff.y - Bootstrap.window_rect.top,
+        x : this.options.point.x - this.options.diff.x - ModelBootstrap.window_rect.left,
+        y : this.options.point.y - this.options.diff.y - ModelBootstrap.window_rect.top,
       }
     }
 
@@ -95,20 +93,20 @@ export class Move{
     Move.instance = document.createElement("div")
     Move.instance.className = "icon-move-instance"
     Move.instance.setAttribute("data-select", true)
-    const icon = new Icon(this.icon_data)
-    const html = new Convert(Html.icon, icon).text
+    const icon = new ControllerIcon(this.icon_data)
+    const html = new Convert(ComponentHtml.icon, icon).text
     Move.instance.innerHTML = html
-    Bootstrap.elm_main.appendChild(Move.instance)
-    const x = this.options.point.x - this.options.diff.x - Bootstrap.window_rect.left
-    const y = this.options.point.y - this.options.diff.y - Bootstrap.window_rect.top
+    ModelBootstrap.elm_main.appendChild(Move.instance)
+    const x = this.options.point.x - this.options.diff.x - ModelBootstrap.window_rect.left
+    const y = this.options.point.y - this.options.diff.y - ModelBootstrap.window_rect.top
     Move.instance.style.setProperty("left",`${x}px`,"")
     Move.instance.style.setProperty("top" ,`${y}px`,"")
   }
 
   move_instance(){
     if(!Move.instance){return}
-    const x = this.options.point.x - this.options.diff.x - Bootstrap.window_rect.left
-    const y = this.options.point.y - this.options.diff.y - Bootstrap.window_rect.top
+    const x = this.options.point.x - this.options.diff.x - ModelBootstrap.window_rect.left
+    const y = this.options.point.y - this.options.diff.y - ModelBootstrap.window_rect.top
     Move.instance.style.setProperty("left",`${x}px`,"")
     Move.instance.style.setProperty("top" ,`${y}px`,"")
   }
@@ -121,7 +119,7 @@ export class Move{
 
   window_change(){
     if(this.options.first_window === this.options.window){return}
-    const parent = this.options.window ? this.options.window.querySelector(".body") : Bootstrap.elm_main
+    const parent = this.options.window ? this.options.window.querySelector(".body") : ModelBootstrap.elm_main
     parent.appendChild(this.elm)
     this.moved_pos()
     this.storage_parent_change(parent)
@@ -131,9 +129,9 @@ export class Move{
     const icon_data = this.icon_data
 
     // desktop
-    if(parent_elm === Bootstrap.elm_main){
+    if(parent_elm === ModelBootstrap.elm_main){
       icon_data.parent_id = ""
-      new Clear(Bootstrap.elm_main, this.elm)
+      new Clear(ModelBootstrap.elm_main, this.elm)
     }
 
     // window
@@ -147,7 +145,7 @@ export class Move{
   // @return { true : 禁止 , false : スルー }
   window_in_prohibited_acts(parent){
     // windowの場合は問題なし
-    if(parent === Bootstrap.elm_main){
+    if(parent === ModelBootstrap.elm_main){
       return false
     }
 
@@ -183,7 +181,7 @@ export class Move{
     const datas = []
     let id = parent_id
     while(id !== null){
-      const storage_data = Icons.datas.find(e => e.id === id)
+      const storage_data = ModelIcons.datas.find(e => e.id === id)
       if(storage_data && storage_data.parent_id){
         datas.push(storage_data.parent_id)
         id = storage_data.parent_id

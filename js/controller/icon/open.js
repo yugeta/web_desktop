@@ -1,5 +1,5 @@
-import { Storage }   from "../../controller/lib/storage.js"
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
+import { ModelStorage }   from "../../model/storage.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
 
 export class Open{
   constructor(options){
@@ -20,8 +20,8 @@ export class Open{
   }
 
   overlap(){
-    const current_data = Storage.datas.icons.find(e => e.id === this.options.id)
-    const target_data  = Storage.datas.icons.find(e => e.id === this.options.target_id)
+    const current_data = ModelStorage.datas.icons.find(e => e.id === this.options.id)
+    const target_data  = ModelStorage.datas.icons.find(e => e.id === this.options.target_id)
     if(!current_data || !target_data){return}
     switch(target_data.type){
       case "folder":
@@ -40,14 +40,14 @@ export class Open{
     from_data.parent_id = to_data.id
     from_data.x = null
     from_data.y = null
-    new Storage({
+    new ModelStorage({
       mode : "save",
       name : "icons",
       data : from_data,
     })
     // windowが表示されている場合は更新する
-    const current_icon = Bootstrap.elm_main.querySelector(`.icon[data-id="${from_data.id}"]`)
-    const win = Bootstrap.elm_main.querySelector(`.window[data-id="${to_data.id}"] .body`)
+    const current_icon = ModelBootstrap.elm_main.querySelector(`.icon[data-id="${from_data.id}"]`)
+    const win = ModelBootstrap.elm_main.querySelector(`.window[data-id="${to_data.id}"] .body`)
     if(win){
       win.appendChild(current_icon)
     }

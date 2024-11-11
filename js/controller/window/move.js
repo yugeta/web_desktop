@@ -1,4 +1,4 @@
-import { Bootstrap }  from "../../controller/lib/bootstrap.js"
+import { ModelBootstrap }  from "../../model/bootstrap.js"
 
 export class Move{
   constructor(options){
@@ -20,7 +20,7 @@ export class Move{
   }
 
   position(rect){
-    const window_rect = Bootstrap.window_rect
+    const window_rect = ModelBootstrap.window_rect
 
     // 左上制限
     rect.x = rect.x < 0 ? 0 : rect.x

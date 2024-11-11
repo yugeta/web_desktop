@@ -1,8 +1,8 @@
-import { Position }  from "../../controller/icon/position.js"
-import { Storage }   from "../../controller/lib/storage.js"
-import { Trash }     from "../../controller/icon/trash.js"
-import { Icon }      from "../../controller/icon.js"
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
+import { Position }       from "../../controller/icon/position.js"
+import { ModelStorage }   from "../../model/storage.js"
+import { Trash }          from "../../controller/icon/trash.js"
+import { ControllerIcon } from "../../controller/icon.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
 
 export class Alignment{
   constructor(options){
@@ -13,7 +13,7 @@ export class Alignment{
   }
 
   get root(){
-    return this.options.target || Bootstrap.elm_main
+    return this.options.target || ModelBootstrap.elm_main
   }
 
   move_clear(){
@@ -47,10 +47,10 @@ export class Alignment{
   }
 
   save_storage(elm){
-    new Storage({
+    new ModelStorage({
       mode : "save",
       name : "icons",
-      data : new Icon({elm:elm}),
+      data : new ControllerIcon({elm:elm}),
     })
   }
 }

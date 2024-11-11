@@ -1,4 +1,4 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
+import { ModelBootstrap } from "../../model/bootstrap.js"
 
 /**
  * ゴミ箱のModelモジュール
@@ -29,8 +29,8 @@ export class Trash{
   get fixed_position(){
     return {
       x : 0,
-      // x : Bootstrap.elm_main.offsetWidth  - this.size.w,
-      y : Bootstrap.elm_main.offsetHeight - this.size.h,
+      // x : ModelBootstrap.elm_main.offsetWidth  - this.size.w,
+      y : ModelBootstrap.elm_main.offsetHeight - this.size.h,
     }
   }
 

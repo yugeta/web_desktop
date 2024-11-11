@@ -1,8 +1,8 @@
-import { Storage }   from "../../controller/lib/storage.js"
-import { Auth }      from "../../controller/system/auth.js"
-import { Icon }      from "../../controller/icon.js"
+import { ModelStorage }   from "../model/storage.js"
+import { ControllerAuth } from "../controller/auth.js"
+import { ControllerIcon } from "../controller/icon.js"
 
-export class Header{
+export class ControllerHeader{
   constructor(){
     // this.menu.addEventListener("click" , this.menu_click.bind(this))
     window.addEventListener("click" , this.window_click.bind(this))
@@ -18,19 +18,19 @@ export class Header{
     switch(item.getAttribute("data-mode")){
       case "storage-destroy":
         if(!confirm("デスクトップを初期化してもよろしいですか？")){return}
-        new Storage({mode: "destroy"})
+        new ModelStorage({mode: "destroy"})
       break
 
       case "storage-download":
-        new Storage({mode: "download"})
+        new ModelStorage({mode: "download"})
       break
 
       case "storage-upload":
-        new Storage({mode: "upload"})
+        new ModelStorage({mode: "upload"})
       break
 
       case "sort-icon":
-        new Icon({
+        new ControllerIcon({
           mode   : "alignment",
           target : null,
         })
@@ -38,7 +38,7 @@ export class Header{
 
       // Logout
       case "logout":
-        new Auth({
+        new ControllerAuth({
           mode : "logout"
         })
       break

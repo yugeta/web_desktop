@@ -1,8 +1,8 @@
-import { Storage }   from "../controller/lib/storage.js"
-import { Bootstrap } from "../controller/lib/bootstrap.js"
-import { InnerHtml } from "../controller/lib/inner_html.js"
+import { ModelStorage }   from "../model/storage.js"
+import { ModelBootstrap } from "../model/bootstrap.js"
+import { InnerHtml }      from "../lib/inner_html.js"
 
-export class App{
+export class ViewApp{
   constructor(options){
     this.options = options || {}
     this.promise = new Promise((resolve, reject)=>{
@@ -25,7 +25,7 @@ export class App{
   }
 
   get data(){
-    return Storage.datas.icons.find(e => e.id === this.id)
+    return ModelStorage.datas.icons.find(e => e.id === this.id)
   }
 
   get file(){
@@ -143,8 +143,8 @@ export class App{
   get_inner_size(elm){
     const inner_w     = elm.scrollWidth
     const inner_h     = elm.scrollHeight
-    const half_main_w = Bootstrap.elm_main.offsetWidth  / 2
-    const half_main_h = Bootstrap.elm_main.offsetHeight / 2
+    const half_main_w = ModelBootstrap.elm_main.offsetWidth  / 2
+    const half_main_h = ModelBootstrap.elm_main.offsetHeight / 2
     return {
       w : inner_w <= half_main_w ? inner_w : half_main_w,
       h : inner_h <= half_main_h ? inner_h + 30 + 20 : half_main_h,

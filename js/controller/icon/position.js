@@ -1,5 +1,5 @@
-import { Bootstrap } from "../../controller/lib/bootstrap.js"
-import { Setting }   from "../../component/setting.js"
+import { ModelBootstrap }   from "../../model/bootstrap.js"
+import { ComponentSetting } from "../../component/setting.js"
 
 /**
  * アイコンの座標を取得する
@@ -10,7 +10,7 @@ import { Setting }   from "../../component/setting.js"
 
 export class Position{
   constructor(parent, num){
-    this.parent = parent || Bootstrap.elm_main
+    this.parent = parent || ModelBootstrap.elm_main
     if(num !== undefined){
       this.datas = this.get_num_pos(num)
     }
@@ -32,7 +32,7 @@ export class Position{
   }
 
   get icon_size(){
-    return Setting.icon.size
+    return ComponentSetting.icon.size
   }
 
   get_new_pos(){
