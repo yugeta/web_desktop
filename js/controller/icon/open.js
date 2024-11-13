@@ -1,4 +1,5 @@
 import { ModelStorage }   from "../../model/storage.js"
+import { ModelIcons }     from "../../model/icons.js"
 import { ModelBootstrap } from "../../model/bootstrap.js"
 
 export class ControllerIconOpen{
@@ -20,8 +21,8 @@ export class ControllerIconOpen{
   }
 
   overlap(){
-    const current_data = ModelStorage.datas.icons.find(e => e.id === this.options.id)
-    const target_data  = ModelStorage.datas.icons.find(e => e.id === this.options.target_id)
+    const current_data = ModelIcons.datas.find(e => e.id === this.options.id)
+    const target_data  = ModelIcons.datas.find(e => e.id === this.options.target_id)
     if(!current_data || !target_data){return}
     switch(target_data.type){
       case "folder":
@@ -42,8 +43,8 @@ export class ControllerIconOpen{
     from_data.y = null
     new ModelStorage({
       mode : "save",
-      name : "icons",
-      data : from_data,
+      // name : "icons",
+      // data : from_data,
     })
     // windowが表示されている場合は更新する
     const current_icon = ModelBootstrap.elm_main.querySelector(`.icon[data-id="${from_data.id}"]`)

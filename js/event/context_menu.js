@@ -3,6 +3,8 @@ import { ComponentContextMenu } from "../component/context_menu.js"
 import { ComponentHtml }        from "../component/html.js"
 import { Convert }              from "../lib/convert.js"
 import { ModelStorage }         from "../model/storage.js"
+import { ModelIcons }           from "../model/icons.js"
+import { ModelWindows }         from "../model/windows.js"
 import { ControllerIcon }       from "../controller/icon.js"
 import { ControllerWindow }     from "../controller/window.js"
 import { ControllerBackground } from "../controller/background.js"
@@ -45,10 +47,10 @@ export class EventContextMenu{
     switch(this.mode){
       case "icon":
         const icon_id = elm.getAttribute("data-id")
-        return ModelStorage.datas.icons ? ModelStorage.datas.icons.find(e => e.id === icon_id) : null
+        return ModelIcons.datas ? ModelIcons.datas.find(e => e.id === icon_id) : null
       case "window":
         const window_id = elm.getAttribute("data-id")
-        return ModelStorage.datas.windows ? ModelStorage.datas.windows.find(e => e.id === window_id) : null
+        return ModelWindows.datas ? ModelWindows.datas.find(e => e.id === window_id) : null
       case "desktop":
         return null
     }

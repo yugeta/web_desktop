@@ -5,10 +5,11 @@ import { ComponentSetting }         from "../component/setting.js"
 import { ComponentHtml }            from "../component/html.js"
 import { Convert }                  from "../lib/convert.js"
 import { ModelStorage }             from "../model/storage.js"
+import { ModelIcons }               from "../model/icons.js"
+import { ModelWindows }             from "../model/windows.js"
 import { ControllerIcon }           from "../controller/icon.js"
 import { ControllerFile }           from "../controller/file.js"
 import { ControllerApp }            from "../controller/app.js"
-import { ModelWindows }             from "../model/windows.js"
 
 export class ViewWindow{
   constructor(options){
@@ -68,10 +69,10 @@ export class ViewWindow{
         h : this.options.h,
       }
     }
-    if(this.data && this.data.window_size){
+    if(this.window_data && this.window_data.window_size){
       return {
-        w : this.data.window_size.w,
-        h : this.data.window_size.h,
+        w : this.window_data.window_size.w,
+        h : this.window_data.window_size.h,
       }
     }
     const asset_size = ComponentSetting.window.size
@@ -93,7 +94,7 @@ export class ViewWindow{
   }
 
   get icons(){
-    return ModelStorage.datas.icons.filter(e => e.parent_id === this.uuid)
+    return ModelIcons.datas.filter(e => e.parent_id === this.uuid)
   }
 
   get window(){
@@ -105,11 +106,10 @@ export class ViewWindow{
   }
 
   get icon_data(){
-    if(!ModelStorage.datas || !ModelStorage.datas.icons){return null}
-    return ModelStorage.datas.icons.find(e => e.id === this.id)
+    return ModelIcons.datas.find(e => e.id === this.id)
   }
 
-  get data(){
+  get window_data(){
     return ModelWindows.datas.find(e => e.id === this.id)
   }
 
@@ -126,9 +126,8 @@ export class ViewWindow{
   }
 
   get storage_window_data(){
-    if(ModelStorage.datas
-    && ModelStorage.datas.windows){
-      return ModelStorage.datas.windows.find(e => e.id === this.id)
+    if(ModelWindows.datas){
+      return ModelWindows.datas.find(e => e.id === this.id)
     }
     else{
       return null
@@ -156,7 +155,7 @@ export class ViewWindow{
       y    : rect.y,
       w    : rect.w,
       h    : rect.h,
-      z    : this.data ? this.data.z : "",
+      z    : this.window_data ? this.window_data.z : "",
       position : this.options.position || {},
     }
     const html = new Convert(this.html, data).text

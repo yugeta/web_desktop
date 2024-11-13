@@ -1,4 +1,4 @@
-import { ModelStorage }   from "../model/storage.js"
+import { ModelIcons }     from "../model/icons.js"
 import { ModelBootstrap } from "../model/bootstrap.js"
 import { InnerHtml }      from "../lib/inner_html.js"
 
@@ -25,7 +25,7 @@ export class ViewApp{
   }
 
   get data(){
-    return ModelStorage.datas.icons.find(e => e.id === this.id)
+    return ModelIcons.datas.find(e => e.id === this.id)
   }
 
   get file(){
