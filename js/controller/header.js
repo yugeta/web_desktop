@@ -46,17 +46,19 @@ export class ControllerHeader{
   }
 
   window_click(e){
+    // hrefリンク起動（移動）
     if(e.target.closest("#desktop header .menu a")){
       const a = e.target.closest("a")
       this.menu_click({target : a})
       this.clear()
     }
+    // プルダウンメニュー表示（非表示）
     else if(e.target.closest("#desktop header .menu label")){
-      const label = e.target.closest("label")
-      const li    = label.parentNode
-      const flg   = li.hasAttribute("data-active")
+      const label       = e.target.closest("label")
+      const li          = label.parentNode
+      const viewing_flg = li.hasAttribute("data-active")
       this.clear()
-      if(flg){
+      if(viewing_flg){
         li.removeAttribute("data-active")
       }
       else{

@@ -1,6 +1,7 @@
 import { ControllerWindow } from "../controller/window.js"
 import { ModelBootstrap }   from "../model/bootstrap.js"
 import { ModelStorage }     from "../model/storage.js"
+import { ModelIcons }       from "../model/icons.js"
 
 export class ControllerHash{
   constructor(options){
@@ -22,8 +23,8 @@ export class ControllerHash{
 
   // iconデータが存在確認（存在しないidの場合は、hashを削除する）
   get is_data(){
-    if(!ModelStorage.datas ||!ModelStorage.datas.icons){return}
-    return ModelStorage.datas.icons.find(e => e.id === this.hash_name) ? true : false
+    if(!ModelIcons.datas ||!ModelIcons.datas.icons){return}
+    return ModelIcons.datas.icons.find(e => e.id === this.hash_name) ? true : false
   }
 
 

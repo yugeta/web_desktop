@@ -1,4 +1,5 @@
 import { ModelStorage }   from "../../model/storage.js"
+import { ModelIcons }     from "../../model/icons.js"
 import { ModelBootstrap } from "../../model/bootstrap.js"
 
 /**
@@ -45,8 +46,11 @@ export class ControllerIconNameChange{
   }
 
   get is_system_item(){
-    const data = ModelStorage.datas.icons.find(e => e.id === this.id)
-    return data.system_flg ? true : false
+    return this.icon_data.system_flg ? true : false
+  }
+
+  get icon_data(){
+    return ModelIcons.datas.find(e => e.id === this.id)
   }
 
   // 名前欄を入力可能にする
@@ -89,12 +93,11 @@ export class ControllerIconNameChange{
     const icon = elm_name.closest(".icon")
     const id   = icon.getAttribute("data-id")
     const name = elm_name.innerText
-    const data = ModelStorage.datas.icons.find(e => e.id === id)
-    data.name = name
+    this.icon_data.name = name
     new ModelStorage({
       mode : "save",
-      name : "icons",
-      data : data,
+      // name : "icons",
+      // data : this.icon_data,
     })
     elm_name.blur()
     elm_name.removeAttribute("contenteditable")
