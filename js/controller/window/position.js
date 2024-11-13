@@ -1,7 +1,7 @@
 import { ModelBootstrap } from "../../model/bootstrap.js"
 import { ModelWindows }   from "../../model/windows.js"
 
-export class Position{
+export class ControllerWindowPosition{
   data = {
     x : 0,
     y : 0,

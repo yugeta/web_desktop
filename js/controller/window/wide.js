@@ -1,4 +1,4 @@
-export class Wide{
+export class ControllerWindowWide{
   constructor(elm_window){
     // 拡大
     if(!elm_window.hasAttribute("data-wide-flg")){

@@ -1,12 +1,12 @@
-import { Select }          from "../controller/icon/select.js"
-import { Clear }           from "../controller/icon/clear.js"
-import { ViewIcon }        from "../view/icon.js"
-import { Move }            from "../controller/icon/move.js"
-import { Alignment }       from "../controller/icon/alignment.js"
-import { NewFolder }       from "../controller/icon/new_folder.js"
-import { NameChange }      from "../controller/icon/name_change.js"
-import { ModelBootstrap }  from "../model/bootstrap.js"
-import { ModelStorage }    from "../model/storage.js"
+import { ControllerIconSelect }     from "../controller/icon/select.js"
+import { ControllerIconClear }      from "../controller/icon/clear.js"
+import { ViewIcon }                 from "../view/icon.js"
+import { ControllerIconMove }       from "../controller/icon/move.js"
+import { ControllerIconAlignment }  from "../controller/icon/alignment.js"
+import { ControllerIconNewFolder }  from "../controller/icon/new_folder.js"
+import { ControllerIconNameChange } from "../controller/icon/name_change.js"
+import { ModelBootstrap }           from "../model/bootstrap.js"
+import { ModelStorage }             from "../model/storage.js"
 
 export class ControllerIcon{
   constructor(options){
@@ -17,36 +17,34 @@ export class ControllerIcon{
       break
       
       case "select":
-        new Select(this.options.icon)
+        new ControllerIconSelect(this.options.icon)
       break
 
       case "clear":
-        new Clear(this.options.click_element)
+        new ControllerIconClear(this.options.click_element)
       break
 
       case "move":
       case "move_end":
       case "move_start":
-        new Move(this.options)
+        new ControllerIconMove(this.options)
         
       break
 
       case "alignment":
-        new Alignment(this.options)
+        new ControllerIconAlignment(this.options)
       break
 
       case "new_folder":
-        new NewFolder(this.options)
+        new ControllerIconNewFolder(this.options)
       break
 
       case "name_change":
-        new NameChange(this.options)
+        new ControllerIconNameChange(this.options)
       break
 
       case "name_change_end":
-        new NameChange({
-          mode : "end"
-        })
+        new ControllerIconNameChange({mode : "end"})
       break
     }
   }

@@ -1,12 +1,12 @@
-import { ModelBootstrap } from "../../model/bootstrap.js"
-import { Convert }        from "../../lib/convert.js"
-import { Clear }          from "../../controller/icon/clear.js"
-import { Overlap }        from "../../controller/icon/overlap.js"
-import { ControllerIcon } from "../../controller/icon.js"
-import { ModelIcons }     from "../../model/icons.js"
-import { ComponentHtml }  from "../../component/html.js"
+import { ModelBootstrap }      from "../../model/bootstrap.js"
+import { Convert }             from "../../lib/convert.js"
+import { ControllerIconClear } from "../../controller/icon/clear.js"
+import { Overlap }             from "../../controller/icon/overlap.js"
+import { ControllerIcon }      from "../../controller/icon.js"
+import { ModelIcons }          from "../../model/icons.js"
+import { ComponentHtml }       from "../../component/html.js"
 
-export class Move{
+export class ControllerIconMove{
   constructor(options){
     this.options = options || {}
     this.elm = options.target
@@ -90,31 +90,31 @@ export class Move{
   }
 
   create_instance(){
-    Move.instance = document.createElement("div")
-    Move.instance.className = "icon-move-instance"
-    Move.instance.setAttribute("data-select", true)
+    ControllerIconMove.instance = document.createElement("div")
+    ControllerIconMove.instance.className = "icon-move-instance"
+    ControllerIconMove.instance.setAttribute("data-select", true)
     const icon = new ControllerIcon(this.icon_data)
     const html = new Convert(ComponentHtml.icon, icon).text
-    Move.instance.innerHTML = html
-    ModelBootstrap.elm_main.appendChild(Move.instance)
+    ControllerIconMove.instance.innerHTML = html
+    ModelBootstrap.elm_main.appendChild(ControllerIconMove.instance)
     const x = this.options.point.x - this.options.diff.x - ModelBootstrap.window_rect.left
     const y = this.options.point.y - this.options.diff.y - ModelBootstrap.window_rect.top
-    Move.instance.style.setProperty("left",`${x}px`,"")
-    Move.instance.style.setProperty("top" ,`${y}px`,"")
+    ControllerIconMove.instance.style.setProperty("left",`${x}px`,"")
+    ControllerIconMove.instance.style.setProperty("top" ,`${y}px`,"")
   }
 
   move_instance(){
-    if(!Move.instance){return}
+    if(!ControllerIconMove.instance){return}
     const x = this.options.point.x - this.options.diff.x - ModelBootstrap.window_rect.left
     const y = this.options.point.y - this.options.diff.y - ModelBootstrap.window_rect.top
-    Move.instance.style.setProperty("left",`${x}px`,"")
-    Move.instance.style.setProperty("top" ,`${y}px`,"")
+    ControllerIconMove.instance.style.setProperty("left",`${x}px`,"")
+    ControllerIconMove.instance.style.setProperty("top" ,`${y}px`,"")
   }
 
   remove_instance(){
-    if(!Move.instance){return}
-    Move.instance.parentNode.removeChild(Move.instance)
-    Move.instance = null
+    if(!ControllerIconMove.instance){return}
+    ControllerIconMove.instance.parentNode.removeChild(ControllerIconMove.instance)
+    ControllerIconMove.instance = null
   }
 
   window_change(){
@@ -131,13 +131,13 @@ export class Move{
     // desktop
     if(parent_elm === ModelBootstrap.elm_main){
       icon_data.parent_id = ""
-      new Clear(ModelBootstrap.elm_main, this.elm)
+      new ControllerIconClear(ModelBootstrap.elm_main, this.elm)
     }
 
     // window
     else{
       icon_data.parent_id = parent_elm.closest(".window").getAttribute("data-id")
-      new Clear(parent_elm, this.elm)
+      new ControllerIconClear(parent_elm, this.elm)
     }
   }
   

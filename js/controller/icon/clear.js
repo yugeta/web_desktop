@@ -1,4 +1,4 @@
-export class Clear{
+export class ControllerIconClear{
   constructor(parent_elm, except_id){
     if(!parent_elm){return}
     const icons = parent_elm.querySelectorAll(`:scope > .icon[data-select]`)

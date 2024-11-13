@@ -11,7 +11,6 @@ class Main{
     new Event()
     new ControllerSystem()
     new ControllerDesktop({mode:"init"})
-    console.log(ModelStorage.datas)
   }
 }
 

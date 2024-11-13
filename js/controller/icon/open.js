@@ -1,7 +1,7 @@
 import { ModelStorage }   from "../../model/storage.js"
 import { ModelBootstrap } from "../../model/bootstrap.js"
 
-export class Open{
+export class ControllerIconOpen{
   constructor(options){
     this.options = options || {}
     this.promise = new Promise((resolve, reject)=>{

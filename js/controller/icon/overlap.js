@@ -1,5 +1,5 @@
-import { ModelBootstrap } from "../../model/bootstrap.js"
-import { Open }           from "../../controller/icon/open.js"
+import { ModelBootstrap }      from "../../model/bootstrap.js"
+import { ControllerIconOpen }  from "../../controller/icon/open.js"
 
 export class Overlap{
   constructor(options){
@@ -118,7 +118,7 @@ export class Overlap{
 
   open(){
     if(!Overlap.past_id){return}
-    new Open({
+    new ControllerIconOpen({
       mode      : "overlap",
       id        : this.elm.getAttribute("data-id"),
       target_id : Overlap.past_id,

@@ -1,14 +1,14 @@
-import { ModelBootstrap }   from "../model/bootstrap.js"
-import { Sort }             from "../controller/window/sort.js"
-import { Position }         from "../controller/window/position.js"
-import { ComponentSetting } from "../component/setting.js"
-import { ComponentHtml }    from "../component/html.js"
-import { Convert }          from "../lib/convert.js"
-import { ModelStorage }     from "../model/storage.js"
-import { ControllerIcon }   from "../controller/icon.js"
-import { ControllerFile }   from "../controller/file.js"
-import { ControllerApp }    from "../controller/app.js"
-import { ModelWindows }     from "../model/windows.js"
+import { ModelBootstrap }           from "../model/bootstrap.js"
+import { ControllerWindowSort }     from "../controller/window/sort.js"
+import { ControllerWindowPosition } from "../controller/window/position.js"
+import { ComponentSetting }         from "../component/setting.js"
+import { ComponentHtml }            from "../component/html.js"
+import { Convert }                  from "../lib/convert.js"
+import { ModelStorage }             from "../model/storage.js"
+import { ControllerIcon }           from "../controller/icon.js"
+import { ControllerFile }           from "../controller/file.js"
+import { ControllerApp }            from "../controller/app.js"
+import { ModelWindows }             from "../model/windows.js"
 
 export class ViewWindow{
   constructor(options){
@@ -115,7 +115,7 @@ export class ViewWindow{
 
   get init_rect(){
     const window_size = this.size || {}
-    const window_pos  = new Position(this)
+    const window_pos  = new ControllerWindowPosition(this)
     const rect     = {
       x : window_pos.x,
       y : window_pos.y,
@@ -162,14 +162,14 @@ export class ViewWindow{
     const html = new Convert(this.html, data).text
     ModelBootstrap.elm_main.insertAdjacentHTML("beforeend", html)
     const elm_window = ModelBootstrap.elm_main.querySelector(`.window[data-id="${this.uuid}"]`)
-    new Sort(elm_window)
+    new ControllerWindowSort(elm_window)
     if(this.options.mode === "view"){
       this.set_storage_data(data)
     }
   }
 
   active(){
-    new Sort(this.opened)
+    new ControllerWindowSort(this.opened)
   }
 
   set_storage_data(data){

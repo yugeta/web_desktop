@@ -5,7 +5,7 @@
  * - クリックしたアイコンを選択状態にする
  */
 
-export class Select{
+export class ControllerIconSelect{
   constructor(target_icon){
     if(!target_icon || target_icon.hasAttribute("data-select")){return}
     const icons = target_icon.parentNode.querySelectorAll(`:scope > .icon`)

@@ -1,6 +1,6 @@
 import { ModelBootstrap }  from "../../model/bootstrap.js"
 
-export class Move{
+export class ControllerWindowMove{
   constructor(options){
     this.elm = options.target
     this.move(options)

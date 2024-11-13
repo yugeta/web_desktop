@@ -1,9 +1,9 @@
-import { ModelBootstrap } from "../model/bootstrap.js"
-import { ComponentHtml }  from "../component/html.js"
-import { Convert }        from "../lib/convert.js"
-import { Position }       from "../controller/icon/position.js"
-import { Trash }          from "../controller/icon/trash.js"
-import { ControllerIcon } from "../controller/icon.js"
+import { ModelBootstrap }         from "../model/bootstrap.js"
+import { ComponentHtml }          from "../component/html.js"
+import { Convert }                from "../lib/convert.js"
+import { ControllerIconPosition } from "../controller/icon/position.js"
+import { ControllerIconTrash }    from "../controller/icon/trash.js"
+import { ControllerIcon }         from "../controller/icon.js"
 
 export class ViewIcon{
   constructor(data, parent){
@@ -56,7 +56,7 @@ export class ViewIcon{
 
   get_pos(data){
     if(data.type === "trash"){
-      return new Trash().fixed_position
+      return new ControllerIconTrash().fixed_position
     }
     else if(data && typeof data.x === "number" && typeof data.y === "number"){
       return {
@@ -65,7 +65,7 @@ export class ViewIcon{
       }
     }
     else{
-      return new Position(this.parent).datas
+      return new ControllerIconPosition(this.parent).datas
     }
   }
 
@@ -74,12 +74,6 @@ export class ViewIcon{
     const parent = this.get_parent(data.parent_id)
     if(!parent){return}
     const icon = parent.querySelector(`.icon[data-id="${data.id}"]`)
-    // if(!icon){return}
-    // new Storage({
-    //   mode : "save",
-    //   name : "icons",
-    //   data : data,
-    // })
   }
 
   check_name(data){

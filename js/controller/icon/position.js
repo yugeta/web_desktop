@@ -8,7 +8,7 @@ import { ComponentSetting } from "../../component/setting.js"
  * @ parent (desktop or window)
  */
 
-export class Position{
+export class ControllerIconPosition{
   constructor(parent, num){
     this.parent = parent || ModelBootstrap.elm_main
     if(num !== undefined){

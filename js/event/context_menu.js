@@ -5,7 +5,7 @@ import { Convert }              from "../lib/convert.js"
 import { ModelStorage }         from "../model/storage.js"
 import { ControllerIcon }       from "../controller/icon.js"
 import { ControllerWindow }     from "../controller/window.js"
-import { Background }           from "../controller/desktop/background.js"
+import { ControllerBackground } from "../controller/background.js"
 import { ControllerModal }      from "../controller/modal.js"
 
 /**
@@ -201,7 +201,7 @@ export class EventContextMenu{
 
       // 壁紙の変更
       case "change_background":
-        new Background({mode: "view_modal"})
+        new ControllerBackground({mode: "view_modal"})
       break
 
       // アラート表示

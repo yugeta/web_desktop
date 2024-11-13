@@ -5,10 +5,10 @@ import { ModelBootstrap } from "../../model/bootstrap.js"
  * アイコンの名前を変更する処理
  */
 
-export class NameChange{
+export class ControllerIconNameChange{
   constructor(options){
     this.options = options || {}
-    NameChange.icon = this.icon
+    ControllerIconNameChange.icon = this.icon
     this.promise = new Promise((resolve, reject)=>{
       this.resolve = resolve
       this.reject  = reject

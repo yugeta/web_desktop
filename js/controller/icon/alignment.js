@@ -1,10 +1,10 @@
-import { Position }       from "../../controller/icon/position.js"
-import { ModelStorage }   from "../../model/storage.js"
-import { Trash }          from "../../controller/icon/trash.js"
-import { ControllerIcon } from "../../controller/icon.js"
-import { ModelBootstrap } from "../../model/bootstrap.js"
+import { ControllerIconPosition } from "../../controller/icon/position.js"
+import { ModelStorage }           from "../../model/storage.js"
+import { ControllerIconTrash }    from "../../controller/icon/trash.js"
+import { ControllerIcon }         from "../../controller/icon.js"
+import { ModelBootstrap }         from "../../model/bootstrap.js"
 
-export class Alignment{
+export class ControllerIconAlignment{
   constructor(options){
     this.options = options || {}
     this.move_clear()
@@ -30,7 +30,7 @@ export class Alignment{
     // 整列移動
     for(let i=0; i<icons.length; i++){
       const icon = icons[i]
-      const pos = new Position(this.root, i).datas
+      const pos = new ControllerIconPosition(this.root, i).datas
       icon.style.setProperty("--x", `${pos.x}px`, "")
       icon.style.setProperty("--y", `${pos.y}px`, "")
 
@@ -41,7 +41,7 @@ export class Alignment{
   sort_trash(){
     const trash = this.root.querySelector(`:scope > .icon[type="trash"]`)
     if(!trash){return}
-    const pos = new Trash().fixed_position
+    const pos = new ControllerIconTrash().fixed_position
     trash.style.setProperty("--x", `${pos.x}px`, "")
     trash.style.setProperty("--y", `${pos.y}px`, "")
   }

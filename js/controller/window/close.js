@@ -1,7 +1,7 @@
 import { ModelStorage }   from "../../model/storage.js"
 import { ControllerHash } from "../../controller/hash.js"
 
-export class Close{
+export class ControllerWindowClose{
   constructor(target_window){
     this.elm = target_window
 

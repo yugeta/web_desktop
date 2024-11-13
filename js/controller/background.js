@@ -1,12 +1,12 @@
-import { ModelBootstrap }   from "../../model/bootstrap.js"
-import { ComponentSetting } from "../../component/setting.js"
-import { ComponentHtml }    from "../../component/html.js"
-import { Convert }          from "../../lib/convert.js"
-import { Style }            from "../../lib/style.js"
-import { ModelStorage }     from "../../model/storage.js"
-import { ControllerWindow } from "../../controller/window.js"
+import { ModelBootstrap }   from "../model/bootstrap.js"
+import { ComponentSetting } from "../component/setting.js"
+import { ComponentHtml }    from "../component/html.js"
+import { Convert }          from "../lib/convert.js"
+import { Style }            from "../lib/style.js"
+import { ModelStorage }     from "../model/storage.js"
+import { ControllerWindow } from "../controller/window.js"
 
-export class Background{
+export class ControllerBackground{
   static window_name = "background_modal"
   static sheets = null
 
@@ -21,13 +21,13 @@ export class Background{
       break
 
       default:
-        Background.sheets = Background.sheets || new Style()
+        ControllerBackground.sheets = ControllerBackground.sheets || new Style()
         this.set_bg(this.value)
     }
   }
 
   get root(){
-    return ModelBootstrap.elm_main.querySelector(`.window[data-id="${Background.window_name}"]`)
+    return ModelBootstrap.elm_main.querySelector(`.window[data-id="${ControllerBackground.window_name}"]`)
   }
 
   get body(){
@@ -41,7 +41,7 @@ export class Background{
   window_view(){
     new ControllerWindow({
       mode : "view_only",
-      id   : Background.window_name,
+      id   : ControllerBackground.window_name,
       name : this.name,
       window_size : {
         width  : 500,
@@ -91,7 +91,7 @@ export class Background{
   // 初期の背景をセット
   set_bg(value){
     if(!value){return}
-    Background.sheets.set_value("#desktop main", "background", value, null)
+    ControllerBackground.sheets.set_value("#desktop main", "background", value, null)
   }
 
 }

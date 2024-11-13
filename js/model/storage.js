@@ -76,7 +76,7 @@ export class ModelStorage{
   get data(){
     if(!this.options.data || !this.options.data.mode){return null}
     const data = this.options.data || {}
-    const storage = Storage.datas
+    const storage = ModelStorage.datas
     if(storage && storage[data.mode] && storage[data.mode].constructor === Array){
       const index = storage[data.mode].findIndex(e => e.id === data.id)
       if(index !== -1){
@@ -125,16 +125,16 @@ export class ModelStorage{
   save(datas){//console.log(datas)
     const enc_datas = this.enc(datas)
     window.localStorage.setItem(this.name, enc_datas)
-    return Storage.datas
+    return ModelStorage.datas
   }
 
   // localStorageから読み込み
   load(key){
     if(!key){
-      return Storage.datas
+      return ModelStorage.datas
     }
-    if(Storage.datas[key]){
-      return Storage.datas[key] || []
+    if(ModelStorage.datas[key]){
+      return ModelStorage.datas[key] || []
     }
   }
 
@@ -171,7 +171,7 @@ export class ModelStorage{
   // 任意項目のデータを削除する (mode, id)
   del_id(data){
     if(!data || !data.mode || !data.id){return}
-    const storage_data = Storage.datas
+    const storage_data = ModelStorage.datas
     if(!storage_data[data.mode]){return}
     const index = storage_data[data.mode].findIndex(e => e.id === data.id)
     if(index === -1){return}
@@ -181,12 +181,12 @@ export class ModelStorage{
 
   // 2階層目のデータを削除する
   remove(data){
-    if(!data.id || !data.name || !Storage.datas[data.name]){return}
-    const index = Storage.datas[data.name].findIndex(e => e.id)
+    if(!data.id || !data.name || !ModelStorage.datas[data.name]){return}
+    const index = ModelStorage.datas[data.name].findIndex(e => e.id)
     if(index < -1){return}
-    Storage.datas[data.name].splice(index,1)
-    Storage.datas[data.name] = Storage.datas[data.name].filter(e => e)
-    this.save(Storage.datas)
+    ModelStorage.datas[data.name].splice(index,1)
+    ModelStorage.datas[data.name] = ModelStorage.datas[data.name].filter(e => e)
+    this.save(ModelStorage.datas)
   }
 
   // データを全て削除する
@@ -194,7 +194,7 @@ export class ModelStorage{
     window.localStorage.removeItem(this.name)
   }
   destroy(){
-    Storage.datas = null
+    ModelStorage.datas = null
     window.localStorage.removeItem(this.name)
     location.reload()
   }
@@ -208,7 +208,7 @@ export class ModelStorage{
   }
 
   download(){
-    const json = JSON.stringify(Storage.datas, null , "  ")
+    const json = JSON.stringify(ModelStorage.datas, null , "  ")
     const data = this.enc(json)
     const bom = new Uint8Array([0xef, 0xbb, 0xbf])
     const blob = new Blob([bom, data], { type: "text/plane" })

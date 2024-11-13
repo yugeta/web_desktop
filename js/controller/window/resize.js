@@ -1,4 +1,4 @@
-export class Resize{
+export class ControllerWindowResize{
   constructor(options){
     this.elm = options.target
     this.resize(options)

@@ -1,7 +1,7 @@
 import { ViewIcon } from "../../view/icon.js"
 import { Uuid }     from "../../lib/uuid.js"
 
-export class NewFolder{
+export class ControllerIconNewFolder{
   constructor(options){
     this.options = options || {}
     this.promise = new Promise((resolve, reject)=>{

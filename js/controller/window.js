@@ -1,11 +1,11 @@
-import { ViewWindow } from "../view/window.js"
-import { Sort }       from "../controller/window/sort.js"
-import { Close }      from "../controller/window/close.js"
-import { Wide }       from "../controller/window/wide.js"
-import { Resize }     from "../controller/window/resize.js"
-import { Move }       from "../controller/window/move.js"
-import { Alignment }  from "../controller/window/alignment.js"
-import { ViewType }   from "../controller/window/view_type.js"
+import { ViewWindow }                from "../view/window.js"
+import { ControllerWindowSort }      from "../controller/window/sort.js"
+import { ControllerWindowClose }     from "../controller/window/close.js"
+import { ControllerWindowWide }      from "../controller/window/wide.js"
+import { ControllerWindowResize }    from "../controller/window/resize.js"
+import { ControllerWindowMove }      from "../controller/window/move.js"
+import { ControllerWindowAlignment } from "../controller/window/alignment.js"
+import { ControllerWindowViewType }  from "../controller/window/view_type.js"
 
 export class ControllerWindow{
   constructor(options){
@@ -24,31 +24,31 @@ export class ControllerWindow{
         break
   
         case "sort":
-          new Sort(options.active_window)
+          new ControllerWindowSort(options.active_window)
         break
   
         case "close":
-          new Close(options.target_window)
+          new ControllerWindowClose(options.target_window)
         break
   
         case "wide":
-          new Wide(options.active_window)
+          new ControllerWindowWide(options.active_window)
         break
   
         case "view_type":
-          new ViewType(options.active_window)
+          new ControllerWindowViewType(options.active_window)
         break
   
         case "move":
-          new Move(options)
+          new ControllerWindowMove(options)
         break
   
         case "resize":
-          new Resize(options)
+          new ControllerWindowResize(options)
         break
   
         case "alignment":
-          new Alignment(options)
+          new ControllerWindowAlignment(options)
         break
       }
     })

@@ -2,7 +2,7 @@ import { ModelBootstrap }   from "../../model/bootstrap.js"
 import { ComponentSetting } from "../../component/setting.js"
 import { ModelWindows }     from "../../model/windows.js"
 
-export class Sort{
+export class ControllerWindowSort{
   constructor(active_window){
     this.active_window = active_window
     const windows = this.get_windows()

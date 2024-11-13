@@ -1,4 +1,4 @@
-export class Sort{
+export class ControllerIconSort{
   constructor(icon){
     this.icon = icon
     const icons = this.get_windows()

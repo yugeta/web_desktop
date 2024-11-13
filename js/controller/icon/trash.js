@@ -5,7 +5,7 @@ import { ModelBootstrap } from "../../model/bootstrap.js"
  * 左下に配置
  */
 
-export class Trash{
+export class ControllerIconTrash{
   constructor(options){
     this.options || {}
     this.promise = new Promise((resolve, reject)=>{

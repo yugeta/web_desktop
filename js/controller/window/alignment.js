@@ -1,7 +1,7 @@
 import { ModelBootstrap } from "../../model/bootstrap.js"
 import { ModelStorage }   from "../../model/storage.js"
 
-export class Alignment{
+export class ControllerWindowAlignment{
   constructor(options){
     this.exec()
   }
@@ -55,7 +55,7 @@ export class Alignment{
     }
   }
 
-  set_storage_data(data){console.log(data)
+  set_storage_data(data){
     new ModelStorage({
       mode : "save",
       name : "windows",

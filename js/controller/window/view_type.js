@@ -1,4 +1,4 @@
-export class ViewType{
+export class ControllerWindowViewType{
   constructor(target_window){
     this.window = target_window
     this.change()
