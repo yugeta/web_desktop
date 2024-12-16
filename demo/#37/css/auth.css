@@ -1,0 +1,20 @@
+#desktop header #login_icon{
+  display:flex;
+  align-items:center;
+  padding:5px;
+  width: var(--header-size);
+  /* max-width:var(--header-size); */
+}
+
+#desktop header #login_icon img{
+  /* width:40px;
+  height:40px; */
+  width:100%;
+  aspect-ratio: 1 / 1;
+  clip-path:circle();
+}
+
+#desktop[data-logined="true"] [data-unlogin],
+#desktop[data-logined="false"] [data-logined]{
+  display:none;
+}

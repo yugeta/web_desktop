@@ -1,0 +1,149 @@
+#desktop header{
+  width:100%;
+  height        : var(--header-size);
+  display       : flex;
+  gap:10px;
+  align-items   : center;
+  padding:0 10px;
+  background-color:white;
+  position:relative;
+  z-index:100;
+}
+
+
+/**
+* Menu
+*/
+
+#desktop .menu{
+  
+  height:100%;
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+#desktop .menu li{
+  height:100%;
+  padding:0px;
+  
+  display:flex;
+  gap:0px;
+  align-items:center;
+  justify-content:center;
+  
+
+  position:relative;
+}
+
+#desktop .menu li label,
+#desktop .menu li a{
+  display:flex;
+  align-items:center;
+  justify-content:start;
+  width:100%;
+  height:100%;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+#desktop .menu *{
+  color : black;
+  text-decoration:none;
+}
+
+#menu .icon{
+  width:20px;
+  height: 20px;
+  fill:black;
+  vertical-align:middle;
+}
+
+#desktop label[for='menu_toggle']{
+  display:none;
+}
+
+/**
+* サブメニュー
+*/
+#desktop .menu > li > ul{
+  display:flex;
+  flex-direction:column;
+  background-color:rgba(255,255,255,0.7);
+  backdrop-filter:blur(2.0px);
+  min-width:100px;
+  border-radius:5px;
+
+  position:absolute;
+  top:100%;
+  left:50%;
+  transform:translateX(-50%);
+  margin:0;
+  padding:5px;
+
+  box-shadow:4px 4px 20px rgba(0,0,0,0.5);
+}
+#desktop .menu > li:has(ul)::after{
+  content:"";
+  display:inline-block;
+  width:0.5em;
+  height:0.5em;
+  border-color:black;
+  border-style:solid;
+  border-width:0 1px 1px 0;
+  transform:rotate(45deg);
+  margin-left:4px;
+}
+
+#desktop .menu > li:not([data-active]) > ul{
+  display:none;
+}
+
+#desktop .menu > li > ul li{
+  cursor:pointer;
+  justify-content:start;
+}
+#desktop .menu > li > ul li *{
+  white-space:nowrap;
+}
+
+#desktop .menu > li > ul li a{
+  border-radius:3px;
+  font-size: 0.8em;
+  padding: 2px 5px;
+}
+@media (hover:hover){
+  #desktop .menu > li > ul li:hover a{
+    background-color: var(--hover-color);
+    color:white;
+  }
+}
+#desktop .menu > li > ul li:active a{
+  background-color: var(--hover-color);
+  color:white;
+}
+
+
+
+/**
+* Logo
+*/
+#desktop .logo{
+  height:100%;
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  background-color:var(--color-bg);
+}
+#desktop .logo .name{
+  white-space:nowrap;
+}
+
+#desktop .logo img,
+#desktop .logo svg{
+  height:100%;
+  fill:var(--color-01);
+}
+
+
