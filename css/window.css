@@ -42,8 +42,7 @@
 #desktop .window .header .thumb{
   width:24px;
   height:24px;
-  padding:2p;
-  background-color:white;
+  padding:0px;
 }
 #desktop .window .header .thumb[src=""]{
   display:none;

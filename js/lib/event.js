@@ -1,19 +1,19 @@
-import { MouseDown }   from "../desktop/mouse_down.js"
-import { MouseMove }   from "../desktop/mouse_move.js"
-import { MouseUp }     from "../desktop/mouse_up.js"
-import { Click }       from "../desktop/click.js"
-import { DoubleClick } from "../desktop/double_click.js"
-import { ContextMenu } from "../desktop/context_menu.js"
-import { Bootstrap }   from "../lib/bootstrap.js"
+import { EventMouseDown }   from "../event/mouse_down.js"
+import { EventMouseMove }   from "../event/mouse_move.js"
+import { EventMouseUp }     from "../event/mouse_up.js"
+import { EventClick }       from "../event/click.js"
+import { EventDoubleClick } from "../event/double_click.js"
+import { EventContextMenu } from "../event/context_menu.js"
+import { ModelBootstrap }   from "../model/bootstrap.js"
 
 export class Event{
   constructor(){
-    Bootstrap.elm_main.addEventListener("mousedown"   , ((e)=> new MouseDown(e)))
-    Bootstrap.elm_main.addEventListener("mousemove"   , ((e)=> new MouseMove(e)))
-    Bootstrap.elm_main.addEventListener("mouseup"     , ((e)=> new MouseUp(e)))
-    Bootstrap.elm_main.addEventListener("click"       , ((e)=> new Click(e)))
-    Bootstrap.elm_main.addEventListener("dblclick"    , ((e)=> new DoubleClick(e)))
-    Bootstrap.elm_main.oncontextmenu = function(){return false}
-    Bootstrap.elm_main.addEventListener("contextmenu" , ((e)=> {new ContextMenu(e);return false}))
+    ModelBootstrap.elm_main.addEventListener("mousedown"   , ((e)=> new EventMouseDown(e)))
+    ModelBootstrap.elm_main.addEventListener("mousemove"   , ((e)=> new EventMouseMove(e)))
+    ModelBootstrap.elm_main.addEventListener("mouseup"     , ((e)=> new EventMouseUp(e)))
+    ModelBootstrap.elm_main.addEventListener("click"       , ((e)=> new EventClick(e)))
+    ModelBootstrap.elm_main.addEventListener("dblclick"    , ((e)=> new EventDoubleClick(e)))
+    ModelBootstrap.elm_main.oncontextmenu = function(){return false}
+    ModelBootstrap.elm_main.addEventListener("contextmenu" , ((e)=> {new EventContextMenu(e);return false}))
   }
 }

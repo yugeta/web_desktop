@@ -1,20 +1,17 @@
-import { Event }   from "./lib/event.js"
-import { Asset }   from "./lib/asset.js"
-import { Desktop } from "./desktop.js"
-import { System }  from "./system.js"
-import { Storage } from "./lib/storage.js"
-import { Hash }    from "./system/hash.js"
+import { Event }             from "./lib/event.js"
+import { ControllerDesktop } from "./controller/desktop.js"
+import { ControllerSystem }  from "./controller/system.js"
+import { ModelStorage }      from "./model/storage.js"
+import { ControllerHash }    from "./controller/hash.js"
 
 class Main{
   constructor(){
-    new Asset().promise.then(()=>{
-      new Storage()
-      new Hash()
-      new Event()
-      new System()
-      new Desktop({mode:"init"})
-      console.log(Storage.datas)
-    })
+    new ModelStorage()
+    new ControllerHash()
+    new Event()
+    new ControllerSystem()
+    new ControllerDesktop({mode:"init"})
+    // console.log(ModelStorage.datas)
   }
 }
 
