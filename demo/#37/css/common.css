@@ -1,0 +1,40 @@
+#desktop{
+  --header-size : 50px;
+  --main-size   : calc(100% - var(--header-size));
+  --color-bg1 : #6bd8e5;
+  --color-bg2 : #98cead;
+  --hover-color: #1212a3;
+  
+  width : 100%;
+  height: 100%;
+  min-height: 300px;
+  box-shadow:4px 4px 20px rgba(0,0,0,0.5);
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+#desktop,
+#desktop *{
+  white-space:normal;
+}
+#desktop,
+#desktop *,
+#desktop *::before,
+#desktop *::after{
+  -webkit-box-sizing  : border-box;
+     -moz-box-sizing  : border-box;
+       -o-box-sizing  : border-box;
+      -ms-box-sizing  : border-box;
+          box-sizing  : border-box;
+  -webkit-user-select : none;
+     -moz-user-select : none;
+      -ms-user-select : none;
+          user-select : none;
+}
+
+#desktop ul,
+#desktop li{
+  margin:0;
+  padding:0;
+  list-style:none;
+}

@@ -1,0 +1,73 @@
+.hamburger-menu{
+  --size : 20px;
+
+  display:flex;
+  align-items:center;
+  gap : 10px;
+  margin-left:auto;
+  height:100%;
+  text-align:center;
+  position:relative;
+}
+.hamburger-menu,
+.hamburger-menu *{
+  cursor:pointer;
+}
+.hamburger-menu .hamburger{
+  width:var(--size);
+  height:var(--size);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+}
+.hamburger-menu .hamburger > *{
+  display:block;
+  width:100%;
+  height:2px;
+  background-color:black;
+  transition-property: transform,opacity;
+  transition-duration: 0.5s;
+  margin:0;
+  padding:0;
+  opacity:1.0;
+}
+.hamburger-menu .hamburger > *:nth-of-type(1){
+  transform:translateY(-50%) rotate(0deg);
+  transform-origin:bottom left;
+}
+.hamburger-menu .hamburger > *:nth-of-type(2){
+
+}
+.hamburger-menu .hamburger > *:nth-of-type(3){
+  transform:translateY(50%) rotate(0deg);
+  transform-origin:top left;
+}
+
+/**
+* Toggle
+*/
+input#hamburger[type='checkbox']:checked ~ header .hamburger-menu .hamburger > *:nth-of-type(1){
+  transform:translateY(-50%) rotate(45deg);
+  opacity:1.0;
+}
+input#hamburger[type='checkbox']:checked ~ header .hamburger-menu .hamburger > *:nth-of-type(2){
+  opacity:0.0;
+}
+input#hamburger[type='checkbox']:checked ~ header .hamburger-menu .hamburger > *:nth-of-type(3){
+  transform:translateY(50%) rotate(-45deg);
+  opacity:1.0;
+}
+
+@media (min-width:769px){
+  .hamburger-menu{
+    display:none;
+  }
+}
+@media (max-width:768px){
+  
+}
+@media (max-width:500px){
+  .hamburger-menu .name{
+    display:none;
+  }
+}

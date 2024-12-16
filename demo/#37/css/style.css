@@ -1,0 +1,30 @@
+@import 'common.css';
+@import "header.css";
+@import "header_sp.css";
+@import "hamburger.css";
+@import "main.css";
+@import "main_sp.css";
+@import "icon.css";
+@import "icon_sp.css";
+@import "window.css";
+@import "window_sp.css";
+@import "context_menu.css";
+@import "font.css";
+@import "window_view_type.css";
+@import "time.css";
+@import "auth.css";
+@import "file.css";
+@import "modal.css";
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  padding:0;
+  margin:0;
+  outline:none;
+}
+
+#hoge{
+  display:block;
+}
