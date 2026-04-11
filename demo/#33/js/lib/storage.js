@@ -9,11 +9,7 @@ export class Storage{
     icons   : [],
     windows : [],
   }
-<<<<<<< HEAD
   name = "mynt_web_desktop_33"
-=======
-  name = "mynt_web_desktop"
->>>>>>> origin/main
   ext  = "webd"
   
   constructor(options){
